@@ -10,20 +10,25 @@
 \begin{document}
 
 %Setup ``requirements''
-\newcommand{\enumReq}{CR}
-\newcounter{\enumReq}
-%\newcommand{\defineReq}[2]{\defineReferenceableEnumElement{\enumReq}{Requirement}{#1}{#2}}
+\setupReferencableEnumElements{R}{Requirement}
+
+%Setup ``capabilities'', without any separator
+\setupReferencableEnumElements[]{C}{Capability}
 
 \section{Requirements}
 \label{sec:reqs}
-%\defineReq{Scalability}{sca}
-\defineReferenceableEnumElement{CR}{Requirement}{Scalability}{sca}
+\defineReferenceableEnumElement{R}{Scalability}{sca}
 We see scalability as important requirement.
 
-\defineReferenceableEnumElement{CR}{Requirement}{Portability}{port}
+\defineReferenceableEnumElement{R}{Portability}{port}
 We also see portability as important requirement.
 
+\section{Capabilities}
+\defineReferenceableEnumElement{C}{Maintainability}{maint}
+
 \section{Discussion}
-In \autoref{sec:reqs} we discussed \refEnumFull{CR}{sca} and \refEnumFull{CR}{port}.
+In \autoref{sec:reqs} we discussed \refEnumFull{R}{sca} and \refEnumFull{R}{port}.
+
+We showed the capability \refEnumFull{C}{maint}.
 
 \end{document}
