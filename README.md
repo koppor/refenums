@@ -17,7 +17,7 @@ Decide for `<EnumId>`.
 E.g., `req`.
 
 #### Initialize
-`\setupReferencableEnumElements{<EnumId>}{<PrintName>}
+`\setupReferencableEnumElements{<EnumId>}{<PrintName>}`
 
 In case `<PrintName>` is set to `ONLYSHORT`, only the short name is used.
 
@@ -38,8 +38,8 @@ Optional parameter: Separator between `<EnumId>` and number.
 * `\refEnumFull{<EnumId>}{<LabelId>}` = `<EnumId>-<Counter> ("<FullName>")`, e.g. `CA-1 ("Quality")`
 * `\refEnum{<EnumId>}{<LabelId>}` = `<EnumId>-<Counter>`, e.g. `CA-1`
 * References to the label
-** `\nameref{enum:<EnumId>:<LabelId>}` = `<FullName>`
-** `\ref{enum:<EnumId>:<LabelId>}` = `<Counter>`, e.g. `1`
+  * `\nameref{enum:<EnumId>:<LabelId>}` = `<FullName>`
+  * `\ref{enum:<EnumId>:<LabelId>}` = `<Counter>`, e.g. `1`
 
  
 ## Example
