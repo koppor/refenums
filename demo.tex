@@ -4,6 +4,8 @@
 \usepackage{csquotes}
 \usepackage{ifthen}
 \usepackage{hyperref}
+\usepackage[capitalise,nameinlink]{cleveref}
+%
 \newcommand{\thighlight}[1]{#1}
 
 \input{referenceableenumelement}
@@ -20,7 +22,7 @@
 \setupReferencableEnumElements[ ]{Step}{ONLYSHORT}
 
 \section{Requirements}
-\label{sec:reqs}
+\label{secreqs}
 \defineReferenceableEnumElement{R}{Scalability}{sca}
 We see scalability as important requirement.
 
@@ -33,9 +35,11 @@ We also see portability as important requirement.
 \section{Steps}
 \defineReferenceableEnumElement{Step}{Requirements Analysis}{rqa}
 
+%to show that the links are working: start a new page
+\clearpage
 
 \section{Discussion}
-In \autoref{sec:reqs} we discussed \refEnumFull{R}{sca} and \refEnumFull{R}{port}.
+In \cref{secreqs} we discussed \refEnumFull{R}{sca} and \refEnumFull{R}{port}.
 
 We showed the capability \refEnumFull{C}{maint}.
 

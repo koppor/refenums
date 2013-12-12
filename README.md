@@ -2,6 +2,15 @@
 
 ## Usage
 
+Include following packages in your `.tex` document:
+
+```
+\usepackage{csquotes}
+\usepackage{ifthen}
+\usepackage{hyperref}
+\usepackage[capitalise,nameinlink]{cleveref}
+```
+
 ### Define the "Referenceable Enum Environment"
 
 Decide for `<EnumId>`.
