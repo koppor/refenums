@@ -3,7 +3,8 @@
 %  \usepackage{csquotes}
 %  \usepackage{hyperref}
 
-%Requires the macro \thighlight to be defined
+%Defines command \thighlight if it is not already defined
+\ifthenelse{\isundefined{\thighlight}}{\newcommand{\thighlight}[1]{#1}}{}
 
 % tip by http://tex.stackexchange.com/a/73710/9075
 \makeatletter
