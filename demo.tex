@@ -1,0 +1,29 @@
+\documentclass{article}
+
+%required by referenceableenumelement
+\usepackage{csquotes}
+\usepackage{hyperref}
+\newcommand{\thighlight}[1]{#1}
+
+\input{referenceableenumelement}
+
+\begin{document}
+
+%Setup ``requirements''
+\newcommand{\enumReq}{CR}
+\newcounter{\enumReq}
+%\newcommand{\defineReq}[2]{\defineReferenceableEnumElement{\enumReq}{Requirement}{#1}{#2}}
+
+\section{Requirements}
+\label{sec:reqs}
+%\defineReq{Scalability}{sca}
+\defineReferenceableEnumElement{CR}{Requirement}{Scalability}{sca}
+We see scalability as important requirement.
+
+\defineReferenceableEnumElement{CR}{Requirement}{Portability}{port}
+We also see portability as important requirement.
+
+\section{Discussion}
+In \autoref{sec:reqs} we discussed \refEnumFull{CR}{sca} and \refEnumFull{CR}{port}.
+
+\end{document}

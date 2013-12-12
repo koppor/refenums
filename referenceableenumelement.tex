@@ -1,16 +1,22 @@
+%Requires \usepackage{ifthen}
+
 % tip by http://tex.stackexchange.com/a/73710/9075
 \makeatletter
  \newcommand{\labelname}[1]{% \labelname{<stuff>}
   \def\@currentlabelname{#1}}%
 \makeatother
 
-% Generic commant to define counter elements
-% #1: Enum Id (no spaces, only characters!)
+% Generic command to define counter elements
+%
+% Is not used directly, but by a wrapper element
+%
+% #1: Enum Id (no spaces, only characters), also used to print short form of enum
 % #2: Print Name of enum type
-% #3: Full Name
-% #4: Label Id
-% \arabic{#1} return the counter value
+% #3: Full Name of the enum to be defined
+% #4: Label Id of the enum when referencing it
+%
 \newcommand{\defineReferenceableEnumElement}[4]{%
+% \arabic{#1} returns the counter value
  \refstepcounter{#1}%
  \thighlight{#2 \arabic{#1} (#1-\arabic{#1}): #3}. %
  \labelname{#3}%
@@ -18,6 +24,7 @@
 }
 
 % Same as \defineReferenceableEnumElement but for inline referenceable elements!
+% One uses either without ``Inline'' or with ``Inline'' for a group of types
 \newcommand{\defineReferenceableEnumElementInline}[4]{%
  \refstepcounter{#1}%
  \thighlight{(#1-\arabic{#1}) #3}%
@@ -27,30 +34,12 @@
 
 % Generic command to reference to an enum
 % #1: Enum Id (no spaces, only characters!)
-% #2: Nummer des Elements oder definiertes Label
+% #2: Label Id
 \newcommand{\refEnumFull}[2]{%
  \refEnum{#1}{#2}
  (\enquote{\nameref{enum:#1:#2}})%
 }
+
 \newcommand{\refEnum}[2]{%
  #1-\ref{enum:#1:#2}%
 }
-
-% NAMEN WERDEN GLOBAL VERWALTET
-\newcommand{\enumCrawlerAnforderungen}{CA}
-\newcounter{\enumCrawlerAnforderungen}
-\newcommand{\defineCrawlerAnforderung}[2]{\defineReferenceableEnumElement{\enumCrawlerAnforderungen}{Anforderung}{#1}{#2}}
-
-% VERWENDUNG
-% Definieren des Referenceable Enum environments
- %\newcounter{<EnumId>}
- %\newcommand{\define<EnumId>}[1]{\defineReferenceableEnumElement{<EnumId>}{Anforderung}{#1}}
-% Definieren von Elementen
- %\defineCrawlerAnforderung{ETG Quality} % Name
- %\label{enum:<EnumId>:<label>} % muss "enum" sein! 
-% Referenzieren
- % \refEnumFull{<EnumId>}{<label>} = <EnumId>-<Counter> ("<fullName>") z.B. CA-1 ("Qualität")
- % \refEnum{<EnumId>}{<label>} = <EnumId>-<Counter> z.b. CA-1
- % Ganz normale Referenzen auf das definierte Label
- % \nameref{enum:<EnumId>:<label>} = <fullName>
- % \ref{enum:<EnumId>:<label>} = <Counter>, e.g. 1
