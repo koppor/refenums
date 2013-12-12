@@ -10,6 +10,9 @@ E.g., `req`.
 #### Initialize
 `\setupReferencableEnumElements{<EnumId>}{<PrintName>}
 
+In case `<PrintName>` is set to `ONLYSHORT`, only the short name is used.
+
+Optional parameter: Separator between `<EnumId>` and number.
 
 #### (Optional) Define shorthand macro to define the macros for referencing
 

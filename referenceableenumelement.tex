@@ -1,4 +1,9 @@
-%Requires \usepackage{ifthen}
+%Requires following packages
+%  \usepackage{ifthen}
+%  \usepackage{csquotes}
+%  \usepackage{hyperref}
+
+%Requires the macro \thighlight to be defined
 
 % tip by http://tex.stackexchange.com/a/73710/9075
 \makeatletter
@@ -33,7 +38,14 @@
  \refstepcounter{#1}%
 %
 % \arabic{#1} returns the counter value
- \thighlight{\csname #1PrintName\endcsname\ \arabic{#1} (#1\csname #1Separator\endcsname\arabic{#1}): #2}. %
+ \thighlight{%
+\ifthenelse{%
+\equal{\csname #1PrintName\endcsname}{ONLYSHORT}}{%
+#1\csname #1Separator\endcsname\arabic{#1}: #2%
+}{%
+\csname #1PrintName\endcsname\ \arabic{#1} (#1\csname #1Separator\endcsname\arabic{#1}): #2%
+}%
+}.
 %
  %store the label into a sepcial variable being used later for referencing
  \labelname{#2}%

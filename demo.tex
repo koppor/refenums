@@ -2,6 +2,7 @@
 
 %required by referenceableenumelement
 \usepackage{csquotes}
+\usepackage{ifthen}
 \usepackage{hyperref}
 \newcommand{\thighlight}[1]{#1}
 
@@ -15,6 +16,9 @@
 %Setup ``capabilities'', without any separator
 \setupReferencableEnumElements[]{C}{Capability}
 
+%Setup ``Steps'' not having a print form
+\setupReferencableEnumElements[ ]{Step}{ONLYSHORT}
+
 \section{Requirements}
 \label{sec:reqs}
 \defineReferenceableEnumElement{R}{Scalability}{sca}
@@ -26,9 +30,15 @@ We also see portability as important requirement.
 \section{Capabilities}
 \defineReferenceableEnumElement{C}{Maintainability}{maint}
 
+\section{Steps}
+\defineReferenceableEnumElement{Step}{Requirements Analysis}{rqa}
+
+
 \section{Discussion}
 In \autoref{sec:reqs} we discussed \refEnumFull{R}{sca} and \refEnumFull{R}{port}.
 
 We showed the capability \refEnumFull{C}{maint}.
+
+We started with \refEnumFull{Step}{rqa}.
 
 \end{document}
