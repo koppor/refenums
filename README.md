@@ -31,7 +31,7 @@ Optional parameter: Separator between `<EnumId>` and number.
 
 ### Usage in the text
 
-#### Setup
+#### Define a single enum
 `\define<EnumId>{<FullName>}{<LabelId>}`
 
 #### Referencing
@@ -45,26 +45,19 @@ Optional parameter: Separator between `<EnumId>` and number.
  
 ## Example
 
-```
-\setupReferencableEnumElements{R}{Requirement}
+**Initialize**: `\setupReferencableEnumElements{R}{Requirement}`
 
-\newcommand{\defineReq}[2]{\defineReferenceableEnumElement{R}{#1}{#2}}
-```
-
-...
-
-`\defineReq{Quality}{qual}`
-or
-`\defineReferenceableEnumElement{R}{Quality}{qual}`
-
+**Define a single enum**: `\defineReferenceableEnumElement{R}{Quality}{qual}`.
 When you want to put the element in a section, use the optional parameter:
 `\defineReferenceableEnumElement[section]{R}{Quality}{qual}`
+
+**Referencing**:
 
 * Reference only Name + Number: `\refEnum{R}{qual}`
 * Full reference with the print name in brackets: `\refEnumFull{R}{qual}`
 * Full reference with the print name appended after ":": `\refEnumFullT{R}{qual}`
 
-See also [demo.tex](demo.tex).
+**See also** [demo.tex](demo.tex).
 
 
 ## TODO
