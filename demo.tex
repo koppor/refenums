@@ -6,6 +6,9 @@
 \usepackage{hyperref}
 \usepackage[capitalise,nameinlink]{cleveref}
 
+%Always add a dot behind the definition
+\newcommand{\thighlight}[1]{#1.}
+
 \input{referenceableenumelement}
 
 \begin{document}
@@ -27,20 +30,28 @@ We see scalability as important requirement.
 \defineReferenceableEnumElement{R}{Portability}{port}
 We also see portability as important requirement.
 
+
 \section{Capabilities}
 \defineReferenceableEnumElement{C}{Maintainability}{maint}
 
+
 \section{Steps}
-\defineReferenceableEnumElement{Step}{Requirements Analysis}{rqa}
+\label{sec:steps}
+
+\defineReferenceableEnumElement[subsection]{Step}{Requirements Analysis}{rqa}
+\label{sec:rqa}
+The heading is defined using the macro.
 
 %to show that the links are working: start a new page
 \clearpage
 
+
 \section{Discussion}
-In \cref{secreqs} we discussed \refEnumFull{R}{sca} and \refEnumFull{R}{port}.
+In \cref{secreqs}, we discussed \refEnumFull{R}{sca} and \refEnumFull{R}{port}.
 
 We showed the capability \refEnumFull{C}{maint}.
 
-We started with \refEnumFull{Step}{rqa}.
+In \cref{sec:steps}, we started with \refEnumFull{Step}{rqa}.
+\LaTeX{} put that step into \cref{sec:rqa}.
 
 \end{document}

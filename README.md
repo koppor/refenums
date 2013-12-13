@@ -53,8 +53,17 @@ Optional parameter: Separator between `<EnumId>` and number.
 ...
 
 `\defineReq{Quality}{qual}`
+or
+`\defineReferenceableEnumElement{R}{Quality}{qual}`
 
+When you want to put the element in a section, use the optional parameter:
+`\defineReferenceableEnumElement[section]{R}{Quality}{qual}`
 See also [demo.tex](demo.tex).
+
+
+## TODO
+
+The decision to put the enum in a section should be taken at `\setupReferencableEnumElements` not at `\defineReferenceableEnumElement`.
 
 ## Files
 

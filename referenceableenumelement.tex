@@ -13,9 +13,11 @@
 \makeatother
 
 % Setup environment
+% Called ONCE for each enum
+%
 % #1: (optional) the seperator between EnumId and Number. Default: "-".
 % #2: Enum Id (no spaces, only characters), also used later in defineReferenceableEnumElement
-% #3: Print Name of enum type
+% #3: Print Name of enum type, if "ONLYSHORT" then only the short name is used and a long name never printed
 \newcommand{\setupReferencableEnumElements}[3][-]{%
 %Define global counter
 \newcounter{#2}
@@ -30,42 +32,65 @@
 %Setup cleveref: use the same format for both beginning of the sentence and in the middle of the sentence
 \crefformat{#2}{##2#2#1##1##3}
 \Crefformat{#2}{##2#2#1##1##3}
+
+%Store ONLYSHORTCONFIG
+%generate if XYOnlyShort
+\expandafter\newif \csname if#2OnlyShort\endcsname%
+%set if to right value: XYOnlyShorttrue or XYOnlyShortfalse
+\ifthenelse{%
+\equal{#3}{ONLYSHORT}}{%
+\expandafter\csname #2OnlyShorttrue\endcsname
+}{%
+\expandafter\csname #2OnlyShortfalse\endcsname
+}
+
+%End of definition of setupReferencableEnumElements
+}
+
+%internal command, used only at defineReferenceableEnumElement
+% #1: Enum Id (no spaces, only characters), also used to print short form of enum and to reference the setup at setupReferencableEnumElements
+% #2: Full Name of the enum to be defined
+\newcommand{\defineReferenceableEnumElementHelper}[2]{%
+% \arabic{#1} returns the counter value
+\expandafter\csname if#1OnlyShort\endcsname%
+#1\csname #1Separator\endcsname\arabic{#1}: #2%
+\else%
+\csname #1PrintName\endcsname\ \arabic{#1} (#1\csname #1Separator\endcsname\arabic{#1}): #2%
+\fi
 }
 
 % Generic command to define counter elements
+% Called for EACH element
 %
-% Is not used directly, but by a wrapper element
+% #1: (optional) the command to wrap the text under. Default thighlight
+% #2: Enum Id (no spaces, only characters), also used to print short form of enum and to reference the setup at setupReferencableEnumElements
+% #3: Full Name of the enum to be defined
+% #4: Label Id of the enum when referencing it
+\newcommand{\defineReferenceableEnumElement}[4][thighlight]{%
+%increase counter
+\refstepcounter{#2}%
 %
-% #1: Enum Id (no spaces, only characters), also used to print short form of enum and to reference the setup at setupReferencableEnumElements
-% #2: Full Name of the enum to be defined
-% #3: Label Id of the enum when referencing it%
-\newcommand{\defineReferenceableEnumElement}[3]{%
- \refstepcounter{#1}%
+%store the ``caption'' into a sepcial variable being used later for referencing
+\labelname{#3}%
 %
-% \arabic{#1} returns the counter value
- \thighlight{%
-\ifthenelse{%
-\equal{\csname #1PrintName\endcsname}{ONLYSHORT}}{%
-#1\csname #1Separator\endcsname\arabic{#1}: #2%
-}{%
-\csname #1PrintName\endcsname\ \arabic{#1} (#1\csname #1Separator\endcsname\arabic{#1}): #2%
-}%
-}.
+%label directly put after refstepcounter to enable sectioning commands to be used as enumeration
+\label{enum:#2:#4}%
 %
- %store the label into a sepcial variable being used later for referencing
- \labelname{#2}%
+%Print out the thing
+\csname #1\endcsname{\defineReferenceableEnumElementHelper{#2}{#3}}%
 %
- \label{enum:#1:#3}%
 }
+
 
 % Same as \defineReferenceableEnumElement but for inline referenceable elements!
 % One uses either without ``Inline'' or with ``Inline'' for a group of types
-\newcommand{\defineReferenceableEnumElementInline}[3]{%
- \refstepcounter{#1}%
- \thighlight{(#1\csname #1Separator\endcsname\arabic{#1}) #2}%
- \labelname{#2}%
- \label{enum:#1:#3}%
+\newcommand{\defineReferenceableEnumElementInline}[4]{%
+ \refstepcounter{#2}%
+ \thighlight{(#2\csname #2Separator\endcsname\arabic{#2}) #3}%
+ \labelname{#3}%
+ \label{enum:#2:#4}%
 }
+
 
 % Generic command to reference to an enum
 % #1: Enum Id (no spaces, only characters!)
@@ -74,6 +99,7 @@
  \refEnum{#1}{#2}
  (\enquote{\nameref{enum:#1:#2}})%
 }
+
 
 \newcommand{\refEnum}[2]{%
   \cref{enum:#1:#2}%
