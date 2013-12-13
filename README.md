@@ -59,6 +59,11 @@ or
 
 When you want to put the element in a section, use the optional parameter:
 `\defineReferenceableEnumElement[section]{R}{Quality}{qual}`
+
+* Reference only Name + Number: `\refEnum{R}{qual}`
+* Full reference with the print name in brackets: `\refEnumFull{R}{qual}`
+* Full reference with the print name appended after ":": `\refEnumFullT{R}{qual}`
+
 See also [demo.tex](demo.tex).
 
 

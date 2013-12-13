@@ -101,11 +101,25 @@
 
 
 % Generic command to reference to an enum
+%
+% Output: <EnumId><Num> (``<PrintName>'')
+%
 % #1: Enum Id (no spaces, only characters!)
 % #2: Label Id
 \newcommand{\refEnumFull}[2]{%
  \refEnum{#1}{#2}
  (\enquote{\nameref{enum:#1:#2}})%
+}
+
+
+% Generic command to reference to an enum
+%
+% Output: <EnumId><Num>: ``<PrintName>''
+%
+% #1: Enum Id (no spaces, only characters!)
+% #2: Label Id
+\newcommand{\refEnumFullT}[2]{%
+ \refEnum{#1}{#2}: \enquote{\nameref{enum:#1:#2}}%
 }
 
 
