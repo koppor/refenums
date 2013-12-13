@@ -7,6 +7,7 @@ Include following packages in your `.tex` document:
 ```
 \usepackage{csquotes}
 \usepackage{ifthen}
+\usepackage{etoolbox}
 \usepackage{hyperref}
 \usepackage[capitalise,nameinlink]{cleveref}
 ```

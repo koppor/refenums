@@ -1,0 +1,34 @@
+\documentclass{article}
+
+%required by referenceableenumelement
+\usepackage{csquotes}
+\usepackage{ifthen}
+\usepackage{etoolbox}
+\usepackage{hyperref}
+\usepackage[capitalise,nameinlink]{cleveref}
+
+%Always add a dot behind the definition
+\newcommand{\thighlight}[1]{#1.}
+
+\input{../referenceableenumelement}
+
+\begin{document}
+
+%Setup ``Steps'' not having a print form
+\setupReferencableEnumElements[ ]{Step}{ONLYSHORT}
+
+\section{Steps}
+\label{sec:steps}
+
+\defineReferenceableEnumElement[subsection]{Step}{Requirements Analysis}{rqa}
+\label{sec:rqa}
+The heading is defined using the macro.
+
+%to show that the links are working: start a new page
+
+\section{Discussion}
+
+In \cref{sec:steps}, we started with \refEnumFull{Step}{rqa}.
+\LaTeX{} put that step into \cref{sec:rqa}.
+
+\end{document}

@@ -1,4 +1,7 @@
+*.*~
 *.aux
+*.bak
 *.log
 *.out
+*.toc
 *.pdf

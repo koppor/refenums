@@ -13,6 +13,9 @@
 
 \begin{document}
 
+\tableofcontents
+\clearpage
+
 %Setup ``requirements''
 \setupReferencableEnumElements{R}{Requirement}
 
@@ -21,6 +24,10 @@
 
 %Setup ``Steps'' not having a print form
 \setupReferencableEnumElements[ ]{Step}{ONLYSHORT}
+
+%Setup ``Milestones'' where the print name and the short name is combined
+\setupReferencableEnumElements[COMBINED]{M}{Milestone}
+
 
 \section{Requirements}
 \label{secreqs}
@@ -42,6 +49,9 @@ We also see portability as important requirement.
 \label{sec:rqa}
 The heading is defined using the macro.
 
+\section{Milestones}
+\defineReferenceableEnumElement[subsection]{M}{Basic Model}{bm}
+
 %to show that the links are working: start a new page
 \clearpage
 
@@ -53,5 +63,7 @@ We showed the capability \refEnumFull{C}{maint}.
 
 In \cref{sec:steps}, we started with \refEnumFull{Step}{rqa}.
 \LaTeX{} put that step into \cref{sec:rqa}.
+
+First, the milestone \refEnumFull{M}{bm} has to be reached.
 
 \end{document}
