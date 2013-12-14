@@ -1,15 +1,10 @@
 \documentclass{article}
 
-%required by referenceableenumelement
-\usepackage{csquotes}
-\usepackage{ifthen}
-\usepackage{hyperref}
-\usepackage[capitalise,nameinlink]{cleveref}
-
 %Always add a dot behind the definition
-\newcommand{\thighlight}[1]{#1.}
+\newcommand{\refenumenclosing}[1]{#1.}
+%
+\usepackage{refenums}
 
-\input{referenceableenumelement}
 
 \begin{document}
 
@@ -21,6 +16,9 @@
 
 %Setup ``capabilities'', without any separator
 \setupReferencableEnumElements[]{C}{Capability}
+
+%Setup ``Notes'' showing the usage of defineReferenceableEnumElementInline
+\setupReferencableEnumElements{N}{Note}
 
 %Setup ``Steps'' not having a print form
 \setupReferencableEnumElements[ ]{Step}{ONLYSHORT}
@@ -41,6 +39,8 @@ We also see portability as important requirement.
 \section{Capabilities}
 \defineReferenceableEnumElement{C}{Maintainability}{maint}
 
+\section{Notes}
+\defineReferenceableEnumElementInline{N}{Blue}{blue} It should be a blue note, shouldn't it?
 
 \section{Steps}
 \label{sec:steps}
@@ -60,6 +60,8 @@ The heading is defined using the macro.
 In \cref{secreqs}, we discussed \refEnumFull{R}{sca} and \refEnumFull{R}{port}.
 
 We showed the capability \refEnumFull{C}{maint}.
+
+We also had a note \refEnumFull{N}{blue}.
 
 In \cref{sec:steps}, we started with \refEnumFull{Step}{rqa}.
 \LaTeX{} put that step into \cref{sec:rqa}.

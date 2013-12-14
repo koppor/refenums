@@ -1,15 +1,14 @@
 # ReferenceableEnumElement
 
+This package provides commands to define enumerable items, which can be referenced
+For instance, "Milestone M1: Specification created"
+Later, one can reference the short name of the item (M1) or the short name together with the print name (M1 ("Specification created"))
+
+
 ## Usage
 
-Include following packages in your `.tex` document:
-
 ```
-\usepackage{csquotes}
-\usepackage{ifthen}
-\usepackage{etoolbox}
-\usepackage{hyperref}
-\usepackage[capitalise,nameinlink]{cleveref}
+\usepackage{refenums}
 ```
 
 ### Define the "Referenceable Enum Environment"
@@ -66,5 +65,5 @@ The decision to put the enum in a section should be taken at `\setupReferencable
 
 ## Files
 
-* `referenceableenumelement.tex`: the macro definitions
-* `demo.tex`: small demonstration
+* [refenums.sty](refenums.sty): the package
+* [demo.tex](demo.tex): small demonstration

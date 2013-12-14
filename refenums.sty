@@ -1,7 +1,19 @@
-%See README.md for required packages
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{refenums}
+  [2013/12/14 Referenceable enumerated items]
 
-%Defines command \thighlight if it is not already defined
-\ifthenelse{\isundefined{\thighlight}}{\newcommand{\thighlight}[1]{#1}}{}
+% This package provides commands to define enumerable items, which can be referenced
+% For instance, "Milestone M1: Specification created"
+% Later, one can reference the short name of the item (M1) or the short name together with the print name (M1 ("Specification created"))
+
+
+\RequirePackage{csquotes}
+\RequirePackage{ifthen}
+\RequirePackage{hyperref}
+\RequirePackage[capitalise,nameinlink]{cleveref}
+
+%Defines command \refenumenclosing if it is not already defined
+\ifthenelse{\isundefined{\refenumenclosing}}{\newcommand{\refenumenclosing}[1]{#1}}{}
 
 % tip by http://tex.stackexchange.com/a/73710/9075
 \makeatletter
@@ -70,11 +82,11 @@
 % Generic command to define counter elements
 % Called for EACH element
 %
-% #1: (optional) the command to wrap the text under. Default thighlight
+% #1: (optional) the command to wrap the text under. Defaults to refenumenclosing
 % #2: Enum Id (no spaces, only characters), also used to print short form of enum and to reference the setup at setupReferencableEnumElements
 % #3: Full Name of the enum to be defined
 % #4: Label Id of the enum when referencing it
-\newcommand{\defineReferenceableEnumElement}[4][thighlight]{%
+\newcommand{\defineReferenceableEnumElement}[4][refenumenclosing]{%
 %increase counter
 \refstepcounter{#2}%
 %
@@ -92,9 +104,9 @@
 
 % Same as \defineReferenceableEnumElement but for inline referenceable elements!
 % One uses either without ``Inline'' or with ``Inline'' for a group of types
-\newcommand{\defineReferenceableEnumElementInline}[4]{%
+\newcommand{\defineReferenceableEnumElementInline}[4][refenumenclosing]{%
  \refstepcounter{#2}%
- \thighlight{(#2\csname #2Separator\endcsname\arabic{#2}) #3}%
+ \csname #1\endcsname{(#2\csname #2Separator\endcsname\arabic{#2}) #3}%
  \labelname{#3}%
  \label{enum:#2:#4}%
 }
@@ -126,3 +138,4 @@
 \newcommand{\refEnum}[2]{%
   \cref{enum:#1:#2}%
 }
+\endinput
