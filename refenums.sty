@@ -73,7 +73,7 @@
 %internal command, used only at defineReferenceableEnumElement
 % #1: Enum Id (no spaces, only characters), also used to print short form of enum and to reference the setup at setupReferencableEnumElements
 % #2: Full Name of the enum to be defined
-\newcommand{\defineReferenceableEnumElementHelper}[2]{%
+\newcommand{\defRefEnumHelper}[2]{%
 % \arabic{#1} returns the counter value
 \iftoggle{#1OnlyShort}{%
 #1\csname #1Separator\endcsname\arabic{#1}: #2%
@@ -93,7 +93,7 @@
 % #2: Enum Id (no spaces, only characters), also used to print short form of enum and to reference the setup at setupReferencableEnumElements
 % #3: Full Name of the enum to be defined
 % #4: Label Id of the enum when referencing it
-\newcommand{\defineReferenceableEnumElement}[4][refenumenclosing]{%
+\newcommand{\defRefEnum}[4][refenumenclosing]{%
 %increase counter
 \refstepcounter{#2}%
 %
@@ -104,14 +104,14 @@
 \label{enum:#2:#4}%
 %
 %Print out the thing
-\csname #1\endcsname{\defineReferenceableEnumElementHelper{#2}{#3}}%
+\csname #1\endcsname{\defRefEnumHelper{#2}{#3}}%
 %
 }
 
 
-% Same as \defineReferenceableEnumElement but for inline referenceable elements!
+% Same as \defRefEnum but for inline referenceable elements!
 % One uses either without ``Inline'' or with ``Inline'' for a group of types
-\newcommand{\defineReferenceableEnumElementInline}[4][refenuminlineenclosing]{%
+\newcommand{\defRefEnumInline}[4][refenuminlineenclosing]{%
  \refstepcounter{#2}%
  \csname #1\endcsname{(#2\csname #2Separator\endcsname\arabic{#2}) #3}%
  \labelname{#3}%

@@ -26,13 +26,13 @@ Optional parameter: Separator between `<EnumId>` and number.
 
 #### (Optional) Define shorthand macro to define the macros for referencing
 
-`\newcommand{\def<EnumId>}[2]{\defineReferenceableEnumElement{<EnumId>}{#1}{#2}}`
+`\newcommand{\def<EnumId>}[2]{\defRefEnum{<EnumId>}{#1}{#2}}`
 
 
 ### Usage in the text
 
 #### Define a single enum
-* `\defineReferenceableEnumElement{<EnumId>}{<FullName>}{<LabelId>}` (always supported)
+* `\defRefEnum{<EnumId>}{<FullName>}{<LabelId>}` (always supported)
 * `\def<EnumId>{<FullName>}{<LabelId>}` (when the shorthand command is defined)
 
 
@@ -49,9 +49,9 @@ Optional parameter: Separator between `<EnumId>` and number.
 
 **Initialize**: `\setupReferencableEnumElements{R}{Requirement}`
 
-**Define a single enum**: `\defineReferenceableEnumElement{R}{Quality}{qual}`.
+**Define a single enum**: `\defRefEnum{R}{Quality}{qual}`.
 When you want to put the element in a section, use the optional parameter:
-`\defineReferenceableEnumElement[section]{R}{Quality}{qual}`
+`\defRefEnum[section]{R}{Quality}{qual}`
 
 **Referencing**:
 
@@ -64,7 +64,7 @@ When you want to put the element in a section, use the optional parameter:
 
 ## TODO
 
-* The decision to put the enum in a section should be taken at `\setupReferencableEnumElements` not at `\defineReferenceableEnumElement`.
+* The decision to put the enum in a section should be taken at `\setupReferencableEnumElements` not at `\defRefEnum`.
 * Enable automatically generating `\def<EnumId>` at `\setupReferencableEnumElements` via a package parameter.
 
 
