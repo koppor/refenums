@@ -1,5 +1,6 @@
-\documentclass{article}
+\documentclass[parskip=full]{scrartcl}
 
+\usepackage[colorlinks]{hyperref}
 \usepackage{refenums}
 
 %Always add a dot behind the definition
@@ -7,6 +8,18 @@
 
 
 \begin{document}
+
+\title{Demonstation of the refenums package}
+\date{}
+\maketitle
+
+\vspace{-12ex}
+This documents demonstrates the usage and results of the \href{http://mirror.ctan.org/tex-archive/macros/latex/contrib/refenums/}{refenums} package.
+All content appearing in this work is fictitious.
+Any resemblance to real artefacts, items, or persons, living or dead, is purely coincidental.
+
+\Crefrange{sec:reqs}{sec:milestones} show defined referenceable enums.
+\Cref{sec:discussion} references the defined enums.
 
 \tableofcontents
 \clearpage
@@ -23,12 +36,15 @@
 %Setup ``Steps'' not having a print form
 \setupRefEnums[ ]{Step}{ONLYSHORT}
 
+%Setup ``Issue'' not having a print form
+\setupRefEnums[ ]{Issue}{ONLYSHORT}
+
 %Setup ``Milestones'' where the print name and the short name is combined
 \setupRefEnums[COMBINED]{M}{Milestone}
 
 
 \section{Requirements}
-\label{secreqs}
+\label{sec:reqs}
 \defRefEnum{R}{Scalability}{sca}
 We see scalability as important requirement.
 
@@ -43,6 +59,7 @@ We also see portability as important requirement.
 \defRefEnumInline{N}{Blue}{blue} It should be a blue note, shouldn't it?
 \defRefEnumInline{N}{Red}{Red} There should also be a red note, shouldn't it?
 
+
 \section{Steps}
 \label{sec:steps}
 
@@ -53,15 +70,21 @@ The heading is defined using the macro.
 \defRefEnum[subsection]{Step}{Software Specification}{spec}
 The heading is defined using the macro.
 
-\section{Milestones}
-\defRefEnum[subsection]{M}{Basic Model}{bm}
 
-%to show that the links are working: start a new page
-\clearpage
+\section{Issues}
+\defRefEnum{Issue}{Fictional}{fi}
+
+\defRefEnum{Issue}{Unrealistic}{unr}
+
+
+\section{Milestones}
+\label{sec:milestones}
+\defRefEnum[subsection]{M}{Basic Model}{bm}
 
 
 \section{Discussion}
-In \cref{secreqs}, we discussed \refEnumFull{R}{sca} and \refEnumFull{R}{port}.
+\label{sec:discussion}
+In \cref{sec:reqs}, we discussed \refEnumFull{R}{sca} and \refEnumFull{R}{port}.
 
 We showed the capability \refEnumFull{C}{maint}.
 
@@ -70,6 +93,8 @@ We also had a note \refEnumFull{N}{blue}.
 In \cref{sec:steps}, we started with \refEnumFull{Step}{rqa}.
 \LaTeX{} put that step into \cref{sec:rqa}.
 Afterwards, \refEnumFull{Step}{spec} has been described.
+
+Some issues such as \refEnumFull{Issue}{fi} were raised.
 
 First, the milestone \refEnumFull{M}{bm} has to be reached.
 
