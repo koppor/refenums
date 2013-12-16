@@ -43,6 +43,8 @@ Using this, a enumeration similar to the ones of the `inparaenum` environment is
 #### Referencing
  
 * `\refEnumFull{<EnumId>}{<LabelId>}` = `<EnumId>-<Counter> ("<FullName>")`, e.g. `R-1 ("Quality")`
+* `\refEnumFullP{<EnumId>}{<LabelId>}` is the long form for `\refEnumFull'.
+* `\refEnumFullT{<EnumId>}{<LabelId>}` = `<EnumId>-<Counter>: "<FullName>"`, e.g. `R-1: "Quality"`
 * `\refEnum{<EnumId>}{<LabelId>}` = `<EnumId>-<Counter>`, e.g. `R-1`
 * References to the label
   * `\nameref{enum:<EnumId>:<LabelId>}` = `<FullName>`

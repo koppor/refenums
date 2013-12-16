@@ -119,19 +119,19 @@
 }
 
 
-% Generic command to reference to an enum
+% Generic command to reference to an enum. The print name is put in brackets after the identifier.
 %
 % Output: <EnumId><Num> (``<PrintName>'')
 %
 % #1: Enum Id (no spaces, only characters!)
 % #2: Label Id
-\newcommand{\refEnumFull}[2]{%
+\newcommand{\refEnumFullP}[2]{%
  \refEnum{#1}{#2}
  (\enquote{\nameref{enum:#1:#2}})%
 }
 
 
-% Generic command to reference to an enum
+% Generic command to reference to an enum. The print name is put in quotes after the identifier.
 %
 % Output: <EnumId><Num>: ``<PrintName>''
 %
@@ -140,6 +140,10 @@
 \newcommand{\refEnumFullT}[2]{%
  \refEnum{#1}{#2}: \enquote{\nameref{enum:#1:#2}}%
 }
+
+
+% \refEnumFull defaults to \efEnumFullP
+\let\refEnumFull\refEnumFullP
 
 
 \newcommand{\refEnum}[2]{%
