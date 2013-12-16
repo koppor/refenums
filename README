@@ -63,6 +63,7 @@ When you want to put the element in a section, use the optional parameter:
 
 The decision to put the enum in a section should be taken at `\setupReferencableEnumElements` not at `\defineReferenceableEnumElement`.
 
+
 ## Files
 
 * [refenums.sty](refenums.sty): the package
