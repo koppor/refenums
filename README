@@ -1,9 +1,7 @@
 # ReferenceableEnumElement
 
-This package provides commands to define enumerable items, which can be referenced
-For instance, "Milestone M1: Specification created"
-Later, one can reference the short name of the item (M1) or the short name together with the print name (M1 ("Specification created"))
-
+This package provides commands to define enumerable items with a number and a long name, which can be referenced referenced later with the name or just the short form.
+For instance, "Milestone M1: Specification created" can be defined and later on be referenced with `M1` or `M1 ("Specification created")`.
 
 ## Usage
 
@@ -25,18 +23,20 @@ Optional parameter: Separator between `<EnumId>` and number.
 
 #### (Optional) Define shorthand macro to define the macros for referencing
 
-`\newcommand{\define<EnumId>}[2]{\defineReferenceableEnumElement{<EnumId>}{#1}{#2}}`
+`\newcommand{\def<EnumId>}[2]{\defineReferenceableEnumElement{<EnumId>}{#1}{#2}}`
 
 
 ### Usage in the text
 
 #### Define a single enum
-`\define<EnumId>{<FullName>}{<LabelId>}`
+* `\defineReferenceableEnumElement{<EnumId>}{<FullName>}{<LabelId>}` (always supported)
+* `\def<EnumId>{<FullName>}{<LabelId>}` (when the shorthand command is defined)
+
 
 #### Referencing
  
-* `\refEnumFull{<EnumId>}{<LabelId>}` = `<EnumId>-<Counter> ("<FullName>")`, e.g. `CA-1 ("Quality")`
-* `\refEnum{<EnumId>}{<LabelId>}` = `<EnumId>-<Counter>`, e.g. `CA-1`
+* `\refEnumFull{<EnumId>}{<LabelId>}` = `<EnumId>-<Counter> ("<FullName>")`, e.g. `R-1 ("Quality")`
+* `\refEnum{<EnumId>}{<LabelId>}` = `<EnumId>-<Counter>`, e.g. `R-1`
 * References to the label
   * `\nameref{enum:<EnumId>:<LabelId>}` = `<FullName>`
   * `\ref{enum:<EnumId>:<LabelId>}` = `<Counter>`, e.g. `1`
@@ -61,7 +61,8 @@ When you want to put the element in a section, use the optional parameter:
 
 ## TODO
 
-The decision to put the enum in a section should be taken at `\setupReferencableEnumElements` not at `\defineReferenceableEnumElement`.
+* The decision to put the enum in a section should be taken at `\setupReferencableEnumElements` not at `\defineReferenceableEnumElement`.
+* Enable automatically generating `\def<EnumId>` at `\setupReferencableEnumElements` via a package parameter.
 
 
 ## Files
