@@ -20,7 +20,7 @@
 
 %Defines command \refenumenclosing and \refenuminlineenclosing if it is not already defined
 \ifthenelse{\isundefined{\refenumenclosing}}{\newcommand{\refenumenclosing}[1]{#1}}{}
-\ifthenelse{\isundefined{\refenuminlineenclosing}}{\newcommand{\refenuminlineenclosing}[1]{#1}}{}
+\ifthenelse{\isundefined{\refenuminlineenclosing}}{\newcommand{\refenuminlineenclosing}[1]{\emph{#1}}}{}
 
 % tip by http://tex.stackexchange.com/a/73710/9075
 \makeatletter
