@@ -20,6 +20,7 @@
 
 %Defines command \refenumenclosing if it is not already defined
 \ifthenelse{\isundefined{\refenumenclosing}}{\newcommand{\refenumenclosing}[1]{#1}}{}
+\ifthenelse{\isundefined{\refenuminlineenclosing}}{\newcommand{\refenuminlineenclosing}[1]{#1}}{}
 
 % tip by http://tex.stackexchange.com/a/73710/9075
 \makeatletter
@@ -110,7 +111,7 @@
 
 % Same as \defineReferenceableEnumElement but for inline referenceable elements!
 % One uses either without ``Inline'' or with ``Inline'' for a group of types
-\newcommand{\defineReferenceableEnumElementInline}[4][refenumenclosing]{%
+\newcommand{\defineReferenceableEnumElementInline}[4][refenuminlineenclosing]{%
  \refstepcounter{#2}%
  \csname #1\endcsname{(#2\csname #2Separator\endcsname\arabic{#2}) #3}%
  \labelname{#3}%
