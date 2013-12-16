@@ -18,7 +18,7 @@
 \RequirePackage{hyperref}
 \RequirePackage[capitalise,nameinlink]{cleveref}
 
-%Defines command \refenumenclosing if it is not already defined
+%Defines command \refenumenclosing and \refenuminlineenclosing if it is not already defined
 \ifthenelse{\isundefined{\refenumenclosing}}{\newcommand{\refenumenclosing}[1]{#1}}{}
 \ifthenelse{\isundefined{\refenuminlineenclosing}}{\newcommand{\refenuminlineenclosing}[1]{#1}}{}
 
