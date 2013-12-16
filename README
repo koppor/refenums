@@ -66,6 +66,11 @@ When you want to put the element in a section, use the optional parameter:
 **See also** [demo.tex](demo.tex).
 
 
+## Tuning
+
+When defining a referenceable element, this element is enclosed using `\refenumenclosing` for normal enums and `\refenumenclosinginline` for inline enums.
+These commands can be redefined after package usage.
+
 ## TODO
 
 * The decision to put the enum in a section should be taken at `\setupReferencableEnumElements` not at `\defRefEnum`.
