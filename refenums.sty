@@ -34,7 +34,7 @@
 % #1: (optional) the seperator between EnumId and Number. Default: "-". If set to COMBINED, the output format changes to <PrintName> <EnumId><Number>
 % #2: Enum Id (no spaces, only characters), also used later in defineReferenceableEnumElement
 % #3: Print Name of enum type, if "ONLYSHORT" then only the short name is used and a long name never printed
-\newcommand{\setupReferencableEnumElements}[3][-]{%
+\newcommand{\setupRefEnums}[3][-]{%
 %Define global counter
 \newcounter{#2}
 
@@ -67,11 +67,11 @@
 \togglefalse{#2OnlyShort}
 }
 
-%End of definition of setupReferencableEnumElements
+%End of definition of setupRefEnums
 }
 
 %internal command, used only at defineReferenceableEnumElement
-% #1: Enum Id (no spaces, only characters), also used to print short form of enum and to reference the setup at setupReferencableEnumElements
+% #1: Enum Id (no spaces, only characters), also used to print short form of enum and to reference the setup at setupRefEnums
 % #2: Full Name of the enum to be defined
 \newcommand{\defRefEnumHelper}[2]{%
 % \arabic{#1} returns the counter value
@@ -90,7 +90,7 @@
 % Called for EACH element
 %
 % #1: (optional) the command to wrap the text under. Defaults to refenumenclosing
-% #2: Enum Id (no spaces, only characters), also used to print short form of enum and to reference the setup at setupReferencableEnumElements
+% #2: Enum Id (no spaces, only characters), also used to print short form of enum and to reference the setup at setupRefEnums
 % #3: Full Name of the enum to be defined
 % #4: Label Id of the enum when referencing it
 \newcommand{\defRefEnum}[4][refenumenclosing]{%

@@ -18,7 +18,7 @@ Decide for `<EnumId>`.
 E.g., `req`.
 
 #### Initialize
-`\setupReferencableEnumElements{<EnumId>}{<PrintName>}`
+`\setupRefEnums{<EnumId>}{<PrintName>}`
 
 In case `<PrintName>` is set to `ONLYSHORT`, only the short name is used.
 
@@ -51,7 +51,7 @@ Using this, a enumeration similar to the ones of the `inparaenum` environment is
  
 ## Example
 
-**Initialize**: `\setupReferencableEnumElements{R}{Requirement}`
+**Initialize**: `\setupRefEnums{R}{Requirement}`
 
 **Define a single enum**: `\defRefEnum{R}{Quality}{qual}`.
 When you want to put the element in a section, use the optional parameter:
@@ -73,8 +73,8 @@ These commands can be redefined after package usage.
 
 ## TODO
 
-* The decision to put the enum in a section should be taken at `\setupReferencableEnumElements` not at `\defRefEnum`.
-* Enable automatically generating `\def<EnumId>` at `\setupReferencableEnumElements` via a package parameter.
+* The decision to put the enum in a section should be taken at `\setupRefEnums` not at `\defRefEnum`.
+* Enable automatically generating `\def<EnumId>` at `\setupRefEnums` via a package parameter.
 
 
 ## Source code
