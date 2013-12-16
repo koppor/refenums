@@ -65,6 +65,10 @@ When you want to put the element in a section, use the optional parameter:
 * Enable automatically generating `\def<EnumId>` at `\setupReferencableEnumElements` via a package parameter.
 
 
+## Source coe
+
+The latest source code is available at https://github.com/koppor/refenums
+
 ## Files
 
 * [refenums.sty](refenums.sty): the package
