@@ -35,6 +35,10 @@ Optional parameter: Separator between `<EnumId>` and number.
 * `\defRefEnum{<EnumId>}{<FullName>}{<LabelId>}` (always supported)
 * `\def<EnumId>{<FullName>}{<LabelId>}` (when the shorthand command is defined)
 
+#### Define a single enum using the inline format
+`\defineReferenceableEnumElementInline{<EnumId>}{<FullName>}{<LabelId>}`.
+Using this, a enumeration similar to the ones of the `inparaenum` environment is possible.
+`inparaenum` is offered by the [paralist package].
 
 #### Referencing
  
@@ -68,7 +72,7 @@ When you want to put the element in a section, use the optional parameter:
 * Enable automatically generating `\def<EnumId>` at `\setupReferencableEnumElements` via a package parameter.
 
 
-## Source coe
+## Source code
 
 The latest source code is available at https://github.com/koppor/refenums
 
@@ -76,3 +80,5 @@ The latest source code is available at https://github.com/koppor/refenums
 
 * [refenums.sty](refenums.sty): the package
 * [demo.tex](demo.tex): small demonstration
+
+  [paralist]: http://mirror.ctan.org/tex-archive/macros/latex/contrib/paralist/
