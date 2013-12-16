@@ -2,6 +2,9 @@
 
 This package provides commands to define enumerable items with a number and a long name, which can be referenced referenced later with the name or just the short form.
 For instance, "Milestone M1: Specification created" can be defined and later on be referenced with `M1` or `M1 ("Specification created")`.
+The text in the references is derived from the definition and also rendered as hyperlink to the definition.
+Thus, a change of the definition also leads to a change of all references to the text.
+This ensures consistency in the text.
 
 ## Usage
 
