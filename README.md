@@ -88,4 +88,4 @@ The latest source code is available at https://github.com/koppor/refenums
 * [refenums.sty](refenums.sty): the package
 * [demo.tex](demo.tex): small demonstration
 
-  [paralist]: http://mirror.ctan.org/tex-archive/macros/latex/contrib/paralist/
+  [paralist]: www.ctan.org/pkg/paralist
