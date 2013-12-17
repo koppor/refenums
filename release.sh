@@ -10,9 +10,9 @@ zip -d refenums.zip /refenums/\.*
 zip -d refenums.zip /refenums/release.sh
 
 #Generate demo.pdf
-#pdflatex demo
-#pdflatex demo
-#pdflatex demo
+pdflatex demo
+pdflatex demo
+pdflatex demo
 
 #Add demo.pdf to the archive
 mkdir refenums
