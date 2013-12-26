@@ -12,6 +12,12 @@ This ensures consistency in the text.
 \usepackage{refenums}
 ```
 
+Load the package after all packages (hyperref, cleveref, ...).
+For best results, use the `nameinlink` option at cleveref.
+The option `capitalise` is also useful if you use cleveref's `\cref` command, therefore we recommend loading `cleveref` before `refenums` with follwing line:
+`\usepackage[capitalise,nameinlink]{cleveref}`
+
+
 ### Define the "Referenceable Enum Environment"
 
 Decide for `<EnumId>`.
