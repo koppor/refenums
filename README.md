@@ -1,4 +1,6 @@
-# ReferenceableEnumElement
+# refenums - ReferenceableEnumElements
+
+Define named items and provide back-references with that name
 
 This package provides commands to define enumerable items with a number and a long name, which can be referenced referenced later with the name or just the short form.
 For instance, "Milestone M1: Specification created" can be defined and later on be referenced with `M1` or `M1 ("Specification created")`.
