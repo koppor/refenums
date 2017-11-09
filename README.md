@@ -1,4 +1,4 @@
-# refenums - ReferenceableEnumElements [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+# refenums – ReferenceableEnumElements [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 
 Define named items and provide back-references with that name
 
