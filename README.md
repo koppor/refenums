@@ -1,4 +1,4 @@
-# refenums – ReferenceableEnumElements [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+# refenums – ReferenceableEnumElements [![CTAN](https://img.shields.io/badge/CTAN-refenums-blue.svg?style=flat-square)](https://ctan.org/pkg/refenums) [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 
 Define named items and provide back-references with that name
 
@@ -89,7 +89,7 @@ These commands can be redefined after package usage.
 
 ## Source code
 
-The latest source code is available at https://github.com/koppor/refenums
+The latest source code is available at https://github.com/latextemplates/refenums
 
 ## Files
 
