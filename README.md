@@ -1,6 +1,6 @@
-# refenums – ReferenceableEnumElements [![CTAN](https://img.shields.io/badge/CTAN-refenums-blue.svg?style=flat-square)](https://ctan.org/pkg/refenums) [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+# refenums – ReferenceableEnumElements [![CTAN](https://img.shields.io/badge/CTAN-refenums-blue.svg?style=flat-square)](https://ctan.org/pkg/refenums)
 
-Define named items and provide back-references with that name
+> Define named items and provide back-references with that name
 
 This package provides commands to define enumerable items with a number and a long name, which can be referenced referenced later with the name or just the short form.
 For instance, "Milestone M1: Specification created" can be defined and later on be referenced with `M1` or `M1 ("Specification created")`.
@@ -95,6 +95,11 @@ The latest source code is available at <https://github.com/latextemplates/refenu
 
 * [refenums.sty](refenums.sty): the package
 * [demo.tex](demo.tex): small demonstration
+
+## Related packages
+
+* See <https://ctan.org/topic/label-ref> for an overview.
+* In the conext of chemistry, [chemsec](https://ctan.org/pkg/chemsec) offers taylored functionality.
 
 ## License
 
