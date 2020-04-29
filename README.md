@@ -10,7 +10,7 @@ This ensures consistency in the text.
 
 ## Usage
 
-```
+```latex
 \usepackage{refenums}
 ```
 
@@ -19,14 +19,16 @@ For best results, use the `nameinlink` option at cleveref.
 The option `capitalise` is also useful if you use cleveref's `\cref` command, therefore we recommend loading `cleveref` before `refenums` with follwing line:
 `\usepackage[capitalise,nameinlink]{cleveref}`
 
-
 ### Define the "Referenceable Enum Environment"
 
 Decide for `<EnumId>`.
 E.g., `req`.
 
 #### Initialize
-`\setupRefEnums{<EnumId>}{<PrintName>}`
+
+```latex
+\setupRefEnums{<EnumId>}{<PrintName>}
+```
 
 In case `<PrintName>` is set to `ONLYSHORT`, only the short name is used.
 
@@ -34,16 +36,19 @@ Optional parameter: Separator between `<EnumId>` and number.
 
 #### (Optional) Define shorthand macro to define the macros for referencing
 
-`\newcommand{\def<EnumId>}[2]{\defRefEnum{<EnumId>}{#1}{#2}}`
-
+```latex
+\newcommand{\def<EnumId>}[2]{\defRefEnum{<EnumId>}{#1}{#2}}
+```
 
 ### Usage in the text
 
 #### Define a single enum
+
 * `\defRefEnum{<EnumId>}{<FullName>}{<LabelId>}` (always supported)
 * `\def<EnumId>{<FullName>}{<LabelId>}` (when the shorthand command is defined)
 
 #### Define a single enum using the inline format
+
 `\defineReferenceableEnumElementInline{<EnumId>}{<FullName>}{<LabelId>}`.
 Using this, a enumeration similar to the ones of the `inparaenum` environment is possible.
 `inparaenum` is offered by the [paralist package](https://www.ctan.org/pkg/paralist).
@@ -51,13 +56,12 @@ Using this, a enumeration similar to the ones of the `inparaenum` environment is
 #### Referencing
  
 * `\refEnumFull{<EnumId>}{<LabelId>}` = `<EnumId>-<Counter> ("<FullName>")`, e.g. `R-1 ("Quality")`
-* `\refEnumFullP{<EnumId>}{<LabelId>}` is the long form for `\refEnumFull'.
+* `\refEnumFullP{<EnumId>}{<LabelId>}` is the long form for `\refEnumFull`.
 * `\refEnumFullT{<EnumId>}{<LabelId>}` = `<EnumId>-<Counter>: "<FullName>"`, e.g. `R-1: "Quality"`
 * `\refEnum{<EnumId>}{<LabelId>}` = `<EnumId>-<Counter>`, e.g. `R-1`
 * References to the label
   * `\nameref{enum:<EnumId>:<LabelId>}` = `<FullName>`
   * `\ref{enum:<EnumId>:<LabelId>}` = `<Counter>`, e.g. `1`
-
  
 ## Example
 
@@ -75,7 +79,6 @@ When you want to put the element in a section, use the optional parameter:
 
 **See also** [demo.tex](demo.tex).
 
-
 ## Tuning
 
 When defining a referenceable element, this element is enclosed using `\refenumenclosing` for normal enums and `\refenumenclosinginline` for inline enums.
@@ -86,10 +89,9 @@ These commands can be redefined after package usage.
 * The decision to put the enum in a section should be taken at `\setupRefEnums` not at `\defRefEnum`.
 * Enable automatically generating `\def<EnumId>` at `\setupRefEnums` via a package parameter.
 
-
 ## Source code
 
-The latest source code is available at <https://github.com/latextemplates/refenums>.
+The latest source code is available at <https://github.com/koppor/refenums>.
 
 ## Files
 
