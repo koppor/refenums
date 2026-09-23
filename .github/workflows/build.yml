@@ -19,3 +19,9 @@ jobs:
         with:
           package_file: .github/tl_packages
       - run: pdflatex -interaction=nonstopmode -halt-on-error demo && pdflatex -interaction=nonstopmode -halt-on-error demo
+
+  changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: curl -Ls https://sh.jbang.dev | bash -s - com.github.nbbrd.heylogs:heylogs-cli:0.19.1:bin check CHANGELOG.md --format github-actions
