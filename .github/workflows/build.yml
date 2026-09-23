@@ -9,7 +9,7 @@ jobs:
   demo:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       # Package list generated with depp (gitlab.com/islandoftex/texmf/depp) in the Island of TeX image, plus latex-bin for pdflatex and amsfonts + cm-super for fonts depp cannot see (loaded after \begin{document})
       - uses: zauguin/install-texlive@v4
         with:
