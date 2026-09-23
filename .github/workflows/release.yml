@@ -1,0 +1,27 @@
+name: Release
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+  pull_request:
+    paths: [release.sh, .github/workflows/release.yml]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ctan-zip:
+    runs-on: ubuntu-latest
+    container: registry.gitlab.com/islandoftex/images/texlive:latest
+    steps:
+      - uses: actions/checkout@v7
+      # rsvg-convert: pandoc needs it for the SVG badge in README.md
+      - run: apt-get update && apt-get install -y pandoc librsvg2-bin
+      - run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - run: sh release.sh
+      - uses: actions/upload-artifact@v7
+        with:
+          name: refenums
+          path: refenums.zip

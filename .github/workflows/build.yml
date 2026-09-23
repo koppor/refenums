@@ -1,0 +1,21 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      # Package list generated with depp (gitlab.com/islandoftex/texmf/depp) in the Island of TeX image, plus latex-bin for pdflatex and amsfonts + cm-super for fonts depp cannot see (loaded after \begin{document})
+      - uses: zauguin/install-texlive@v4
+        with:
+          package_file: .github/tl_packages
+      - run: pdflatex -interaction=nonstopmode -halt-on-error demo && pdflatex -interaction=nonstopmode -halt-on-error demo

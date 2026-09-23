@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 #This script releases refenums.sty in the format required by CTAN
 
 #First create ZIP file containing versioned files only
@@ -15,7 +16,7 @@ pdflatex demo
 pdflatex demo
 
 #Generate README.pdf
-pandoc -f markdown_github-hard_line_breaks -t latex README.md -o README.pdf
+pandoc -f gfm-hard_line_breaks -t latex README.md -o README.pdf
 
 #Add demo.pdf and README.pdf to the archive
 mkdir refenums
