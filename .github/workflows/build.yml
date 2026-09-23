@@ -15,3 +15,5 @@ jobs:
         with:
           package_file: .github/tl_packages
       - run: pdflatex -interaction=nonstopmode -halt-on-error demo && pdflatex -interaction=nonstopmode -halt-on-error demo
+      - run: pdflatex -interaction=nonstopmode -halt-on-error demo-sec-param && pdflatex -interaction=nonstopmode -halt-on-error demo-sec-param
+        working-directory: test
