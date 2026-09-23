@@ -24,4 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - run: curl -Ls https://sh.jbang.dev | bash -s - com.github.nbbrd.heylogs:heylogs-cli:0.19.1:bin check CHANGELOG.md --format github-actions
+      - uses: jbangdev/jbang-action@v0.142.0
+        with:
+          script: com.github.nbbrd.heylogs:heylogs-cli:0.19.1:bin
+          scriptargs: check CHANGELOG.md --format github-actions
