@@ -7,6 +7,10 @@ on:
   pull_request:
     paths: [release.sh, .github/workflows/release.yml]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   ctan-zip:
     runs-on: ubuntu-latest
