@@ -84,7 +84,7 @@ A single element can override this with the optional parameter:
 * Full reference with the print name in brackets: `\refEnumFull{R}{qual}`
 * Full reference with the print name appended after ":": `\refEnumFullT{R}{qual}`
 
-**See also** [demo.tex](demo.tex).
+**See also** [demo.tex](demo.tex) and its rendering [demo.pdf](https://koppor.github.io/refenums/demo.pdf), which shows the LaTeX code next to each result.
 
 ## Tuning
 
