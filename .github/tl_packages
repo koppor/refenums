@@ -1,4 +1,3 @@
-latex-bin
 amsfonts
 bigintcalc
 bitset
@@ -8,6 +7,8 @@ cm
 cm-super
 csquotes
 ec
+environ
+epstopdf-pkg
 etoolbox
 gettitlestring
 graphics
@@ -24,11 +25,19 @@ kvoptions
 kvsetkeys
 l3kernel
 latex
+latex-bin
+latexconfig
+listings
 ltxcmds
 pdfescape
 pdftexcmds
+pgf
 refcount
 rerunfilecheck
 stringenc
+tcolorbox
+tools
+trimspaces
 uniquecounter
 url
+xcolor
