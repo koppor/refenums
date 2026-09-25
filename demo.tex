@@ -35,8 +35,8 @@ Any resemblance to real artefacts, items, or persons, living or dead, is purely 
 %Setup ``Notes'' showing the usage of defineReferenceableEnumElementInline
 \setupRefEnums{N}{Note}
 
-%Setup ``Steps'' not having a print form
-\setupRefEnums[ ]{Step}{ONLYSHORT}
+%Setup ``Steps'' not having a print form, each step getting its own subsection
+\setupRefEnums[ ][subsection]{Step}{ONLYSHORT}
 
 %Setup ``Issue'' not having a print form
 \setupRefEnums[ ]{Issue}{ONLYSHORT}
@@ -65,11 +65,11 @@ We also see portability as important requirement.
 \section{Steps}
 \label{sec:steps}
 
-\defRefEnum[subsection]{Step}{Requirements Analysis}{rqa}
+\defRefEnum{Step}{Requirements Analysis}{rqa}
 \label{sec:rqa}
 The heading is defined using the macro.
 
-\defRefEnum[subsection]{Step}{Software Specification}{spec}
+\defRefEnum{Step}{Software Specification}{spec}
 The heading is defined using the macro.
 
 \section{Other Steps}
