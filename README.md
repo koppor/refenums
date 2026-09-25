@@ -119,4 +119,4 @@ This work has the LPPL maintenance status "maintained".
 The Current Maintainer and author of this work is Oliver Kopp.
 
 This work consists of the files `refenums.sty`, `demo.tex`, and `README.md`.
-In case files are not listed here, but available at <https://github.com/latextemplates/refenums>, these additional files also form part of this work.
+In case files are not listed here, but available at <https://github.com/koppor/refenums>, these additional files also form part of this work.
