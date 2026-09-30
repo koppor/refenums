@@ -7,6 +7,35 @@
 %Always add a dot behind the definition
 \renewcommand{\refenumenclosing}[1]{#1.}
 
+% \bexample ... \eexample runs the code in between and then prints its source lines.
+% Plain commands, not an environment: a group would discard the macros \setupRefEnums defines.
+\usepackage[listings]{tcolorbox}
+\newcount\bexampleline
+\newcount\eexampleline
+\newcommand{\bexample}{\global\bexampleline=\numexpr\inputlineno+1\relax}
+\newcommand{\eexample}{%
+  \global\eexampleline=\numexpr\inputlineno-1\relax
+  \tcbinputlisting{%
+    listing only,
+    listing file=\jobname.tex,
+    colback=green!5!white,
+    colframe=green!25,
+    left=8mm,
+    listing options={
+      language={[LaTeX]TeX},
+      basicstyle=\small\ttfamily,
+      columns=fullflexible,
+      breaklines,
+      breakatwhitespace,
+      firstline=\the\bexampleline,
+      lastline=\the\eexampleline,
+      firstnumber=\the\bexampleline,
+      numbers=left,
+      numberstyle=\tiny,
+      numbersep=8pt
+    }
+  }%
+}
 
 \begin{document}
 
@@ -17,22 +46,31 @@
 
 \vspace{-12ex}
 This documents demonstrates the usage and results of the \href{http://www.ctan.org/pkg/refenums}{refenums} package.
+Each green box shows the \LaTeX{} code producing the output right above it.
 All content appearing in this work is fictitious.
 Any resemblance to real artefacts, items, or persons, living or dead, is purely coincidental.
 
+\Cref{sec:setup} sets up the enums.
 \Crefrange{sec:reqs}{sec:milestones} show defined referenceable enums.
 \Cref{sec:discussion} references the defined enums.
 
 \tableofcontents
 \clearpage
 
+\section{Setup}
+\label{sec:setup}
+
+Each kind of enum is set up once.
+This produces no output.
+
+\bexample
 %Setup ``requirements''
 \setupRefEnums{R}{Requirement}
 
 %Setup ``capabilities'', without any separator
 \setupRefEnums[]{C}{Capability}
 
-%Setup ``Notes'' showing the usage of defineReferenceableEnumElementInline
+%Setup ``Notes'' showing the usage of \defRefEnumInline
 \setupRefEnums{N}{Note}
 
 %Setup ``Steps'' not having a print form, each step getting its own subsection
@@ -43,34 +81,45 @@ Any resemblance to real artefacts, items, or persons, living or dead, is purely 
 
 %Setup ``Milestones'' where the print name and the short name is combined
 \setupRefEnums[COMBINED]{M}{Milestone}
-
+\eexample
 
 \section{Requirements}
 \label{sec:reqs}
+
+\bexample
 \defRefEnum{R}{Scalability}{sca}
 We see scalability as important requirement.
 
 \defRefEnum{R}{Portability}{port}
 We also see portability as important requirement.
-
+\eexample
 
 \section{Capabilities}
+
+\bexample
 \defRefEnum{C}{Maintainability}{maint}
+\eexample
 
 \section{Notes}
+
+\bexample
 \defRefEnumInline{N}{Blue}{blue} It should be a blue note, shouldn't it?
 \defRefEnumInline{N}{Red}{Red} There should also be a red note, shouldn't it?
-
+\eexample
 
 \section{Steps}
 \label{sec:steps}
 
+\bexample
 \defRefEnum{Step}{Requirements Analysis}{rqa}
 \label{sec:rqa}
 The heading is defined using the macro.
+\eexample
 
+\bexample
 \defRefEnum{Step}{Software Specification}{spec}
 The heading is defined using the macro.
+\eexample
 
 \section{Other Steps}
 \label{sec:osteps}
@@ -78,44 +127,69 @@ The heading is defined using the macro.
 This section shows how an enum can be reused.
 One has to take care to use different labels as in the first usage.
 
+\bexample
 \setcounter{Step}{0}
 \defRefEnumInline{Step}{Think}{think} First think.
 \defRefEnumInline{Step}{Work}{work} Then work.
+\eexample
 
 \section{Issues}
+
+\bexample
 \defRefEnum{Issue}{Fictional}{fi}
 
 \defRefEnum{Issue}{Unrealistic}{unr}
-
+\eexample
 
 \section{Milestones}
 \label{sec:milestones}
-\defRefEnum[subsection]{M}{Basic Model}{bm}
 
+The optional argument of \verb|\defRefEnum| wraps a single element, here in a subsection.
+
+\bexample
+\defRefEnum[subsection]{M}{Basic Model}{bm}
+\eexample
 
 \section{Discussion}
 \label{sec:discussion}
+
+\bexample
 In \cref{sec:reqs}, we discussed \refEnumFull{R}{sca} and \refEnumFull{R}{port}.
+\eexample
 
+\bexample
 We showed the capability \refEnumFull{C}{maint}.
+\eexample
 
+\bexample
 We also had a note \refEnumFull{N}{blue}.
+\eexample
 
+\bexample
 In \cref{sec:steps}, we started with \refEnumFull{Step}{rqa}.
 \LaTeX{} put that step into \cref{sec:rqa}.
 Afterwards, \refEnumFull{Step}{spec} has been described.
+\eexample
 
+\bexample
 We reused the enumeration environment for other steps in \cref{sec:osteps}.
 There, we started with \refEnumFull{Step}{think}.
+\eexample
 
+\bexample
 Some issues such as \refEnumFull{Issue}{fi} were raised.
+\eexample
 
+\bexample
 First, the milestone \refEnumFull{M}{bm} has to be reached.
+\eexample
 
+\bexample
 Following properties are the most important ones:
 \begin{itemize}
 \item \refEnumFullT{R}{sca}
 \item \ldots
 \end{itemize}
+\eexample
 
 \end{document}
