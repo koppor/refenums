@@ -32,7 +32,12 @@ E.g., `req`.
 
 In case `<PrintName>` is set to `ONLYSHORT`, only the short name is used.
 
-Optional parameter: Separator between `<EnumId>` and number.
+Optional parameters:
+
+1. Separator between `<EnumId>` and number. Default: `-`.
+2. Name of the command each element is wrapped in, e.g., `subsection`. Default: `refenumenclosing`.
+
+For instance, `\setupRefEnums[-][subsection]{Step}{Step}` puts every step into its own subsection.
 
 #### (Optional) Define shorthand macro to define the macros for referencing
 
@@ -68,7 +73,9 @@ Using this, a enumeration similar to the ones of the `inparaenum` environment is
 **Initialize**: `\setupRefEnums{R}{Requirement}`
 
 **Define a single enum**: `\defRefEnum{R}{Quality}{qual}`.
-When you want to put the element in a section, use the optional parameter:
+When you want to put all elements in a section, set it at initialization:
+`\setupRefEnums[-][section]{R}{Requirement}`.
+A single element can override this with the optional parameter:
 `\defRefEnum[section]{R}{Quality}{qual}`
 
 **Referencing**:
@@ -77,7 +84,7 @@ When you want to put the element in a section, use the optional parameter:
 * Full reference with the print name in brackets: `\refEnumFull{R}{qual}`
 * Full reference with the print name appended after ":": `\refEnumFullT{R}{qual}`
 
-**See also** [demo.tex](demo.tex).
+**See also** [demo.tex](demo.tex) and its rendering [demo.pdf](https://koppor.github.io/refenums/demo.pdf), which shows the LaTeX code next to each result.
 
 ## Tuning
 
@@ -86,7 +93,6 @@ These commands can be redefined after package usage.
 
 ## TODO
 
-* The decision to put the enum in a section should be taken at `\setupRefEnums` not at `\defRefEnum`.
 * Enable automatically generating `\def<EnumId>` at `\setupRefEnums` via a package parameter.
 
 ## Source code
