@@ -57,22 +57,39 @@ Each green box shows the \LaTeX{} code producing the output right above it.
 Each kind of item is set up once.
 This produces no output.
 
+Phases print only their short form (``Phase~1'') and each becomes a subsection:
+
 \bexample
-% Phases print only their short form ("Phase 1") and each becomes a subsection
 \setupRefEnums[ ][subsection]{Phase}{ONLYSHORT}
+\eexample
 
-% Default separator: "Use Case 1 (UC-1)"
+Use cases use the default separator (``Use Case~1 (UC-1)''):
+
+\bexample
 \setupRefEnums{UC}{Use Case}
+\eexample
 
-% Empty separator: "Risk 1 (R1)"
+Risks use no separator (``Risk~1 (R1)''):
+
+\bexample
 \setupRefEnums[]{R}{Risk}
+\eexample
 
+Decisions are set up like use cases:
+
+\bexample
 \setupRefEnums{D}{Decision}
+\eexample
 
-% Print name and short name combined: "Milestone M1"
+Milestones combine print name and short name (``Milestone~M1''):
+
+\bexample
 \setupRefEnums[COMBINED]{M}{Milestone}
+\eexample
 
-% Used inline, see \cref{sec:questions}
+Questions are used inline, see \cref{sec:questions}:
+
+\bexample
 \setupRefEnums{Q}{Question}
 \eexample
 
