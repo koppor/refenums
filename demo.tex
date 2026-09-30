@@ -1,5 +1,7 @@
 \documentclass[parskip=full]{scrartcl}
 
+\usepackage[T1]{fontenc}
+
 \usepackage[colorlinks,allcolors=blue]{hyperref}
 \usepackage[capitalise,nameinlink]{cleveref}
 \usepackage{refenums}
@@ -45,7 +47,8 @@
 \maketitle
 
 \vspace{-12ex}
-This document demonstrates the \href{https://ctan.org/pkg/refenums}{refenums} package using the project documents of a fictitious lending library app.
+This document demonstrates the \href{https://ctan.org/pkg/refenums}{refenums} package with the development documents of a reference manager.
+The content is a simplified version of \href{https://github.com/JabRef/jabref/tree/main/docs}{JabRef's} requirements, written for \href{https://github.com/itsallcode/openfasttrace}{OpenFastTrace}, and decision records, written in \href{https://adr.github.io/madr/}{MADR}.
 Each green box shows the \LaTeX{} code producing the output right above it.
 
 \tableofcontents
@@ -57,16 +60,10 @@ Each green box shows the \LaTeX{} code producing the output right above it.
 Each kind of item is set up once.
 This produces no output.
 
-Phases print only their short form (``Phase~1'') and each becomes a subsection:
+Features print only their short form (``Feature~1'') and each becomes a subsection:
 
 \bexample
-\setupRefEnums[ ][subsection]{Phase}{ONLYSHORT}
-\eexample
-
-Use cases use the default separator (``Use Case~1 (UC-1)''):
-
-\bexample
-\setupRefEnums{UC}{Use Case}
+\setupRefEnums[ ][subsection]{Feature}{ONLYSHORT}
 \eexample
 
 Risks use no separator (``Risk~1 (R1)''):
@@ -75,10 +72,17 @@ Risks use no separator (``Risk~1 (R1)''):
 \setupRefEnums[]{R}{Risk}
 \eexample
 
-Decisions are set up like use cases:
+Requirements use the default separator (``Requirement~1 (Req-1)''):
 
 \bexample
-\setupRefEnums{D}{Decision}
+\setupRefEnums{Req}{Requirement}
+\eexample
+
+Decision records and the options they consider, too:
+
+\bexample
+\setupRefEnums{ADR}{Decision Record}
+\setupRefEnums{Opt}{Option}
 \eexample
 
 Milestones combine print name and short name (``Milestone~M1''):
@@ -87,96 +91,89 @@ Milestones combine print name and short name (``Milestone~M1''):
 \setupRefEnums[COMBINED]{M}{Milestone}
 \eexample
 
-Questions are used inline, see \cref{sec:questions}:
+\section{Features}
+\label{sec:features}
 
 \bexample
-\setupRefEnums{Q}{Question}
-\eexample
+\defRefEnum{Feature}{Save a library}{save}
+The user saves the library to a \texttt{.bib} file.
 
-\section{Lifecycle}
-\label{sec:lifecycle}
-
-\bexample
-\defRefEnum{Phase}{Analysis}{analysis}
-We collect the use cases (\cref{sec:usecases}) and assess the risks (\cref{sec:risks}).
-
-\defRefEnum{Phase}{Design}{design}
-We record the architecture decisions (\cref{sec:decisions}).
-
-\defRefEnum{Phase}{Implementation}{impl}
-We build and test the app.
-\eexample
-
-\section{Use Cases}
-\label{sec:usecases}
-
-\bexample
-\defRefEnum{UC}{Borrow a book}{borrow}
-A member borrows an available book for four weeks.
-
-\defRefEnum{UC}{Return a book}{return}
-A member returns a book, which becomes available again.
+\defRefEnum{Feature}{Autosave}{autosave}
+Every change to the library is saved shortly afterwards, and a backup is kept.
 \eexample
 
 \section{Risks}
 \label{sec:risks}
 
 \bexample
-\defRefEnum{R}{Loss of lending records}{loss}
-Without the records, \refEnumFull{UC}{return} cannot tell who has a book.
+\defRefEnum{R}{Concurrent modification}{concurrent}
+Another process, e.g., a second JabRef instance on a network share, writes the library file while \refEnum{Feature}{save} is running.
 
-\defRefEnum{R}{Double booking}{double}
-Two members could borrow the same copy at once (\refEnum{UC}{borrow}).
+\defRefEnum{R}{Incomplete backup}{backup}
+A failure while writing a backup during \refEnumFull{Feature}{autosave} replaces a valid backup.
+\eexample
+
+\section{Requirements}
+\label{sec:requirements}
+
+\bexample
+\defRefEnum{Req}{Detect concurrent modification}{detect}
+If the library file changed since the save started, the save is aborted with an error.
+Mitigates \refEnumFull{R}{concurrent}.
+
+OFT: \verb|req~logic.exporter.concurrent-save-detection~1|, needs: impl, utest
+\eexample
+
+\bexample
+\defRefEnum{Req}{Keep valid backups}{keep}
+A failure while writing a backup leaves the previous backup untouched.
+Mitigates \refEnumFull{R}{backup}.
+
+OFT: \verb|req~jabgui.autosaveandbackup.complete-backup~1|, needs: impl, utest
 \eexample
 
 \section{Decisions}
 \label{sec:decisions}
 
-The optional argument of \verb|\defRefEnum| wraps a single item, here in a subsection.
+The optional argument of \verb|\defRefEnum| wraps a single item, here a decision record in a subsection.
 
 \bexample
-\defRefEnum[subsection]{D}{Store lending records in a transactional database}{db}
-This mitigates \refEnumFull{R}{loss} and \refEnumFull{R}{double}.
+\defRefEnum[subsection]{ADR}{Replace files atomically}{atomic}
+
+\paragraph{Context and Problem Statement}
+How do we write a file so that \refEnumFull{Req}{detect} and \refEnumFull{Req}{keep} hold?
+
+\paragraph{Considered Options}
+\begin{itemize}
+\item \defRefEnumInline{Opt}{Overwrite in place}{inplace}
+\item \defRefEnumInline{Opt}{Write a temporary file and move it over the target}{tmp}
+\end{itemize}
+
+\paragraph{Decision Outcome}
+Chosen option: \refEnumFullT{Opt}{tmp}, because a failed write leaves the original file untouched and the target can be checked for changes right before the move.
 \eexample
 
 \section{Milestones}
 \label{sec:milestones}
 
 \bexample
-\defRefEnum{M}{Specification approved}{spec}
-Ends \refEnumFullT{Phase}{analysis}.
-
-\defRefEnum{M}{First release}{release}
-Ends \refEnum{Phase}{impl} and delivers \refEnum{UC}{borrow} and \refEnum{UC}{return}.
-\eexample
-
-\section{Open Questions}
-\label{sec:questions}
-
-\bexample
-\defRefEnumInline{Q}{Reservations}{reserve} Can members reserve a borrowed book?
-\defRefEnumInline{Q}{Fees}{fees} Are late returns charged?
+\defRefEnum{M}{Safe saving}{safe}
+Reached when \refEnum{Req}{detect} and \refEnum{Req}{keep} are implemented as decided in \refEnum{ADR}{atomic} and covered by unit tests.
 \eexample
 
 \section{References}
 \label{sec:references}
 
-Each kind of reference to \refEnum{UC}{borrow}:
+Each kind of reference to \refEnum{Req}{detect}:
 
 \bexample
 \begin{itemize}
-\item \verb|\refEnum|: \refEnum{UC}{borrow}
-\item \verb|\refEnumFull|: \refEnumFull{UC}{borrow}
-\item \verb|\refEnumFullT|: \refEnumFullT{UC}{borrow}
-\item \verb|\nameref|: \nameref{enum:UC:borrow}
-\item \verb|\ref|: \ref{enum:UC:borrow}
+\item \verb|\refEnum|: \refEnum{Req}{detect}
+\item \verb|\refEnumFull|: \refEnumFull{Req}{detect}
+\item \verb|\refEnumFullT|: \refEnumFullT{Req}{detect}
+\item \verb|\nameref|: \nameref{enum:Req:detect}
+\item \verb|\ref|: \ref{enum:Req:detect}
 \end{itemize}
-\eexample
-
-A traceability sentence combining them:
-
-\bexample
-\refEnum{M}{release} is reached once \refEnumFull{D}{db} is implemented; \refEnumFull{Q}{reserve} is still open.
 \eexample
 
 \end{document}
