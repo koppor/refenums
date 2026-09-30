@@ -1,6 +1,8 @@
 \documentclass[parskip=full]{scrartcl}
 
-\usepackage[colorlinks]{hyperref}
+\usepackage[T1]{fontenc}
+
+\usepackage[colorlinks,allcolors=blue]{hyperref}
 \usepackage[capitalise,nameinlink]{cleveref}
 \usepackage{refenums}
 
@@ -45,14 +47,9 @@
 \maketitle
 
 \vspace{-12ex}
-This documents demonstrates the usage and results of the \href{http://www.ctan.org/pkg/refenums}{refenums} package.
+This document demonstrates the \href{https://ctan.org/pkg/refenums}{refenums} package with the development documents of a reference manager.
+The content is a simplified version of \href{https://github.com/JabRef/jabref/tree/main/docs}{JabRef's} requirements, written for \href{https://github.com/itsallcode/openfasttrace}{OpenFastTrace}, and decision records, written in \href{https://adr.github.io/madr/}{MADR}.
 Each green box shows the \LaTeX{} code producing the output right above it.
-All content appearing in this work is fictitious.
-Any resemblance to real artefacts, items, or persons, living or dead, is purely coincidental.
-
-\Cref{sec:setup} sets up the enums.
-\Crefrange{sec:reqs}{sec:milestones} show defined referenceable enums.
-\Cref{sec:discussion} references the defined enums.
 
 \tableofcontents
 \clearpage
@@ -60,135 +57,122 @@ Any resemblance to real artefacts, items, or persons, living or dead, is purely 
 \section{Setup}
 \label{sec:setup}
 
-Each kind of enum is set up once.
+Each kind of item is set up once.
 This produces no output.
 
+Features print only their short form (``Feature~1'') and each becomes a subsection:
+
 \bexample
-%Setup ``requirements''
-\setupRefEnums{R}{Requirement}
+\setupRefEnums[ ][subsection]{Feature}{ONLYSHORT}
+\eexample
 
-%Setup ``capabilities'', without any separator
-\setupRefEnums[]{C}{Capability}
+Risks use no separator (``Risk~1 (R1)''):
 
-%Setup ``Notes'' showing the usage of \defRefEnumInline
-\setupRefEnums{N}{Note}
+\bexample
+\setupRefEnums[]{R}{Risk}
+\eexample
 
-%Setup ``Steps'' not having a print form, each step getting its own subsection
-\setupRefEnums[ ][subsection]{Step}{ONLYSHORT}
+Requirements use the default separator (``Requirement~1 (Req-1)''):
 
-%Setup ``Issue'' not having a print form
-\setupRefEnums[ ]{Issue}{ONLYSHORT}
+\bexample
+\setupRefEnums{Req}{Requirement}
+\eexample
 
-%Setup ``Milestones'' where the print name and the short name is combined
+Decision records and the options they consider, too:
+
+\bexample
+\setupRefEnums{ADR}{Decision Record}
+\setupRefEnums{Opt}{Option}
+\eexample
+
+Milestones combine print name and short name (``Milestone~M1''):
+
+\bexample
 \setupRefEnums[COMBINED]{M}{Milestone}
 \eexample
 
+\section{Features}
+\label{sec:features}
+
+\bexample
+\defRefEnum{Feature}{Save a library}{save}
+The user saves the library to a \texttt{.bib} file.
+
+\defRefEnum{Feature}{Autosave}{autosave}
+Every change to the library is saved shortly afterwards, and a backup is kept.
+\eexample
+
+\section{Risks}
+\label{sec:risks}
+
+\bexample
+\defRefEnum{R}{Concurrent modification}{concurrent}
+Another process, e.g., a second JabRef instance on a network share, writes the library file while \refEnum{Feature}{save} is running.
+
+\defRefEnum{R}{Incomplete backup}{backup}
+A failure while writing a backup during \refEnumFull{Feature}{autosave} replaces a valid backup.
+\eexample
+
 \section{Requirements}
-\label{sec:reqs}
+\label{sec:requirements}
 
 \bexample
-\defRefEnum{R}{Scalability}{sca}
-We see scalability as important requirement.
+\defRefEnum{Req}{Detect concurrent modification}{detect}
+If the library file changed since the save started, the save is aborted with an error.
+Mitigates \refEnumFull{R}{concurrent}.
 
-\defRefEnum{R}{Portability}{port}
-We also see portability as important requirement.
-\eexample
-
-\section{Capabilities}
-
-\bexample
-\defRefEnum{C}{Maintainability}{maint}
-\eexample
-
-\section{Notes}
-
-\bexample
-\defRefEnumInline{N}{Blue}{blue} It should be a blue note, shouldn't it?
-\defRefEnumInline{N}{Red}{Red} There should also be a red note, shouldn't it?
-\eexample
-
-\section{Steps}
-\label{sec:steps}
-
-\bexample
-\defRefEnum{Step}{Requirements Analysis}{rqa}
-\label{sec:rqa}
-The heading is defined using the macro.
+OFT: \verb|req~logic.exporter.concurrent-save-detection~1|, needs: impl, utest
 \eexample
 
 \bexample
-\defRefEnum{Step}{Software Specification}{spec}
-The heading is defined using the macro.
+\defRefEnum{Req}{Keep valid backups}{keep}
+A failure while writing a backup leaves the previous backup untouched.
+Mitigates \refEnumFull{R}{backup}.
+
+OFT: \verb|req~jabgui.autosaveandbackup.complete-backup~1|, needs: impl, utest
 \eexample
 
-\section{Other Steps}
-\label{sec:osteps}
+\section{Decisions}
+\label{sec:decisions}
 
-This section shows how an enum can be reused.
-One has to take care to use different labels as in the first usage.
-
-\bexample
-\setcounter{Step}{0}
-\defRefEnumInline{Step}{Think}{think} First think.
-\defRefEnumInline{Step}{Work}{work} Then work.
-\eexample
-
-\section{Issues}
+The optional argument of \verb|\defRefEnum| wraps a single item, here a decision record in a subsection.
 
 \bexample
-\defRefEnum{Issue}{Fictional}{fi}
+\defRefEnum[subsection]{ADR}{Replace files atomically}{atomic}
 
-\defRefEnum{Issue}{Unrealistic}{unr}
+\paragraph{Context and Problem Statement}
+How do we write a file so that \refEnumFull{Req}{detect} and \refEnumFull{Req}{keep} hold?
+
+\paragraph{Considered Options}
+\begin{itemize}
+\item \defRefEnumInline{Opt}{Overwrite in place}{inplace}
+\item \defRefEnumInline{Opt}{Write a temporary file and move it over the target}{tmp}
+\end{itemize}
+
+\paragraph{Decision Outcome}
+Chosen option: \refEnumFullT{Opt}{tmp}, because a failed write leaves the original file untouched and the target can be checked for changes right before the move.
 \eexample
 
 \section{Milestones}
 \label{sec:milestones}
 
-The optional argument of \verb|\defRefEnum| wraps a single element, here in a subsection.
-
 \bexample
-\defRefEnum[subsection]{M}{Basic Model}{bm}
+\defRefEnum{M}{Safe saving}{safe}
+Reached when \refEnum{Req}{detect} and \refEnum{Req}{keep} are implemented as decided in \refEnum{ADR}{atomic} and covered by unit tests.
 \eexample
 
-\section{Discussion}
-\label{sec:discussion}
+\section{References}
+\label{sec:references}
+
+Each kind of reference to \refEnum{Req}{detect}:
 
 \bexample
-In \cref{sec:reqs}, we discussed \refEnumFull{R}{sca} and \refEnumFull{R}{port}.
-\eexample
-
-\bexample
-We showed the capability \refEnumFull{C}{maint}.
-\eexample
-
-\bexample
-We also had a note \refEnumFull{N}{blue}.
-\eexample
-
-\bexample
-In \cref{sec:steps}, we started with \refEnumFull{Step}{rqa}.
-\LaTeX{} put that step into \cref{sec:rqa}.
-Afterwards, \refEnumFull{Step}{spec} has been described.
-\eexample
-
-\bexample
-We reused the enumeration environment for other steps in \cref{sec:osteps}.
-There, we started with \refEnumFull{Step}{think}.
-\eexample
-
-\bexample
-Some issues such as \refEnumFull{Issue}{fi} were raised.
-\eexample
-
-\bexample
-First, the milestone \refEnumFull{M}{bm} has to be reached.
-\eexample
-
-\bexample
-Following properties are the most important ones:
 \begin{itemize}
-\item \refEnumFullT{R}{sca}
-\item \ldots
+\item \verb|\refEnum|: \refEnum{Req}{detect}
+\item \verb|\refEnumFull|: \refEnumFull{Req}{detect}
+\item \verb|\refEnumFullT|: \refEnumFullT{Req}{detect}
+\item \verb|\nameref|: \nameref{enum:Req:detect}
+\item \verb|\ref|: \ref{enum:Req:detect}
 \end{itemize}
 \eexample
 
