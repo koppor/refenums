@@ -45,14 +45,8 @@
 \maketitle
 
 \vspace{-12ex}
-This documents demonstrates the usage and results of the \href{http://www.ctan.org/pkg/refenums}{refenums} package.
+This document demonstrates the \href{https://ctan.org/pkg/refenums}{refenums} package using the project documents of a fictitious lending library app.
 Each green box shows the \LaTeX{} code producing the output right above it.
-All content appearing in this work is fictitious.
-Any resemblance to real artefacts, items, or persons, living or dead, is purely coincidental.
-
-\Cref{sec:setup} sets up the enums.
-\Crefrange{sec:reqs}{sec:milestones} show defined referenceable enums.
-\Cref{sec:discussion} references the defined enums.
 
 \tableofcontents
 \clearpage
@@ -60,136 +54,112 @@ Any resemblance to real artefacts, items, or persons, living or dead, is purely 
 \section{Setup}
 \label{sec:setup}
 
-Each kind of enum is set up once.
+Each kind of item is set up once.
 This produces no output.
 
 \bexample
-%Setup ``requirements''
-\setupRefEnums{R}{Requirement}
+% Phases print only their short form ("Phase 1") and each becomes a subsection
+\setupRefEnums[ ][subsection]{Phase}{ONLYSHORT}
 
-%Setup ``capabilities'', without any separator
-\setupRefEnums[]{C}{Capability}
+% Default separator: "Use Case 1 (UC-1)"
+\setupRefEnums{UC}{Use Case}
 
-%Setup ``Notes'' showing the usage of \defRefEnumInline
-\setupRefEnums{N}{Note}
+% Empty separator: "Risk 1 (R1)"
+\setupRefEnums[]{R}{Risk}
 
-%Setup ``Steps'' not having a print form, each step getting its own subsection
-\setupRefEnums[ ][subsection]{Step}{ONLYSHORT}
+\setupRefEnums{D}{Decision}
 
-%Setup ``Issue'' not having a print form
-\setupRefEnums[ ]{Issue}{ONLYSHORT}
-
-%Setup ``Milestones'' where the print name and the short name is combined
+% Print name and short name combined: "Milestone M1"
 \setupRefEnums[COMBINED]{M}{Milestone}
+
+% Used inline, see \cref{sec:questions}
+\setupRefEnums{Q}{Question}
 \eexample
 
-\section{Requirements}
-\label{sec:reqs}
+\section{Lifecycle}
+\label{sec:lifecycle}
 
 \bexample
-\defRefEnum{R}{Scalability}{sca}
-We see scalability as important requirement.
+\defRefEnum{Phase}{Analysis}{analysis}
+We collect the use cases (\cref{sec:usecases}) and assess the risks (\cref{sec:risks}).
 
-\defRefEnum{R}{Portability}{port}
-We also see portability as important requirement.
+\defRefEnum{Phase}{Design}{design}
+We record the architecture decisions (\cref{sec:decisions}).
+
+\defRefEnum{Phase}{Implementation}{impl}
+We build and test the app.
 \eexample
 
-\section{Capabilities}
+\section{Use Cases}
+\label{sec:usecases}
 
 \bexample
-\defRefEnum{C}{Maintainability}{maint}
+\defRefEnum{UC}{Borrow a book}{borrow}
+A member borrows an available book for four weeks.
+
+\defRefEnum{UC}{Return a book}{return}
+A member returns a book, which becomes available again.
 \eexample
 
-\section{Notes}
+\section{Risks}
+\label{sec:risks}
 
 \bexample
-\defRefEnumInline{N}{Blue}{blue} It should be a blue note, shouldn't it?
-\defRefEnumInline{N}{Red}{Red} There should also be a red note, shouldn't it?
+\defRefEnum{R}{Loss of lending records}{loss}
+Without the records, \refEnumFull{UC}{return} cannot tell who has a book.
+
+\defRefEnum{R}{Double booking}{double}
+Two members could borrow the same copy at once (\refEnum{UC}{borrow}).
 \eexample
 
-\section{Steps}
-\label{sec:steps}
+\section{Decisions}
+\label{sec:decisions}
+
+The optional argument of \verb|\defRefEnum| wraps a single item, here in a subsection.
 
 \bexample
-\defRefEnum{Step}{Requirements Analysis}{rqa}
-\label{sec:rqa}
-The heading is defined using the macro.
-\eexample
-
-\bexample
-\defRefEnum{Step}{Software Specification}{spec}
-The heading is defined using the macro.
-\eexample
-
-\section{Other Steps}
-\label{sec:osteps}
-
-This section shows how an enum can be reused.
-One has to take care to use different labels as in the first usage.
-
-\bexample
-\setcounter{Step}{0}
-\defRefEnumInline{Step}{Think}{think} First think.
-\defRefEnumInline{Step}{Work}{work} Then work.
-\eexample
-
-\section{Issues}
-
-\bexample
-\defRefEnum{Issue}{Fictional}{fi}
-
-\defRefEnum{Issue}{Unrealistic}{unr}
+\defRefEnum[subsection]{D}{Store lending records in a transactional database}{db}
+This mitigates \refEnumFull{R}{loss} and \refEnumFull{R}{double}.
 \eexample
 
 \section{Milestones}
 \label{sec:milestones}
 
-The optional argument of \verb|\defRefEnum| wraps a single element, here in a subsection.
-
 \bexample
-\defRefEnum[subsection]{M}{Basic Model}{bm}
+\defRefEnum{M}{Specification approved}{spec}
+Ends \refEnumFullT{Phase}{analysis}.
+
+\defRefEnum{M}{First release}{release}
+Ends \refEnum{Phase}{impl} and delivers \refEnum{UC}{borrow} and \refEnum{UC}{return}.
 \eexample
 
-\section{Discussion}
-\label{sec:discussion}
+\section{Open Questions}
+\label{sec:questions}
 
 \bexample
-In \cref{sec:reqs}, we discussed \refEnumFull{R}{sca} and \refEnumFull{R}{port}.
+\defRefEnumInline{Q}{Reservations}{reserve} Can members reserve a borrowed book?
+\defRefEnumInline{Q}{Fees}{fees} Are late returns charged?
 \eexample
 
-\bexample
-We showed the capability \refEnumFull{C}{maint}.
-\eexample
+\section{References}
+\label{sec:references}
+
+Each kind of reference to \refEnum{UC}{borrow}:
 
 \bexample
-We also had a note \refEnumFull{N}{blue}.
-\eexample
-
-\bexample
-In \cref{sec:steps}, we started with \refEnumFull{Step}{rqa}.
-\LaTeX{} put that step into \cref{sec:rqa}.
-Afterwards, \refEnumFull{Step}{spec} has been described.
-\eexample
-
-\bexample
-We reused the enumeration environment for other steps in \cref{sec:osteps}.
-There, we started with \refEnumFull{Step}{think}.
-\eexample
-
-\bexample
-Some issues such as \refEnumFull{Issue}{fi} were raised.
-\eexample
-
-\bexample
-First, the milestone \refEnumFull{M}{bm} has to be reached.
-\eexample
-
-\bexample
-Following properties are the most important ones:
 \begin{itemize}
-\item \refEnumFullT{R}{sca}
-\item \ldots
+\item \verb|\refEnum|: \refEnum{UC}{borrow}
+\item \verb|\refEnumFull|: \refEnumFull{UC}{borrow}
+\item \verb|\refEnumFullT|: \refEnumFullT{UC}{borrow}
+\item \verb|\nameref|: \nameref{enum:UC:borrow}
+\item \verb|\ref|: \ref{enum:UC:borrow}
 \end{itemize}
+\eexample
+
+A traceability sentence combining them:
+
+\bexample
+\refEnum{M}{release} is reached once \refEnumFull{D}{db} is implemented; \refEnumFull{Q}{reserve} is still open.
 \eexample
 
 \end{document}

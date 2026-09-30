@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - `demo.pdf` shows the LaTeX code of each example next to its output.
+- `demo.tex` demonstrates the package with the project documents of a small software project.
 - refenums requires LaTeX 2020-10-01 or later.
 
 ### Removed
