@@ -11,17 +11,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `\setupRefEnum` sets up an enum with key-value options (`separator`, `enclosing`, `combined`).
 - `\setupRefEnum` accepts `titleformat` to format the title of each element.
+- `\setupRefEnum` accepts `plural` for the plural of the print name.
 - `\setupRefEnum` defines `\def<EnumId>` as a shorthand for `\defRefEnum{<EnumId>}`, and `\def<EnumId>Inline` for `\defRefEnumInline{<EnumId>}`. Documents defining such commands themselves need the package option `shorthands=false`.
 - The full LPPL license text is now included as `LICENSE`.
 - `\setupRefEnums` accepts a second optional argument naming the command each element is wrapped in (e.g., `subsection`). The optional argument of `\defRefEnum` still overrides it per element.
 
 ### Changed
 
+- `\ref` prints the identifier, e.g., `Req-1` instead of `1`.
 - Titles of elements are set in italics, unless the elements are wrapped in another command, e.g., `subsection`. Use `titleformat={}` for the former upright titles.
 - `demo.pdf` shows the LaTeX code of each example next to its output.
 - `demo.tex` demonstrates the package with requirements and a decision record (MADR style) modeled on JabRef.
 - `demo.tex` is typeset with LuaLaTeX.
-- refenums references with zref-clever instead of cleveref; `\zcref` prints the same identifiers as `\refEnum`. `\cref` still does if cleveref is loaded before `\setupRefEnum`.
+- refenums references with zref-clever instead of cleveref; `\zcref` prints the print name and the identifier, e.g., "Risk R1" or "Risks R1 and R2". `\cref` prints the identifier, like `\refEnum`, if cleveref is loaded before `\setupRefEnum`.
 - refenums requires LaTeX 2023-06-01 and zref-clever 0.4.0 or later.
 
 ### Removed

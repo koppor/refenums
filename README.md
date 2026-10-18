@@ -25,6 +25,7 @@ If the library file changed since the save started, the save is aborted.
 \refEnumFull{Req}{detect}     % Req-1 ("Detect concurrent modification")
 \refEnumFullT{Req}{detect}    % Req-1: "Detect concurrent modification"
 \nameref{enum:Req:detect}     % Detect concurrent modification
+\zcref{enum:Req:detect}       % Requirement Req-1
 ```
 
 The definition prints "Requirement 1 (Req-1): *Detect concurrent modification*".
@@ -48,6 +49,7 @@ If `<PrintName>` is `ONLYSHORT`, only the short form is printed, e.g., `Feature 
 Options (key-value, all optional):
 
 * `separator=<text>`: separator between `<EnumId>` and number. Default: `-`. Use `separator={}` for none and `separator={ }` for a space.
+* `plural=<text>`: plural of `<PrintName>`, printed by `\zcref` for several items. Default: `<PrintName>s`.
 * `combined`: print `<PrintName> <EnumId><Number>`, e.g., `Milestone M1`.
 * `enclosing=<name>`: name of the command the heading of each element is wrapped in, e.g., `subsection`. Default: `refenumenclosing` (see [Tuning](#tuning)).
 * `titleformat=<name>`: name of the command the title of each element is wrapped in, e.g., `textbf`. Default: `emph` (italics), or none if `enclosing` names another command. Use `titleformat={}` for none. References to the title are not affected.
@@ -66,8 +68,8 @@ If a command with one of these names exists already, LaTeX reports an error; cho
 ### Referencing
 
 * `\refEnumFullP` is the long form of `\refEnumFull`.
-* `\refEnum{<EnumId>}{<LabelId>}` is short for `\zcref{enum:<EnumId>:<LabelId>}`, so `\zcref{enum:Req:detect,enum:Req:keep}` references several items at once, e.g., `Req-1 and 2`.
-* `\ref{enum:<EnumId>:<LabelId>}` prints the number only, e.g., `1`.
+* `\zcref` of [zref-clever](https://ctan.org/pkg/zref-clever) prints the print name and the identifier, e.g., `Requirement Req-1`. It references several items at once, e.g., `\zcref{enum:Req:detect,enum:Req:keep}` prints `Requirements Req-1 and Req-2`.
+* `\refEnum{<EnumId>}{<LabelId>}` is short for `\zcref[noname]{enum:<EnumId>:<LabelId>}`; `\ref{enum:<EnumId>:<LabelId>}` prints the identifier as well.
 
 ### Tuning
 

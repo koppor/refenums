@@ -154,20 +154,20 @@ Chosen option: \refEnumFullT{Opt}{tmp}, because a failed write leaves the origin
 \bexample
 \defM{Safe saving}{safe}
 Reached when \refEnum{Req}{detect} and \refEnum{Req}{keep} are implemented as decided in \refEnum{ADR}{atomic} and covered by unit tests.
-This mitigates \refEnum{R}{concurrent} and \refEnum{R}{backup}.
+This mitigates \zcref{enum:R:concurrent,enum:R:backup}.
 \eexample
 
 \section{References}
 \label{sec:references}
 
 The package \texttt{refenums} offers several ways to reference an item.
-They differ in how much of the item they show: its identifier, its title, or both.
+They differ in how much of the item they show: its kind, its identifier, its title, or a combination.
 The following table shows each of them for \refEnum{Req}{detect} from \zcref{sec:requirements}.
 
 \begin{center}
 \small
 \renewcommand{\arraystretch}{1.3}
-\setlength{\tabcolsep}{5pt}
+\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}lll@{}}
 \toprule
 Aim & Command & Output \\
@@ -176,15 +176,13 @@ Identifier & \verb|\refEnum{Req}{detect}| & \refEnum{Req}{detect} \\
 Identifier (title) & \verb|\refEnumFull{Req}{detect}| & \refEnumFull{Req}{detect} \\
 Identifier: title & \verb|\refEnumFullT{Req}{detect}| & \refEnumFullT{Req}{detect} \\
 Title & \verb|\nameref{enum:Req:detect}| & \nameref{enum:Req:detect} \\
-\midrule
-\multicolumn{3}{@{}l}{\emph{Not recommended}} \\
-Number & \verb|\ref{enum:Req:detect}| & \ref{enum:Req:detect} \\
+Kind and identifier & \verb|\zcref{enum:Req:detect}| & \zcref{enum:Req:detect} \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\verb|\refEnum{Req}{detect}| is short for \verb|\zcref{enum:Req:detect}| of \href{https://ctan.org/pkg/zref-clever}{zref-clever}.
-\verb|\ref| prints the number only, which does not say which kind of item is meant.
+\verb|\zcref| is the reference command of \href{https://ctan.org/pkg/zref-clever}{zref-clever}; \verb|\refEnum{Req}{detect}| is short for \verb|\zcref[noname]{enum:Req:detect}|.
+It also references several items at once, as in \zcref{sec:milestones}.
 
 The following list references every item of this document in the form ``Identifier (title)''.
 
