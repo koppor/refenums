@@ -2,7 +2,7 @@
 
 > Define numbered items with a title, such as requirements, risks, or milestones, and reference them by identifier (`Req-1`), title, or both, with hyperlinks to the definition
 
-This package provides commands to define enumerable items with a number and a long name, which can be referenced referenced later with the name or just the short form.
+This package provides commands to define enumerable items with a number and a long name, which can be referenced later with the name or just the short form.
 For instance, "Milestone M1: Specification created" can be defined and later on be referenced with `M1` or `M1 ("Specification created")`.
 The text in the references is derived from the definition and also rendered as hyperlink to the definition.
 Thus, a change of the definition also leads to a change of all references to the text.
@@ -12,90 +12,68 @@ This ensures consistency in the text.
 
 ```latex
 \usepackage{refenums}
+
+% Once per kind of item: identifier and name
+\setupRefEnum{Req}{Requirement}
+
+% Define an item: title and label
+\defReq{Detect concurrent modification}{detect}
+If the library file changed since the save started, the save is aborted.
+
+% Reference it
+\refEnum{Req}{detect}         % Req-1
+\refEnumFull{Req}{detect}     % Req-1 ("Detect concurrent modification")
+\refEnumFullT{Req}{detect}    % Req-1: "Detect concurrent modification"
+\nameref{enum:Req:detect}     % Detect concurrent modification
 ```
 
-refenums loads [hyperref](https://ctan.org/pkg/hyperref) and [zref-clever](https://ctan.org/pkg/zref-clever) itself.
-If you load them yourself, e.g., to pass options, load refenums after them.
-refenums needs LaTeX 2023-06-01 and zref-clever 0.4.0 or later.
+The definition prints "Requirement 1 (Req-1): *Detect concurrent modification*".
+All references are hyperlinks to it.
 
-### Define the "Referenceable Enum Environment"
+See [demo.tex](demo.tex) and its rendering [demo.pdf](https://koppor.github.io/refenums/demo.pdf), which shows the LaTeX code next to each result.
 
-Decide for `<EnumId>`.
-E.g., `req`.
+refenums needs LaTeX 2023-06-01 and [zref-clever](https://ctan.org/pkg/zref-clever) 0.4.0 or later.
+It loads [hyperref](https://ctan.org/pkg/hyperref) and zref-clever itself; if you load them yourself, e.g., to pass options, load refenums after them.
 
-#### Initialize
+## Advanced usage
+
+### Options of `\setupRefEnum`
 
 ```latex
 \setupRefEnum[<options>]{<EnumId>}{<PrintName>}
 ```
 
-In case `<PrintName>` is set to `ONLYSHORT`, only the short name is used.
+If `<PrintName>` is `ONLYSHORT`, only the short form is printed, e.g., `Feature 1` with `separator={ }`.
 
 Options (key-value, all optional):
 
 * `separator=<text>`: separator between `<EnumId>` and number. Default: `-`. Use `separator={}` for none and `separator={ }` for a space.
-* `enclosing=<name>`: name of the command the heading of each element is wrapped in, e.g., `subsection`. Default: `refenumenclosing`, which prints the heading as is (see [Tuning](#tuning)).
 * `combined`: print `<PrintName> <EnumId><Number>`, e.g., `Milestone M1`.
-* `titleformat=<name>`: name of the command the title of each element is wrapped in, e.g., `emph`. Default: `emph` (italics), or none if `enclosing` names another command. Use `titleformat={}` for none. References to the title are not affected.
-
-For instance, `\setupRefEnum[enclosing=subsection]{Step}{Step}` puts every step into its own subsection.
+* `enclosing=<name>`: name of the command the heading of each element is wrapped in, e.g., `subsection`. Default: `refenumenclosing` (see [Tuning](#tuning)).
+* `titleformat=<name>`: name of the command the title of each element is wrapped in, e.g., `textbf`. Default: `emph` (italics), or none if `enclosing` names another command. Use `titleformat={}` for none. References to the title are not affected.
 
 The older `\setupRefEnums[<separator>][<enclosing>]{<EnumId>}{<PrintName>}` takes the same settings as positional optional arguments, with `COMBINED` as separator for `combined`.
 
-#### (Optional) Shorthand commands
+### Defining items
 
-`\setupRefEnum{<EnumId>}{...}` also defines `\def<EnumId>{<FullName>}{<LabelId>}` as a shorthand for `\defRefEnum{<EnumId>}{<FullName>}{<LabelId>}`, and `\def<EnumId>Inline` for `\defRefEnumInline{<EnumId>}`.
-If a command with one of these names exists already, LaTeX reports an error; choose another `<EnumId>` then, or turn the shorthands off with `\usepackage[shorthands=false]{refenums}`.
+`\setupRefEnum{<EnumId>}` defines two shorthands:
 
-### Usage in the text
+* `\def<EnumId>{<FullName>}{<LabelId>}` for `\defRefEnum{<EnumId>}{<FullName>}{<LabelId>}`
+* `\def<EnumId>Inline{<FullName>}{<LabelId>}` for `\defRefEnumInline{<EnumId>}{<FullName>}{<LabelId>}`, which prints `(<EnumId>-<Counter>) <FullName>` within the text, similar to the `inparaenum` environment of [paralist](https://ctan.org/pkg/paralist).
 
-#### Define a single enum
+If a command with one of these names exists already, LaTeX reports an error; choose another `<EnumId>` then, or turn the shorthands off with `\usepackage[shorthands=false]{refenums}` and use the long forms.
 
-* `\defRefEnum{<EnumId>}{<FullName>}{<LabelId>}` (always supported)
-* `\def<EnumId>{<FullName>}{<LabelId>}` (unless the package option `shorthands=false` is given)
+### Referencing
 
-#### Define a single enum using the inline format
+* `\refEnumFullP` is the long form of `\refEnumFull`.
+* `\refEnum{<EnumId>}{<LabelId>}` is short for `\zcref{enum:<EnumId>:<LabelId>}`, so `\zcref{enum:Req:detect,enum:Req:keep}` references several items at once, e.g., `Req-1 and 2`.
+* `\ref{enum:<EnumId>:<LabelId>}` prints the number only, e.g., `1`.
 
-* `\defRefEnumInline{<EnumId>}{<FullName>}{<LabelId>}` (always supported)
-* `\def<EnumId>Inline{<FullName>}{<LabelId>}` (unless the package option `shorthands=false` is given)
-
-Using this, a enumeration similar to the ones of the `inparaenum` environment is possible.
-`inparaenum` is offered by the [paralist package](https://www.ctan.org/pkg/paralist).
-
-#### Referencing
- 
-* `\refEnumFull{<EnumId>}{<LabelId>}` = `<EnumId>-<Counter> ("<FullName>")`, e.g. `R-1 ("Quality")`
-* `\refEnumFullP{<EnumId>}{<LabelId>}` is the long form for `\refEnumFull`.
-* `\refEnumFullT{<EnumId>}{<LabelId>}` = `<EnumId>-<Counter>: "<FullName>"`, e.g. `R-1: "Quality"`
-* `\refEnum{<EnumId>}{<LabelId>}` = `<EnumId>-<Counter>`, e.g. `R-1`; short for `\zcref{enum:<EnumId>:<LabelId>}`
-* References to the label
-  * `\nameref{enum:<EnumId>:<LabelId>}` = `<FullName>`
-  * `\ref{enum:<EnumId>:<LabelId>}` = `<Counter>`, e.g. `1`
-  * `\zcref{enum:<EnumId>:<LabelId>,enum:<EnumId>:<LabelId2>}` references several items at once, e.g., `R-1 and 2`
- 
-## Example
-
-**Initialize**: `\setupRefEnum{R}{Requirement}`
-
-**Define a single enum**: `\defR{Quality}{qual}` (shorthand for `\defRefEnum{R}{Quality}{qual}`).
-When you want to put all elements in a section, set it at initialization:
-`\setupRefEnum[enclosing=section]{R}{Requirement}`.
-
-**Referencing**:
-
-* Reference only Name + Number: `\refEnum{R}{qual}`
-* Full reference with the print name in brackets: `\refEnumFull{R}{qual}`
-* Full reference with the print name appended after ":": `\refEnumFullT{R}{qual}`
-
-**See also** [demo.tex](demo.tex) and its rendering [demo.pdf](https://koppor.github.io/refenums/demo.pdf), which shows the LaTeX code next to each result.
-
-## Tuning
+### Tuning
 
 The heading of an element is wrapped in `\refenumenclosing` (unless `enclosing` says otherwise), the one of an inline element in `\refenuminlineenclosing`.
 By default, `\refenumenclosing` prints the heading as is and `\refenuminlineenclosing` in italics.
 Both can be redefined after loading the package, e.g., `\renewcommand{\refenumenclosing}[1]{#1.}` adds a dot after each heading.
-
-## Advanced usage
 
 ### cleveref
 
