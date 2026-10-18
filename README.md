@@ -35,7 +35,7 @@ In case `<PrintName>` is set to `ONLYSHORT`, only the short name is used.
 Options (key-value, all optional):
 
 * `separator=<text>`: separator between `<EnumId>` and number. Default: `-`. Use `separator={}` for none and `separator={ }` for a space.
-* `enclosing=<name>`: name of the command each element is wrapped in, e.g., `subsection`. Default: `refenumenclosing`.
+* `enclosing=<name>`: name of the command the heading of each element is wrapped in, e.g., `subsection`. Default: `refenumenclosing`, which prints the heading as is (see [Tuning](#tuning)).
 * `combined`: print `<PrintName> <EnumId><Number>`, e.g., `Milestone M1`.
 
 For instance, `\setupRefEnum[enclosing=subsection]{Step}{Step}` puts every step into its own subsection.
@@ -92,8 +92,9 @@ A single element can override this with the optional parameter:
 
 ## Tuning
 
-When defining a referenceable element, this element is enclosed using `\refenumenclosing` for normal enums and `\refenumenclosinginline` for inline enums.
-These commands can be redefined after package usage.
+The heading of an element is wrapped in `\refenumenclosing` (unless `enclosing` says otherwise), the one of an inline element in `\refenuminlineenclosing`.
+By default, `\refenumenclosing` prints the heading as is and `\refenuminlineenclosing` in italics.
+Both can be redefined after loading the package, e.g., `\renewcommand{\refenumenclosing}[1]{#1.}` adds a dot after each heading.
 
 ## TODO
 
