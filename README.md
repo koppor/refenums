@@ -116,7 +116,8 @@ The latest source code is available at <https://github.com/koppor/refenums>.
 
 ## License
 
-Copyright 2013 Oliver Kopp, Tobias Binz
+Copyright 2013 Oliver Kopp, Tobias Binz\
+Copyright 2014–2026 Oliver Kopp
 
 This work may be distributed and/or modified under the conditions of
 the LaTeX Project Public License, version 1.3c of the license.
