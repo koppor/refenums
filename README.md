@@ -1,6 +1,6 @@
 # refenums – ReferenceableEnumElements [![CTAN](https://img.shields.io/badge/CTAN-refenums-blue.svg?style=flat-square)](https://ctan.org/pkg/refenums)
 
-> Define numbered items with a title, such as requirements, risks, or milestones, and reference them by identifier (`Req-1`), title, or both, with hyperlinks to the definition
+> Define numbered items with a title, such as requirements, risks, or milestones, and reference them by identifier (e.g., `Req-1`), title, or both, with hyperlinks to the definition
 
 This package provides commands to define enumerable items with a number and a long name, which can be referenced later with the name or just the short form.
 For instance, "Milestone M1: Specification created" can be defined and later on be referenced with `M1` or `M1 ("Specification created")`.
