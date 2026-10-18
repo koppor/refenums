@@ -21,12 +21,15 @@ This ensures consistency in the text.
 If the library file changed since the save started, the save is aborted.
 
 % Reference it
-\zcref{enum:Req:detect}        % Requirement Req-1
-\refEnum{Req}{detect}          % Req-1
-\refEnumFull{Req}{detect}      % Req-1 ("Detect concurrent modification")
-\refEnumFull*{Req}{detect}     % Requirement Req-1 ("Detect concurrent modification")
-\refEnumTitle{Req}{detect}     % Detect concurrent modification
+\refReq*{detect}               % Requirement Req-1
+\refReq{detect}                % Req-1
+\refReqFull*{detect}           % Requirement Req-1 ("Detect concurrent modification")
+\refReqFull{detect}            % Req-1 ("Detect concurrent modification")
+\refReqFullColon{detect}       % Req-1: "Detect concurrent modification"
+\refReqTitle{detect}           % Detect concurrent modification
 ```
+
+`\setupRefEnum{Req}` creates the commands `\defReq` and `\refReq…` used above.
 
 The definition prints "Requirement 1 (Req-1): *Detect concurrent modification*".
 All references are hyperlinks to it.
@@ -37,6 +40,32 @@ See [demo.tex](demo.tex) and its rendering [demo.pdf](https://koppor.github.io/r
 `refenums` loads [hyperref](https://ctan.org/pkg/hyperref) and zref-clever itself; if you load them yourself, e.g., to pass options, load `refenums` after them.
 
 ## Advanced usage
+
+### Long forms of the commands
+
+`\setupRefEnum{<EnumId>}` creates these shorthands; the long forms take `<EnumId>` as first argument:
+
+| Shorthand | Long form |
+|---|---|
+| `\def<EnumId>{<FullName>}{<LabelId>}` | `\defRefEnum{<EnumId>}{<FullName>}{<LabelId>}` |
+| `\def<EnumId>Inline{<FullName>}{<LabelId>}` | `\defRefEnumInline{<EnumId>}{<FullName>}{<LabelId>}` |
+| `\ref<EnumId>{<LabelId>}` | `\refEnum{<EnumId>}{<LabelId>}` |
+| `\ref<EnumId>Full{<LabelId>}` | `\refEnumFull{<EnumId>}{<LabelId>}` |
+| `\ref<EnumId>FullColon{<LabelId>}` | `\refEnumFullColon{<EnumId>}{<LabelId>}` |
+| `\ref<EnumId>Title{<LabelId>}` | `\refEnumTitle{<EnumId>}{<LabelId>}` |
+
+The `\ref…` commands except `…Title` have a starred form, which prefixes the print name, e.g., `Requirement Req-1`.
+
+If a command with one of these names exists already, LaTeX reports an error; choose another `<EnumId>` then, or turn the shorthands off with `\usepackage[shorthands=false]{refenums}` and use the long forms.
+
+`\defRefEnumInline` prints `(<EnumId>-<Counter>) <FullName>` within the text, similar to the `inparaenum` environment of [paralist](https://ctan.org/pkg/paralist).
+
+### Referencing with zref-clever
+
+* `\refEnum*{<EnumId>}{<LabelId>}` is short for `\zcref{enum:<EnumId>:<LabelId>}` of [zref-clever](https://ctan.org/pkg/zref-clever), `\refEnum` for `\zcref[noname]`.
+* `\zcref` references several items at once, e.g., `\zcref{enum:Req:detect,enum:Req:keep}` prints `Requirements Req-1 and Req-2`.
+* `\refEnumTitle{<EnumId>}{<LabelId>}` is short for `\nameref{enum:<EnumId>:<LabelId>}`; `\ref{enum:<EnumId>:<LabelId>}` prints the identifier.
+* `\refEnumFullP` and `\refEnumFullT` are older names of `\refEnumFull` and `\refEnumFullColon`.
 
 ### Options of `\setupRefEnum`
 
@@ -55,24 +84,6 @@ Options (key-value, all optional):
 * `titleformat=<name>`: name of the command the title of each element is wrapped in, e.g., `textbf`. Default: `emph` (italics), or none if `enclosing` names another command. Use `titleformat={}` for none. References to the title are not affected.
 
 The older `\setupRefEnums[<separator>][<enclosing>]{<EnumId>}{<PrintName>}` takes the same settings as positional optional arguments, with `COMBINED` as separator for `combined`.
-
-### Defining items
-
-`\setupRefEnum{<EnumId>}` defines two shorthands:
-
-* `\def<EnumId>{<FullName>}{<LabelId>}` for `\defRefEnum{<EnumId>}{<FullName>}{<LabelId>}`
-* `\def<EnumId>Inline{<FullName>}{<LabelId>}` for `\defRefEnumInline{<EnumId>}{<FullName>}{<LabelId>}`, which prints `(<EnumId>-<Counter>) <FullName>` within the text, similar to the `inparaenum` environment of [paralist](https://ctan.org/pkg/paralist).
-
-If a command with one of these names exists already, LaTeX reports an error; choose another `<EnumId>` then, or turn the shorthands off with `\usepackage[shorthands=false]{refenums}` and use the long forms.
-
-### Referencing
-
-* `\refEnumFullColon{<EnumId>}{<LabelId>}` prints `<EnumId>-<Counter>: "<FullName>"`, e.g., `Req-1: "Detect concurrent modification"`.
-* `\refEnumFullP` and `\refEnumFullT` are older names of `\refEnumFull` and `\refEnumFullColon`.
-* The starred forms `\refEnum*`, `\refEnumFull*`, `\refEnumFullColon*` prefix the print name, e.g., `Requirement Req-1`.
-* `\refEnumTitle{<EnumId>}{<LabelId>}` is short for `\nameref{enum:<EnumId>:<LabelId>}`.
-* `\zcref` of [zref-clever](https://ctan.org/pkg/zref-clever) prints the print name and the identifier, e.g., `Requirement Req-1`. It references several items at once, e.g., `\zcref{enum:Req:detect,enum:Req:keep}` prints `Requirements Req-1 and Req-2`.
-* `\refEnum{<EnumId>}{<LabelId>}` is short for `\zcref[noname]{enum:<EnumId>:<LabelId>}`, `\refEnum*` for `\zcref`; `\ref{enum:<EnumId>:<LabelId>}` prints the identifier as well.
 
 ### Tuning
 

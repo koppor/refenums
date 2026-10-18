@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `\refEnumFullColon` is the new name of `\refEnumFullT`; the old name still works.
 - `\refEnum*`, `\refEnumFull*`, and `\refEnumFullColon*` prefix the print name, e.g., "Requirement Req-1 ("Detect concurrent modification")".
 - `\refEnumTitle` prints the title of an element.
-- `\setupRefEnum` defines `\def<EnumId>` as a shorthand for `\defRefEnum{<EnumId>}`, and `\def<EnumId>Inline` for `\defRefEnumInline{<EnumId>}`. Documents defining such commands themselves need the package option `shorthands=false`.
+- `\setupRefEnum` defines shorthands: `\def<EnumId>` for `\defRefEnum{<EnumId>}`, `\def<EnumId>Inline` for `\defRefEnumInline{<EnumId>}`, and `\ref<EnumId>`, `\ref<EnumId>Full`, `\ref<EnumId>FullColon`, `\ref<EnumId>Title` for the corresponding `\refEnum…{<EnumId>}`. Documents defining such commands themselves need the package option `shorthands=false`.
 - The full LPPL license text is now included as `LICENSE`.
 - `\setupRefEnums` accepts a second optional argument naming the command each element is wrapped in (e.g., `subsection`). The optional argument of `\defRefEnum` still overrides it per element.
 

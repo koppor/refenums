@@ -13,7 +13,7 @@
 
 % The latest source code is available at https://github.com/koppor/refenums
 
-% Option shorthands=true|false (default: true): \setupRefEnums{<EnumId>}{...} also defines \def<EnumId>{<FullName>}{<LabelId>} and \def<EnumId>Inline{<FullName>}{<LabelId>}
+% Option shorthands=true|false (default: true): \setupRefEnums{<EnumId>}{...} also defines \def<EnumId>, \def<EnumId>Inline, \ref<EnumId>, \ref<EnumId>Full, \ref<EnumId>FullColon, and \ref<EnumId>Title
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{family=refenums,prefix=refenums@}
 \DeclareBoolOption[true]{shorthands}
@@ -51,6 +51,10 @@
 \ifrefenums@shorthands
 \expandafter\newcommand\csname def#3\endcsname[2]{\defRefEnum{#3}{##1}{##2}}%
 \expandafter\newcommand\csname def#3Inline\endcsname[2]{\defRefEnumInline{#3}{##1}{##2}}%
+\expandafter\NewDocumentCommand\csname ref#3\endcsname{sm}{\IfBooleanTF{##1}{\refEnum*{#3}{##2}}{\refEnum{#3}{##2}}}%
+\expandafter\NewDocumentCommand\csname ref#3Full\endcsname{sm}{\IfBooleanTF{##1}{\refEnumFull*{#3}{##2}}{\refEnumFull{#3}{##2}}}%
+\expandafter\NewDocumentCommand\csname ref#3FullColon\endcsname{sm}{\IfBooleanTF{##1}{\refEnumFullColon*{#3}{##2}}{\refEnumFullColon{#3}{##2}}}%
+\expandafter\newcommand\csname ref#3Title\endcsname[1]{\refEnumTitle{#3}{##1}}%
 \fi}
 
 % Same as \setupRefEnums, with key-value options instead of positional ones

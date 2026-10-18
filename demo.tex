@@ -59,7 +59,7 @@ The content is a simplified version of \href{https://github.com/JabRef/jabref/tr
 
 Each section starts with an orange box setting up a kind of item; this produces no output.
 Each green box shows the \LaTeX{} code producing the output right above it.
-Items are defined with shorthands such as \verb|\defReq| and \verb|\defReqInline|, which \verb|\setupRefEnum{Req}| creates for \verb|\defRefEnum{Req}| and \verb|\defRefEnumInline{Req}|.
+Items are defined and referenced with shorthands such as \verb|\defReq| and \verb|\refReq|, which \verb|\setupRefEnum{Req}| creates for \verb|\defRefEnum{Req}| and \verb|\refEnum{Req}|.
 
 \tableofcontents
 \clearpage
@@ -92,12 +92,12 @@ As a researcher, I want every change to be saved automatically and a backup to b
 
 \bexample
 \defR{Concurrent modification}{concurrent}
-Another process, e.g., a second JabRef instance on a network share, writes the library file while \refEnum{Feature}{save} is running.
+Another process, e.g., a second JabRef instance on a network share, writes the library file while \refFeature{save} is running.
 \eexample
 
 \bexample
 \defR{Incomplete backup}{backup}
-A failure while writing a backup during \refEnumFull{Feature}{autosave} replaces a valid backup.
+A failure while writing a backup during \refFeatureFull{autosave} replaces a valid backup.
 \eexample
 
 \section{Requirements}
@@ -111,13 +111,13 @@ A failure while writing a backup during \refEnumFull{Feature}{autosave} replaces
 \bexample
 \defReq{Detect concurrent modification}{detect}
 If the library file changed since the save started, the save is aborted with an error.
-Mitigates \refEnumFull{R}{concurrent}.
+Mitigates \refRFull{concurrent}.
 \eexample
 
 \bexample
 \defReq{Keep valid backups}{keep}
 A failure while writing a backup leaves the previous backup untouched.
-Mitigates \refEnumFull{R}{backup}.
+Mitigates \refRFull{backup}.
 \eexample
 
 \section{Decisions}
@@ -132,7 +132,7 @@ Mitigates \refEnumFull{R}{backup}.
 \defADR{Replace files atomically}{atomic}
 
 \paragraph{Context and Problem Statement}
-How do we write a file so that \refEnumFull{Req}{detect} and \refEnumFull{Req}{keep} hold?
+How do we write a file so that \refReqFull{detect} and \refReqFull{keep} hold?
 
 \paragraph{Considered Options}
 \begin{itemize}
@@ -141,7 +141,7 @@ How do we write a file so that \refEnumFull{Req}{detect} and \refEnumFull{Req}{k
 \end{itemize}
 
 \paragraph{Decision Outcome}
-Chosen option: \refEnumFullColon{Opt}{tmp}, because a failed write leaves the original file untouched and the target can be checked for changes right before the move.
+Chosen option: \refOptFullColon{tmp}, because a failed write leaves the original file untouched and the target can be checked for changes right before the move.
 \eexample
 
 \section{Milestones}
@@ -154,7 +154,7 @@ Chosen option: \refEnumFullColon{Opt}{tmp}, because a failed write leaves the or
 
 \bexample
 \defM{Safe saving}{safe}
-Reached when \refEnum{Req}{detect} and \refEnum{Req}{keep} are implemented as decided in \refEnum{ADR}{atomic} and covered by unit tests.
+Reached when \refReq{detect} and \refReq{keep} are implemented as decided in \refADR{atomic} and covered by unit tests.
 This mitigates \zcref{enum:R:concurrent,enum:R:backup}.
 \eexample
 
@@ -163,7 +163,7 @@ This mitigates \zcref{enum:R:concurrent,enum:R:backup}.
 
 The package \texttt{refenums} offers several ways to reference an item.
 They differ in how much of the item they show: its kind, its identifier, its title, or a combination.
-The following table shows each of them for \refEnum{Req}{keep} from \zcref{sec:requirements}.
+The following table shows each of them for \refReq{keep} from \zcref{sec:requirements}.
 
 \begin{center}
 \small
@@ -173,31 +173,33 @@ The following table shows each of them for \refEnum{Req}{keep} from \zcref{sec:r
 \toprule
 Aim & Command & Output \\
 \midrule
-Identifier & \verb|\refEnum{Req}{keep}| & \refEnum{Req}{keep} \\
-Identifier (title) & \verb|\refEnumFull{Req}{keep}| & \refEnumFull{Req}{keep} \\
-Identifier: title & \verb|\refEnumFullColon{Req}{keep}| & \refEnumFullColon{Req}{keep} \\
-Title & \verb|\refEnumTitle{Req}{keep}| & \refEnumTitle{Req}{keep} \\
+Identifier & \verb|\refReq{keep}| & \refReq{keep} \\
+Identifier (title) & \verb|\refReqFull{keep}| & \refReqFull{keep} \\
+Identifier: title & \verb|\refReqFullColon{keep}| & \refReqFullColon{keep} \\
+Title & \verb|\refReqTitle{keep}| & \refReqTitle{keep} \\
 \midrule
 \multicolumn{3}{@{}l}{\emph{With the kind of the item}} \\
-Identifier & \verb|\refEnum*{Req}{keep}| & \refEnum*{Req}{keep} \\
-Identifier (title) & \verb|\refEnumFull*{Req}{keep}| & \refEnumFull*{Req}{keep} \\
-Identifier: title & \verb|\refEnumFullColon*{Req}{keep}| & \refEnumFullColon*{Req}{keep} \\
+Identifier & \verb|\refReq*{keep}| & \refReq*{keep} \\
+Identifier (title) & \verb|\refReqFull*{keep}| & \refReqFull*{keep} \\
+Identifier: title & \verb|\refReqFullColon*{keep}| & \refReqFullColon*{keep} \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\verb|\refEnum*{Req}{keep}| is short for \verb|\zcref{enum:Req:keep}| of \href{https://ctan.org/pkg/zref-clever}{zref-clever}, which also references several items at once, as in \zcref{sec:milestones}.
+Each shorthand has a long form, which takes the kind of the item as first argument.
+For instance, \verb|\refReqFull{keep}| is short for \verb|\refEnumFull{Req}{keep}|.
+The command \verb|\refReq*{keep}| is also short for \verb|\zcref{enum:Req:keep}| of \href{https://ctan.org/pkg/zref-clever}{zref-clever}, which also references several items at once, as in \zcref{sec:milestones}.
 
 The following list references every item of this document in the form ``Identifier (title)''.
 
 \bexample
 \begin{itemize}
-\item Features: \refEnumFull{Feature}{save}, \refEnumFull{Feature}{autosave}
-\item Risks: \refEnumFull{R}{concurrent}, \refEnumFull{R}{backup}
-\item Requirements: \refEnumFull{Req}{detect}, \refEnumFull{Req}{keep}
-\item Decision records: \refEnumFull{ADR}{atomic}
-\item Options: \refEnumFull{Opt}{inplace}, \refEnumFull{Opt}{tmp}
-\item Milestones: \refEnumFull{M}{safe}
+\item Features: \refFeatureFull{save}, \refFeatureFull{autosave}
+\item Risks: \refRFull{concurrent}, \refRFull{backup}
+\item Requirements: \refReqFull{detect}, \refReqFull{keep}
+\item Decision records: \refADRFull{atomic}
+\item Options: \refOptFull{inplace}, \refOptFull{tmp}
+\item Milestones: \refMFull{safe}
 \end{itemize}
 \eexample
 
