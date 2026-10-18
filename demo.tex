@@ -185,4 +185,17 @@ Number & \verb|\ref{enum:Req:detect}| & \ref{enum:Req:detect} \\
 
 \verb|\ref| prints the number only, which does not say which kind of item is meant.
 
+The following list references every item of this document in the form ``Identifier (title)''.
+
+\bexample
+\begin{itemize}
+\item Features: \refEnumFull{Feature}{save}, \refEnumFull{Feature}{autosave}
+\item Risks: \refEnumFull{R}{concurrent}, \refEnumFull{R}{backup}
+\item Requirements: \refEnumFull{Req}{detect}, \refEnumFull{Req}{keep}
+\item Decision records: \refEnumFull{ADR}{atomic}
+\item Options: \refEnumFull{Opt}{inplace}, \refEnumFull{Opt}{tmp}
+\item Milestones: \refEnumFull{M}{safe}
+\end{itemize}
+\eexample
+
 \end{document}
