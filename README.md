@@ -67,9 +67,9 @@ If a command with one of these names exists already, LaTeX reports an error; cho
 
 ### Referencing
 
-* `\refEnumFullT{<EnumId>}{<LabelId>}` prints `<EnumId>-<Counter>: "<FullName>"`, e.g., `Req-1: "Detect concurrent modification"`.
-* `\refEnumFullP` is the long form of `\refEnumFull`.
-* The starred forms `\refEnum*`, `\refEnumFull*`, `\refEnumFullT*` prefix the print name, e.g., `Requirement Req-1`.
+* `\refEnumFullColon{<EnumId>}{<LabelId>}` prints `<EnumId>-<Counter>: "<FullName>"`, e.g., `Req-1: "Detect concurrent modification"`.
+* `\refEnumFullP` and `\refEnumFullT` are older names of `\refEnumFull` and `\refEnumFullColon`.
+* The starred forms `\refEnum*`, `\refEnumFull*`, `\refEnumFullColon*` prefix the print name, e.g., `Requirement Req-1`.
 * `\refEnumTitle{<EnumId>}{<LabelId>}` is short for `\nameref{enum:<EnumId>:<LabelId>}`.
 * `\zcref` of [zref-clever](https://ctan.org/pkg/zref-clever) prints the print name and the identifier, e.g., `Requirement Req-1`. It references several items at once, e.g., `\zcref{enum:Req:detect,enum:Req:keep}` prints `Requirements Req-1 and Req-2`.
 * `\refEnum{<EnumId>}{<LabelId>}` is short for `\zcref[noname]{enum:<EnumId>:<LabelId>}`, `\refEnum*` for `\zcref`; `\ref{enum:<EnumId>:<LabelId>}` prints the identifier as well.
@@ -99,7 +99,7 @@ The latest source code is available at <https://github.com/koppor/refenums>.
 
 * See <https://ctan.org/topic/label-ref> for an overview.
 * [zref-clever](https://ctan.org/pkg/zref-clever) (like [cleveref](https://ctan.org/pkg/cleveref)) prints the type and number of a reference.
-  refenums builds on zref-clever: `\defRefEnum` also prints the heading of an item, stores its title, and the references can include that title (`\refEnumFull`, `\refEnumFullT`).
+  refenums builds on zref-clever: `\defRefEnum` also prints the heading of an item, stores its title, and the references can include that title (`\refEnumFull`, `\refEnumFullColon`).
 * In the conext of chemistry, [chemsec](https://ctan.org/pkg/chemsec) offers taylored functionality.
 
 ## License

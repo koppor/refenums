@@ -13,6 +13,7 @@
 % Plain commands, not environments: a group would discard the macros \setupRefEnums defines.
 \usepackage[listings]{tcolorbox}
 \usepackage{booktabs}
+\usepackage{array}
 \tcbset{
   demo listing/.style={
     listing file=\jobname.tex,
@@ -140,7 +141,7 @@ How do we write a file so that \refEnumFull{Req}{detect} and \refEnumFull{Req}{k
 \end{itemize}
 
 \paragraph{Decision Outcome}
-Chosen option: \refEnumFullT{Opt}{tmp}, because a failed write leaves the original file untouched and the target can be checked for changes right before the move.
+Chosen option: \refEnumFullColon{Opt}{tmp}, because a failed write leaves the original file untouched and the target can be checked for changes right before the move.
 \eexample
 
 \section{Milestones}
@@ -168,19 +169,19 @@ The following table shows each of them for \refEnum{Req}{keep} from \zcref{sec:r
 \small
 \renewcommand{\arraystretch}{1.3}
 \setlength{\tabcolsep}{4pt}
-\begin{tabular}{@{}lll@{}}
+\begin{tabular}{@{}l>{\footnotesize}ll@{}}
 \toprule
 Aim & Command & Output \\
 \midrule
 Identifier & \verb|\refEnum{Req}{keep}| & \refEnum{Req}{keep} \\
 Identifier (title) & \verb|\refEnumFull{Req}{keep}| & \refEnumFull{Req}{keep} \\
-Identifier: title & \verb|\refEnumFullT{Req}{keep}| & \refEnumFullT{Req}{keep} \\
+Identifier: title & \verb|\refEnumFullColon{Req}{keep}| & \refEnumFullColon{Req}{keep} \\
 Title & \verb|\refEnumTitle{Req}{keep}| & \refEnumTitle{Req}{keep} \\
 \midrule
 \multicolumn{3}{@{}l}{\emph{With the kind of the item}} \\
 Identifier & \verb|\refEnum*{Req}{keep}| & \refEnum*{Req}{keep} \\
 Identifier (title) & \verb|\refEnumFull*{Req}{keep}| & \refEnumFull*{Req}{keep} \\
-Identifier: title & \verb|\refEnumFullT*{Req}{keep}| & \refEnumFullT*{Req}{keep} \\
+Identifier: title & \verb|\refEnumFullColon*{Req}{keep}| & \refEnumFullColon*{Req}{keep} \\
 \bottomrule
 \end{tabular}
 \end{center}

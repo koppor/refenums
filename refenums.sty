@@ -232,15 +232,16 @@
 \newcommand{\refEnumTitle}[2]{\nameref{enum:#1:#2}}
 
 % Output: <EnumId><Num> (``<FullName>'')
-\NewDocumentCommand{\refEnumFullP}{smm}{%
+\NewDocumentCommand{\refEnumFull}{smm}{%
 \IfBooleanTF{#1}{\refEnum*{#2}{#3}}{\refEnum{#2}{#3}} (\enquote{\refEnumTitle{#2}{#3}})%
 }
 
 % Output: <EnumId><Num>: ``<FullName>''
-\NewDocumentCommand{\refEnumFullT}{smm}{%
+\NewDocumentCommand{\refEnumFullColon}{smm}{%
 \IfBooleanTF{#1}{\refEnum*{#2}{#3}}{\refEnum{#2}{#3}}: \enquote{\refEnumTitle{#2}{#3}}%
 }
 
-% \refEnumFull defaults to \refEnumFullP
-\NewCommandCopy\refEnumFull\refEnumFullP
+% Older names, kept for existing documents
+\NewCommandCopy\refEnumFullP\refEnumFull
+\NewCommandCopy\refEnumFullT\refEnumFullColon
 \endinput

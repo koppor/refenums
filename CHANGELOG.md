@@ -12,7 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `\setupRefEnum` sets up an enum with key-value options (`separator`, `enclosing`, `combined`).
 - `\setupRefEnum` accepts `titleformat` to format the title of each element.
 - `\setupRefEnum` accepts `plural` for the plural of the print name.
-- `\refEnum*`, `\refEnumFull*`, and `\refEnumFullT*` prefix the print name, e.g., "Requirement Req-1 ("Detect concurrent modification")".
+- `\refEnumFullColon` is the new name of `\refEnumFullT`; the old name still works.
+- `\refEnum*`, `\refEnumFull*`, and `\refEnumFullColon*` prefix the print name, e.g., "Requirement Req-1 ("Detect concurrent modification")".
 - `\refEnumTitle` prints the title of an element.
 - `\setupRefEnum` defines `\def<EnumId>` as a shorthand for `\defRefEnum{<EnumId>}`, and `\def<EnumId>Inline` for `\defRefEnumInline{<EnumId>}`. Documents defining such commands themselves need the package option `shorthands=false`.
 - The full LPPL license text is now included as `LICENSE`.
