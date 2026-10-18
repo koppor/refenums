@@ -120,12 +120,11 @@ Mitigates \refEnumFull{R}{backup}.
 \section{Decisions}
 \label{sec:decisions}
 
-\bsetup{Decision records and the options they consider use the default separator, too.}
+\bsetup{Decision records and the options they consider use the default separator, too.
+The optional argument of \texttt{\textbackslash defRefEnum} wraps a single item, here the decision record below in a subsection.}
 \setupRefEnum{ADR}{Decision Record}
 \setupRefEnum{Opt}{Option}
 \esetup
-
-The optional argument of \verb|\defRefEnum| wraps a single item, here a decision record in a subsection.
 
 \bexample
 \defRefEnum[subsection]{ADR}{Replace files atomically}{atomic}
