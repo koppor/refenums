@@ -94,8 +94,8 @@ Both can be redefined after loading the package, e.g., `\renewcommand{\refenumen
 
 ### cleveref
 
-refenums references with zref-clever; [cleveref](https://ctan.org/pkg/cleveref) is supported for existing documents only.
-`\cref` prints the same identifiers as `\refEnum`, no matter whether cleveref is loaded before or after refenums.
+`refenums` references with zref-clever; [cleveref](https://ctan.org/pkg/cleveref) is supported for existing documents only.
+`\cref` prints the same identifiers as `\refEnum`, no matter whether cleveref is loaded before or after `refenums`.
 Only `\setupRefEnum` must come after `\usepackage{cleveref}`; otherwise, `\cref` prints `?? 1` for that enum.
 
 ## Source code
@@ -111,7 +111,7 @@ The latest source code is available at <https://github.com/koppor/refenums>.
 
 * See <https://ctan.org/topic/label-ref> for an overview.
 * [zref-clever](https://ctan.org/pkg/zref-clever) (like [cleveref](https://ctan.org/pkg/cleveref)) prints the type and number of a reference.
-  refenums builds on zref-clever: `\defRefEnum` also prints the heading of an item, stores its title, and the references can include that title (`\refEnumFull`, `\refEnumFullColon`).
+  `refenums` builds on zref-clever: `\defRefEnum` also prints the heading of an item, stores its title, and the references can include that title (`\refEnumFull`, `\refEnumFullColon`).
 * In the conext of chemistry, [chemsec](https://ctan.org/pkg/chemsec) offers taylored functionality.
 
 ## License
