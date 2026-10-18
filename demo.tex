@@ -54,7 +54,7 @@
 
 \vspace{-12ex}
 This document demonstrates the \href{https://ctan.org/pkg/refenums}{refenums} package with the development documents of a reference manager.
-The content is a simplified version of \href{https://github.com/JabRef/jabref/tree/main/docs}{JabRef's} requirements, written for \href{https://github.com/itsallcode/openfasttrace}{OpenFastTrace}, and decision records, written in \href{https://adr.github.io/madr/}{MADR}.
+The content is a simplified version of \href{https://github.com/JabRef/jabref/tree/main/docs}{JabRef's} requirements and decision records, written in \href{https://adr.github.io/madr/}{MADR}.
 
 Each section starts with an orange box setting up a kind of item; this produces no output.
 Each green box shows the \LaTeX{} code producing the output right above it.
@@ -107,16 +107,12 @@ A failure while writing a backup during \refEnumFull{Feature}{autosave} replaces
 \defRefEnum{Req}{Detect concurrent modification}{detect}
 If the library file changed since the save started, the save is aborted with an error.
 Mitigates \refEnumFull{R}{concurrent}.
-
-OFT: \verb|req~logic.exporter.concurrent-save-detection~1|, needs: impl, utest
 \eexample
 
 \bexample
 \defRefEnum{Req}{Keep valid backups}{keep}
 A failure while writing a backup leaves the previous backup untouched.
 Mitigates \refEnumFull{R}{backup}.
-
-OFT: \verb|req~jabgui.autosaveandbackup.complete-backup~1|, needs: impl, utest
 \eexample
 
 \section{Decisions}
