@@ -13,7 +13,7 @@
 
 % The latest source code is available at https://github.com/koppor/refenums
 
-% Option shorthands=true|false (default: true): \setupRefEnums{<EnumId>}{...} also defines \def<EnumId>{<FullName>}{<LabelId>}
+% Option shorthands=true|false (default: true): \setupRefEnums{<EnumId>}{...} also defines \def<EnumId>{<FullName>}{<LabelId>} and \def<EnumId>Inline{<FullName>}{<LabelId>}
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{family=refenums,prefix=refenums@}
 \DeclareBoolOption[true]{shorthands}
@@ -47,7 +47,10 @@
 {\expandafter\def\csname #3TitleFormat\endcsname{emph}}%
 {\expandafter\def\csname #3TitleFormat\endcsname{@firstofone}}%
 % \newcommand, not \def: a clash with an existing command must not go unnoticed
-\ifrefenums@shorthands\expandafter\newcommand\csname def#3\endcsname[2]{\defRefEnum{#3}{##1}{##2}}\fi}
+\ifrefenums@shorthands
+\expandafter\newcommand\csname def#3\endcsname[2]{\defRefEnum{#3}{##1}{##2}}%
+\expandafter\newcommand\csname def#3Inline\endcsname[2]{\defRefEnumInline{#3}{##1}{##2}}%
+\fi}
 
 % Same as \setupRefEnums, with key-value options instead of positional ones
 %

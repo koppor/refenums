@@ -45,8 +45,8 @@ The older `\setupRefEnums[<separator>][<enclosing>]{<EnumId>}{<PrintName>}` take
 
 #### (Optional) Shorthand commands
 
-`\setupRefEnum{<EnumId>}{...}` also defines `\def<EnumId>{<FullName>}{<LabelId>}` as a shorthand for `\defRefEnum{<EnumId>}{<FullName>}{<LabelId>}`.
-If a command with that name exists already, LaTeX reports an error; choose another `<EnumId>` then, or turn the shorthands off with `\usepackage[shorthands=false]{refenums}`.
+`\setupRefEnum{<EnumId>}{...}` also defines `\def<EnumId>{<FullName>}{<LabelId>}` as a shorthand for `\defRefEnum{<EnumId>}{<FullName>}{<LabelId>}`, and `\def<EnumId>Inline` for `\defRefEnumInline{<EnumId>}`.
+If a command with one of these names exists already, LaTeX reports an error; choose another `<EnumId>` then, or turn the shorthands off with `\usepackage[shorthands=false]{refenums}`.
 
 ### Usage in the text
 
@@ -57,7 +57,9 @@ If a command with that name exists already, LaTeX reports an error; choose anoth
 
 #### Define a single enum using the inline format
 
-`\defineReferenceableEnumElementInline{<EnumId>}{<FullName>}{<LabelId>}`.
+* `\defRefEnumInline{<EnumId>}{<FullName>}{<LabelId>}` (always supported)
+* `\def<EnumId>Inline{<FullName>}{<LabelId>}` (unless the package option `shorthands=false` is given)
+
 Using this, a enumeration similar to the ones of the `inparaenum` environment is possible.
 `inparaenum` is offered by the [paralist package](https://www.ctan.org/pkg/paralist).
 

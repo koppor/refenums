@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `\setupRefEnum` sets up an enum with key-value options (`separator`, `enclosing`, `combined`).
 - `\setupRefEnum` accepts `titleformat` to format the title of each element.
-- `\setupRefEnum` defines `\def<EnumId>` as a shorthand for `\defRefEnum{<EnumId>}`. Documents defining such a command themselves need the package option `shorthands=false`.
+- `\setupRefEnum` defines `\def<EnumId>` as a shorthand for `\defRefEnum{<EnumId>}`, and `\def<EnumId>Inline` for `\defRefEnumInline{<EnumId>}`. Documents defining such commands themselves need the package option `shorthands=false`.
 - When zref-clever is loaded, `\zcref` prints the same identifier as `\refEnum`.
 - The full LPPL license text is now included as `LICENSE`.
 - `\setupRefEnums` accepts a second optional argument naming the command each element is wrapped in (e.g., `subsection`). The optional argument of `\defRefEnum` still overrides it per element.
@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- The README named the inline command `\defineReferenceableEnumElementInline` instead of `\defRefEnumInline`.
 - The CTAN archive contains `README.pdf` again.
 
 ## [1.1.2] - 2016-10-07

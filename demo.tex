@@ -58,7 +58,7 @@ The content is a simplified version of \href{https://github.com/JabRef/jabref/tr
 
 Each section starts with an orange box setting up a kind of item; this produces no output.
 Each green box shows the \LaTeX{} code producing the output right above it.
-Items are defined with shorthands such as \verb|\defReq|, which \verb|\setupRefEnum{Req}| creates for \verb|\defRefEnum{Req}|.
+Items are defined with shorthands such as \verb|\defReq| and \verb|\defReqInline|, which \verb|\setupRefEnum{Req}| creates for \verb|\defRefEnum{Req}| and \verb|\defRefEnumInline{Req}|.
 
 \tableofcontents
 \clearpage
@@ -135,8 +135,8 @@ How do we write a file so that \refEnumFull{Req}{detect} and \refEnumFull{Req}{k
 
 \paragraph{Considered Options}
 \begin{itemize}
-\item \defRefEnumInline{Opt}{Overwrite in place}{inplace}
-\item \defRefEnumInline{Opt}{Write a temporary file and move it over the target}{tmp}
+\item \defOptInline{Overwrite in place}{inplace}
+\item \defOptInline{Write a temporary file and move it over the target}{tmp}
 \end{itemize}
 
 \paragraph{Decision Outcome}
