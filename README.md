@@ -14,8 +14,10 @@ This ensures consistency in the text.
 \usepackage{refenums}
 ```
 
-refenums loads [hyperref](https://ctan.org/pkg/hyperref) and [cleveref](https://ctan.org/pkg/cleveref) itself.
+refenums loads [hyperref](https://ctan.org/pkg/hyperref) and [zref-clever](https://ctan.org/pkg/zref-clever) itself.
 If you load them yourself, e.g., to pass options, load refenums after them.
+refenums needs LaTeX 2023-06-01 and zref-clever 0.4.0 or later.
+If [cleveref](https://ctan.org/pkg/cleveref) is loaded before refenums, `\cref` prints the same identifiers as `\refEnum`.
 
 ### Define the "Referenceable Enum Environment"
 
@@ -66,11 +68,11 @@ Using this, a enumeration similar to the ones of the `inparaenum` environment is
 * `\refEnumFull{<EnumId>}{<LabelId>}` = `<EnumId>-<Counter> ("<FullName>")`, e.g. `R-1 ("Quality")`
 * `\refEnumFullP{<EnumId>}{<LabelId>}` is the long form for `\refEnumFull`.
 * `\refEnumFullT{<EnumId>}{<LabelId>}` = `<EnumId>-<Counter>: "<FullName>"`, e.g. `R-1: "Quality"`
-* `\refEnum{<EnumId>}{<LabelId>}` = `<EnumId>-<Counter>`, e.g. `R-1`
+* `\refEnum{<EnumId>}{<LabelId>}` = `<EnumId>-<Counter>`, e.g. `R-1`; short for `\zcref{enum:<EnumId>:<LabelId>}`
 * References to the label
   * `\nameref{enum:<EnumId>:<LabelId>}` = `<FullName>`
   * `\ref{enum:<EnumId>:<LabelId>}` = `<Counter>`, e.g. `1`
-  * `\zcref{enum:<EnumId>:<LabelId>}` = same as `\refEnum`, when [zref-clever](https://ctan.org/pkg/zref-clever) is loaded before `\setupRefEnum`
+  * `\zcref{enum:<EnumId>:<LabelId>,enum:<EnumId>:<LabelId2>}` references several items at once, e.g., `R-1 and 2`
  
 ## Example
 
@@ -107,8 +109,7 @@ The latest source code is available at <https://github.com/koppor/refenums>.
 
 * See <https://ctan.org/topic/label-ref> for an overview.
 * [zref-clever](https://ctan.org/pkg/zref-clever) (like [cleveref](https://ctan.org/pkg/cleveref)) prints the type and number of a reference.
-  refenums builds on such references: `\defRefEnum` also prints the heading of an item, stores its title, and the references can include that title (`\refEnumFull`, `\refEnumFullT`).
-  When zref-clever is loaded, refenums sets it up, so that `\zcref` prints the same identifier as `\refEnum`.
+  refenums builds on zref-clever: `\defRefEnum` also prints the heading of an item, stores its title, and the references can include that title (`\refEnumFull`, `\refEnumFullT`).
 * In the conext of chemistry, [chemsec](https://ctan.org/pkg/chemsec) offers taylored functionality.
 
 ## License

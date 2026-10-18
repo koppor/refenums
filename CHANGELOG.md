@@ -12,7 +12,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `\setupRefEnum` sets up an enum with key-value options (`separator`, `enclosing`, `combined`).
 - `\setupRefEnum` accepts `titleformat` to format the title of each element.
 - `\setupRefEnum` defines `\def<EnumId>` as a shorthand for `\defRefEnum{<EnumId>}`, and `\def<EnumId>Inline` for `\defRefEnumInline{<EnumId>}`. Documents defining such commands themselves need the package option `shorthands=false`.
-- When zref-clever is loaded, `\zcref` prints the same identifier as `\refEnum`.
 - The full LPPL license text is now included as `LICENSE`.
 - `\setupRefEnums` accepts a second optional argument naming the command each element is wrapped in (e.g., `subsection`). The optional argument of `\defRefEnum` still overrides it per element.
 
@@ -22,7 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `demo.pdf` shows the LaTeX code of each example next to its output.
 - `demo.tex` demonstrates the package with requirements and a decision record (MADR style) modeled on JabRef.
 - `demo.tex` is typeset with LuaLaTeX.
-- refenums requires LaTeX 2020-10-01 or later.
+- refenums references with zref-clever instead of cleveref; `\zcref` prints the same identifiers as `\refEnum`. `\cref` still does if cleveref is loaded before refenums.
+- refenums requires LaTeX 2023-06-01 and zref-clever 0.4.0 or later.
 
 ### Removed
 

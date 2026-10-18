@@ -1,9 +1,9 @@
 \documentclass[parskip=full]{scrartcl}
 
-\usepackage{zref-clever}
 \usepackage[colorlinks,allcolors=blue]{hyperref}
-\usepackage[capitalise,nameinlink]{cleveref}
 \usepackage{refenums}
+% refenums references with zref-clever; capitalize its names of other references, too (e.g., "Section 3")
+\zcsetup{cap}
 
 %Always add a dot behind the definition
 \renewcommand{\refenumenclosing}[1]{#1.}
@@ -162,7 +162,7 @@ This mitigates \refEnum{R}{concurrent} and \refEnum{R}{backup}.
 
 The package \texttt{refenums} offers several ways to reference an item.
 They differ in how much of the item they show: its identifier, its title, or both.
-The following table shows each of them for \refEnum{Req}{detect} from \cref{sec:requirements}.
+The following table shows each of them for \refEnum{Req}{detect} from \zcref{sec:requirements}.
 
 \begin{center}
 \small
@@ -177,15 +177,13 @@ Identifier (title) & \verb|\refEnumFull{Req}{detect}| & \refEnumFull{Req}{detect
 Identifier: title & \verb|\refEnumFullT{Req}{detect}| & \refEnumFullT{Req}{detect} \\
 Title & \verb|\nameref{enum:Req:detect}| & \nameref{enum:Req:detect} \\
 \midrule
-\multicolumn{3}{@{}l}{\emph{With \href{https://ctan.org/pkg/zref-clever}{zref-clever}}} \\
-Identifier & \verb|\zcref{enum:Req:detect}| & \zcref{enum:Req:detect} \\
-\midrule
 \multicolumn{3}{@{}l}{\emph{Not recommended}} \\
 Number & \verb|\ref{enum:Req:detect}| & \ref{enum:Req:detect} \\
 \bottomrule
 \end{tabular}
 \end{center}
 
+\verb|\refEnum{Req}{detect}| is short for \verb|\zcref{enum:Req:detect}| of \href{https://ctan.org/pkg/zref-clever}{zref-clever}.
 \verb|\ref| prints the number only, which does not say which kind of item is meant.
 
 The following list references every item of this document in the form ``Identifier (title)''.

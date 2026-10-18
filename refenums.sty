@@ -1,4 +1,4 @@
-\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+\NeedsTeXFormat{LaTeX2e}[2023/06/01]
 \ProvidesPackage{refenums}
   [2014/01/03 v1.1.1 Referenceable enumerated items (refenums.sty)]
 
@@ -22,7 +22,8 @@
 \RequirePackage{csquotes}
 \RequirePackage{ifthen}
 \RequirePackage{hyperref}
-\RequirePackage{cleveref}
+% 0.4.0 sets a \zlabel alongside each \label, so the labels refenums sets work with \zcref
+\RequirePackage{zref-clever}[2023/06/14]
 
 %Defines command \refenumenclosing and \refenuminlineenclosing if it is not already defined
 \ifthenelse{\isundefined{\refenumenclosing}}{\newcommand{\refenumenclosing}[1]{#1}}{}
@@ -108,19 +109,15 @@
 %tipp by http://tex.stackexchange.com/a/64019/9075
 \expandafter\newcommand\csname #2Separator\endcsname{#1}
 
-%Store COMBINED and setup cref
+%Store COMBINED and setup references
 \newtoggle{#2Combined}
 \ifthenelse{%
 \equal{#1}{COMBINED}}{%
 \toggletrue{#2Combined}
-\crefformat{#2}{##2#2##1##3}
-\Crefformat{#2}{##2#2##1##3}
-\refenums@zcsetup{#2}{}%
+\refenums@refsetup{#2}{}%
 }{%
 \togglefalse{#2Combined}
-\crefformat{#2}{##2#2#1##1##3}
-\Crefformat{#2}{##2#2#1##1##3}
-\refenums@zcsetup{#2}{#1}%
+\refenums@refsetup{#2}{#1}%
 }
 
 %Store ONLYSHORTCONFIG
@@ -135,13 +132,15 @@
 %End of definition of setupRefEnums
 }
 
-% zref-clever names a reference by its counter, so \zcref prints the same identifier as \refEnum
-% Checked at each setup, not at package load, because zref-clever may be loaded after refenums
+% References print <EnumId><separator><Number>: zref-clever names a reference by its counter, which is the Enum Id
+% cleveref's \cref gets the same format if cleveref is loaded before refenums
 % #1: Enum Id
 % #2: separator
-\newcommand{\refenums@zcsetup}[2]{%
-\ifdefined\zcRefTypeSetup
+\newcommand{\refenums@refsetup}[2]{%
 \zcRefTypeSetup{#1}{name-sg={#1}, Name-sg={#1}, name-pl={#1}, Name-pl={#1}, namesep={#2}}%
+\ifdefined\crefformat
+\crefformat{#1}{##2#1#2##1##3}%
+\Crefformat{#1}{##2#1#2##1##3}%
 \fi
 }
 
@@ -227,6 +226,6 @@
 
 
 \newcommand{\refEnum}[2]{%
-  \cref{enum:#1:#2}%
+  \zcref{enum:#1:#2}%
 }
 \endinput
