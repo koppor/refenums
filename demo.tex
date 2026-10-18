@@ -10,18 +10,12 @@
 \renewcommand{\refenumenclosing}[1]{#1.}
 
 % \bexample ... \eexample runs the code in between and then prints its source lines.
-% Plain commands, not an environment: a group would discard the macros \setupRefEnums defines.
+% \bsetup{<explanation>} ... \esetup does the same for setup code, which has no output; the explanation goes into the box.
+% Plain commands, not environments: a group would discard the macros \setupRefEnums defines.
 \usepackage[listings]{tcolorbox}
-\newcount\bexampleline
-\newcount\eexampleline
-\newcommand{\bexample}{\global\bexampleline=\numexpr\inputlineno+1\relax}
-\newcommand{\eexample}{%
-  \global\eexampleline=\numexpr\inputlineno-1\relax
-  \tcbinputlisting{%
-    listing only,
+\tcbset{
+  demo listing/.style={
     listing file=\jobname.tex,
-    colback=green!5!white,
-    colframe=green!25,
     left=8mm,
     listing options={
       language={[LaTeX]TeX},
@@ -36,7 +30,19 @@
       numberstyle=\tiny,
       numbersep=8pt
     }
-  }%
+  }
+}
+\newcount\bexampleline
+\newcount\eexampleline
+\newcommand{\bexample}{\global\bexampleline=\numexpr\inputlineno+1\relax}
+\newcommand{\eexample}{%
+  \global\eexampleline=\numexpr\inputlineno-1\relax
+  \tcbinputlisting{demo listing, listing only, colback=green!5!white, colframe=green!25}%
+}
+\newcommand{\bsetup}[1]{\gdef\setupexplanation{#1}\bexample}
+\newcommand{\esetup}{%
+  \global\eexampleline=\numexpr\inputlineno-1\relax
+  \tcbinputlisting{demo listing, comment and listing, comment={\setupexplanation}, colback=orange!5!white, colframe=orange!40}%
 }
 
 \begin{document}
@@ -49,55 +55,26 @@
 \vspace{-12ex}
 This document demonstrates the \href{https://ctan.org/pkg/refenums}{refenums} package with the development documents of a reference manager.
 The content is a simplified version of \href{https://github.com/JabRef/jabref/tree/main/docs}{JabRef's} requirements, written for \href{https://github.com/itsallcode/openfasttrace}{OpenFastTrace}, and decision records, written in \href{https://adr.github.io/madr/}{MADR}.
+
+Each section starts with an orange box setting up a kind of item; this produces no output.
 Each green box shows the \LaTeX{} code producing the output right above it.
 
 \tableofcontents
 \clearpage
 
-\section{Setup}
-\label{sec:setup}
-
-Each kind of item is set up once.
-This produces no output.
-
-Features print only their short form (``Feature~1'') and each becomes a subsection:
-
-\bexample
-\setupRefEnums[ ][subsection]{Feature}{ONLYSHORT}
-\eexample
-
-Risks use no separator (``Risk~1 (R1)''):
-
-\bexample
-\setupRefEnums[]{R}{Risk}
-\eexample
-
-Requirements use the default separator (``Requirement~1 (Req-1)''):
-
-\bexample
-\setupRefEnums{Req}{Requirement}
-\eexample
-
-Decision records and the options they consider, too:
-
-\bexample
-\setupRefEnums{ADR}{Decision Record}
-\setupRefEnums{Opt}{Option}
-\eexample
-
-Milestones combine print name and short name (``Milestone~M1''):
-
-\bexample
-\setupRefEnums[COMBINED]{M}{Milestone}
-\eexample
-
 \section{Features}
 \label{sec:features}
+
+\bsetup{Features print only their short form (``Feature~1'') and each becomes a subsection.}
+\setupRefEnums[ ][subsection]{Feature}{ONLYSHORT}
+\esetup
 
 \bexample
 \defRefEnum{Feature}{Save a library}{save}
 The user saves the library to a \texttt{.bib} file.
+\eexample
 
+\bexample
 \defRefEnum{Feature}{Autosave}{autosave}
 Every change to the library is saved shortly afterwards, and a backup is kept.
 \eexample
@@ -105,16 +82,26 @@ Every change to the library is saved shortly afterwards, and a backup is kept.
 \section{Risks}
 \label{sec:risks}
 
+\bsetup{Risks use no separator (``Risk~1 (R1)'').}
+\setupRefEnums[]{R}{Risk}
+\esetup
+
 \bexample
 \defRefEnum{R}{Concurrent modification}{concurrent}
 Another process, e.g., a second JabRef instance on a network share, writes the library file while \refEnum{Feature}{save} is running.
+\eexample
 
+\bexample
 \defRefEnum{R}{Incomplete backup}{backup}
 A failure while writing a backup during \refEnumFull{Feature}{autosave} replaces a valid backup.
 \eexample
 
 \section{Requirements}
 \label{sec:requirements}
+
+\bsetup{Requirements use the default separator (``Requirement~1 (Req-1)'').}
+\setupRefEnums{Req}{Requirement}
+\esetup
 
 \bexample
 \defRefEnum{Req}{Detect concurrent modification}{detect}
@@ -134,6 +121,11 @@ OFT: \verb|req~jabgui.autosaveandbackup.complete-backup~1|, needs: impl, utest
 
 \section{Decisions}
 \label{sec:decisions}
+
+\bsetup{Decision records and the options they consider use the default separator, too.}
+\setupRefEnums{ADR}{Decision Record}
+\setupRefEnums{Opt}{Option}
+\esetup
 
 The optional argument of \verb|\defRefEnum| wraps a single item, here a decision record in a subsection.
 
@@ -155,6 +147,10 @@ Chosen option: \refEnumFullT{Opt}{tmp}, because a failed write leaves the origin
 
 \section{Milestones}
 \label{sec:milestones}
+
+\bsetup{Milestones combine print name and short name (``Milestone~M1'').}
+\setupRefEnums[COMBINED]{M}{Milestone}
+\esetup
 
 \bexample
 \defRefEnum{M}{Safe saving}{safe}
