@@ -13,6 +13,11 @@
 
 % The latest source code is available at https://github.com/koppor/refenums
 
+% Option shorthands: \setupRefEnums{<EnumId>}{...} also defines \def<EnumId>{<FullName>}{<LabelId>}
+\newif\ifrefenums@shorthands
+\DeclareOption{shorthands}{\refenums@shorthandstrue}
+\ProcessOptions\relax
+
 \RequirePackage{csquotes}
 \RequirePackage{ifthen}
 \RequirePackage{hyperref}
@@ -39,7 +44,9 @@
 % A sectioning command sets the title apart already; a run-in title needs italics to stand out from the following text
 \ifthenelse{\equal{#2}{refenumenclosing}}%
 {\expandafter\def\csname #3TitleFormat\endcsname{emph}}%
-{\expandafter\def\csname #3TitleFormat\endcsname{@firstofone}}}
+{\expandafter\def\csname #3TitleFormat\endcsname{@firstofone}}%
+% \newcommand, not \def: a clash with an existing command must not go unnoticed
+\ifrefenums@shorthands\expandafter\newcommand\csname def#3\endcsname[2]{\defRefEnum{#3}{##1}{##2}}\fi}
 
 % Same as \setupRefEnums, with key-value options instead of positional ones
 %

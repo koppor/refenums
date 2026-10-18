@@ -43,18 +43,17 @@ For instance, `\setupRefEnum[enclosing=subsection]{Step}{Step}` puts every step 
 
 The older `\setupRefEnums[<separator>][<enclosing>]{<EnumId>}{<PrintName>}` takes the same settings as positional optional arguments, with `COMBINED` as separator for `combined`.
 
-#### (Optional) Define shorthand macro to define the macros for referencing
+#### (Optional) Shorthand commands
 
-```latex
-\newcommand{\def<EnumId>}[2]{\defRefEnum{<EnumId>}{#1}{#2}}
-```
+With `\usepackage[shorthands]{refenums}`, `\setupRefEnum{<EnumId>}{...}` also defines `\def<EnumId>{<FullName>}{<LabelId>}` as a shorthand for `\defRefEnum{<EnumId>}{<FullName>}{<LabelId>}`.
+If a command with that name exists already, LaTeX reports an error; choose another `<EnumId>` then.
 
 ### Usage in the text
 
 #### Define a single enum
 
 * `\defRefEnum{<EnumId>}{<FullName>}{<LabelId>}` (always supported)
-* `\def<EnumId>{<FullName>}{<LabelId>}` (when the shorthand command is defined)
+* `\def<EnumId>{<FullName>}{<LabelId>}` (with the package option `shorthands`)
 
 #### Define a single enum using the inline format
 
@@ -94,10 +93,6 @@ When you want to put all elements in a section, set it at initialization:
 The heading of an element is wrapped in `\refenumenclosing` (unless `enclosing` says otherwise), the one of an inline element in `\refenuminlineenclosing`.
 By default, `\refenumenclosing` prints the heading as is and `\refenuminlineenclosing` in italics.
 Both can be redefined after loading the package, e.g., `\renewcommand{\refenumenclosing}[1]{#1.}` adds a dot after each heading.
-
-## TODO
-
-* Enable automatically generating `\def<EnumId>` at `\setupRefEnum` via a package parameter.
 
 ## Source code
 
