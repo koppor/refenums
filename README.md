@@ -45,15 +45,15 @@ The older `\setupRefEnums[<separator>][<enclosing>]{<EnumId>}{<PrintName>}` take
 
 #### (Optional) Shorthand commands
 
-With `\usepackage[shorthands]{refenums}`, `\setupRefEnum{<EnumId>}{...}` also defines `\def<EnumId>{<FullName>}{<LabelId>}` as a shorthand for `\defRefEnum{<EnumId>}{<FullName>}{<LabelId>}`.
-If a command with that name exists already, LaTeX reports an error; choose another `<EnumId>` then.
+`\setupRefEnum{<EnumId>}{...}` also defines `\def<EnumId>{<FullName>}{<LabelId>}` as a shorthand for `\defRefEnum{<EnumId>}{<FullName>}{<LabelId>}`.
+If a command with that name exists already, LaTeX reports an error; choose another `<EnumId>` then, or turn the shorthands off with `\usepackage[shorthands=false]{refenums}`.
 
 ### Usage in the text
 
 #### Define a single enum
 
 * `\defRefEnum{<EnumId>}{<FullName>}{<LabelId>}` (always supported)
-* `\def<EnumId>{<FullName>}{<LabelId>}` (with the package option `shorthands`)
+* `\def<EnumId>{<FullName>}{<LabelId>}` (unless the package option `shorthands=false` is given)
 
 #### Define a single enum using the inline format
 
@@ -76,7 +76,7 @@ Using this, a enumeration similar to the ones of the `inparaenum` environment is
 
 **Initialize**: `\setupRefEnum{R}{Requirement}`
 
-**Define a single enum**: `\defRefEnum{R}{Quality}{qual}`.
+**Define a single enum**: `\defR{Quality}{qual}` (shorthand for `\defRefEnum{R}{Quality}{qual}`).
 When you want to put all elements in a section, set it at initialization:
 `\setupRefEnum[enclosing=section]{R}{Requirement}`.
 

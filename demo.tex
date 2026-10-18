@@ -58,6 +58,7 @@ The content is a simplified version of \href{https://github.com/JabRef/jabref/tr
 
 Each section starts with an orange box setting up a kind of item; this produces no output.
 Each green box shows the \LaTeX{} code producing the output right above it.
+Items are defined with shorthands such as \verb|\defReq|, which \verb|\setupRefEnum{Req}| creates for \verb|\defRefEnum{Req}|.
 
 \tableofcontents
 \clearpage
@@ -71,12 +72,12 @@ Each green box shows the \LaTeX{} code producing the output right above it.
 \esetup
 
 \bexample
-\defRefEnum{Feature}{Save a library}{save}
+\defFeature{Save a library}{save}
 As a researcher, I want to save my library to a \texttt{.bib} file, so that I can cite its entries in \LaTeX{}.
 \eexample
 
 \bexample
-\defRefEnum{Feature}{Autosave}{autosave}
+\defFeature{Autosave}{autosave}
 As a researcher, I want every change to be saved automatically and a backup to be kept, so that I do not lose work after a crash.
 \eexample
 
@@ -89,12 +90,12 @@ As a researcher, I want every change to be saved automatically and a backup to b
 \esetup
 
 \bexample
-\defRefEnum{R}{Concurrent modification}{concurrent}
+\defR{Concurrent modification}{concurrent}
 Another process, e.g., a second JabRef instance on a network share, writes the library file while \refEnum{Feature}{save} is running.
 \eexample
 
 \bexample
-\defRefEnum{R}{Incomplete backup}{backup}
+\defR{Incomplete backup}{backup}
 A failure while writing a backup during \refEnumFull{Feature}{autosave} replaces a valid backup.
 \eexample
 
@@ -107,13 +108,13 @@ A failure while writing a backup during \refEnumFull{Feature}{autosave} replaces
 \esetup
 
 \bexample
-\defRefEnum{Req}{Detect concurrent modification}{detect}
+\defReq{Detect concurrent modification}{detect}
 If the library file changed since the save started, the save is aborted with an error.
 Mitigates \refEnumFull{R}{concurrent}.
 \eexample
 
 \bexample
-\defRefEnum{Req}{Keep valid backups}{keep}
+\defReq{Keep valid backups}{keep}
 A failure while writing a backup leaves the previous backup untouched.
 Mitigates \refEnumFull{R}{backup}.
 \eexample
@@ -127,7 +128,7 @@ Mitigates \refEnumFull{R}{backup}.
 \esetup
 
 \bexample
-\defRefEnum{ADR}{Replace files atomically}{atomic}
+\defADR{Replace files atomically}{atomic}
 
 \paragraph{Context and Problem Statement}
 How do we write a file so that \refEnumFull{Req}{detect} and \refEnumFull{Req}{keep} hold?
@@ -151,7 +152,7 @@ Chosen option: \refEnumFullT{Opt}{tmp}, because a failed write leaves the origin
 \esetup
 
 \bexample
-\defRefEnum{M}{Safe saving}{safe}
+\defM{Safe saving}{safe}
 Reached when \refEnum{Req}{detect} and \refEnum{Req}{keep} are implemented as decided in \refEnum{ADR}{atomic} and covered by unit tests.
 \eexample
 

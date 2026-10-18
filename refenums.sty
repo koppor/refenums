@@ -13,10 +13,11 @@
 
 % The latest source code is available at https://github.com/koppor/refenums
 
-% Option shorthands: \setupRefEnums{<EnumId>}{...} also defines \def<EnumId>{<FullName>}{<LabelId>}
-\newif\ifrefenums@shorthands
-\DeclareOption{shorthands}{\refenums@shorthandstrue}
-\ProcessOptions\relax
+% Option shorthands=true|false (default: true): \setupRefEnums{<EnumId>}{...} also defines \def<EnumId>{<FullName>}{<LabelId>}
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{family=refenums,prefix=refenums@}
+\DeclareBoolOption[true]{shorthands}
+\ProcessKeyvalOptions*
 
 \RequirePackage{csquotes}
 \RequirePackage{ifthen}
