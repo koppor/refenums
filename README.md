@@ -26,6 +26,7 @@ If the library file changed since the save started, the save is aborted.
 \refReqFull{detect}            % Req-1 ("Detect concurrent modification")
 \refReqFull*{detect}           % Requirement Req-1 ("Detect concurrent modification")
 \refReqFullColon{detect}       % Req-1: "Detect concurrent modification"
+\refReqFullColon*{detect}      % Requirement Req-1: "Detect concurrent modification"
 \refReqTitle{detect}           % Detect concurrent modification
 ```
 
