@@ -120,14 +120,13 @@ Mitigates \refEnumFull{R}{backup}.
 \section{Decisions}
 \label{sec:decisions}
 
-\bsetup{Decision records and the options they consider use the default separator, too.
-The optional argument of \texttt{\textbackslash defRefEnum} wraps a single item, here the decision record below in a subsection.}
-\setupRefEnum{ADR}{Decision Record}
+\bsetup{Each decision record becomes a subsection. Decision records and the options they consider use the default separator.}
+\setupRefEnum[enclosing=subsection]{ADR}{Decision Record}
 \setupRefEnum{Opt}{Option}
 \esetup
 
 \bexample
-\defRefEnum[subsection]{ADR}{Replace files atomically}{atomic}
+\defRefEnum{ADR}{Replace files atomically}{atomic}
 
 \paragraph{Context and Problem Statement}
 How do we write a file so that \refEnumFull{Req}{detect} and \refEnumFull{Req}{keep} hold?
