@@ -1,4 +1,7 @@
 auxhook
+babel
+babel-english
+babel-german
 bigintcalc
 bitset
 bookmark
@@ -15,6 +18,8 @@ graphics-cfg
 graphics-def
 hycolor
 hyperref
+hyphen-english
+hyphen-german
 iftex
 infwarerr
 intcalc

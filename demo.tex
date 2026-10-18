@@ -1,5 +1,6 @@
 \documentclass[parskip=full]{scrartcl}
 
+\usepackage[ngerman,main=english]{babel}
 \usepackage[colorlinks,allcolors=blue]{hyperref}
 \usepackage{refenums}
 % refenums references with zref-clever; capitalize its names of other references, too (e.g., "Section 3")
@@ -156,6 +157,30 @@ Chosen option: \refOptFullColon{tmp}, because a failed write leaves the original
 \defM{Safe saving}{safe}
 Reached when \refReq{detect} and \refReq{keep} are implemented as decided in \refADR{atomic} and covered by unit tests.
 This mitigates \zcref{enum:R:concurrent,enum:R:backup}.
+\eexample
+
+\section{German requirements}
+\label{sec:german}
+
+\bsetup{The plural of the print name defaults to the print name with an ``s'' appended (e.g., ``Requirements''). German needs its own plural. \texttt{\textbackslash zcref} follows the language of the text, here set with babel.}
+\setupRefEnum[plural=Anforderungen]{Anf}{Anforderung}
+% Without plural, \zcref would print "Anforderungs"
+\esetup
+
+\bexample
+\selectlanguage{ngerman}
+\defAnf{Bibliothek speichern}{speichern}
+Die Bibliothek wird als \texttt{.bib}-Datei gespeichert.
+\eexample
+
+\bexample
+\defAnf{Sicherung behalten}{sicherung}
+Ein fehlgeschlagenes Schreiben lässt die vorherige Sicherung unverändert.
+\eexample
+
+\bexample
+Diese Version erfüllt \zcref{enum:Anf:speichern,enum:Anf:sicherung}.
+\selectlanguage{english}
 \eexample
 
 \section{References}
