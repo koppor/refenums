@@ -85,10 +85,12 @@
 \toggletrue{#2Combined}
 \crefformat{#2}{##2#2##1##3}
 \Crefformat{#2}{##2#2##1##3}
+\refenums@zcsetup{#2}{}%
 }{%
 \togglefalse{#2Combined}
 \crefformat{#2}{##2#2#1##1##3}
 \Crefformat{#2}{##2#2#1##1##3}
+\refenums@zcsetup{#2}{#1}%
 }
 
 %Store ONLYSHORTCONFIG
@@ -101,6 +103,16 @@
 }
 
 %End of definition of setupRefEnums
+}
+
+% zref-clever names a reference by its counter, so \zcref prints the same identifier as \refEnum
+% Checked at each setup, not at package load, because zref-clever may be loaded after refenums
+% #1: Enum Id
+% #2: separator
+\newcommand{\refenums@zcsetup}[2]{%
+\ifdefined\zcRefTypeSetup
+\zcRefTypeSetup{#1}{name-sg={#1}, Name-sg={#1}, name-pl={#1}, Name-pl={#1}, namesep={#2}}%
+\fi
 }
 
 %internal command, used only at defineReferenceableEnumElement

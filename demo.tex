@@ -2,6 +2,7 @@
 
 \usepackage[T1]{fontenc}
 
+\usepackage{zref-clever}
 \usepackage[colorlinks,allcolors=blue]{hyperref}
 \usepackage[capitalise,nameinlink]{cleveref}
 \usepackage{refenums}
@@ -174,6 +175,9 @@ Identifier & \verb|\refEnum{Req}{detect}| & \refEnum{Req}{detect} \\
 Identifier (title) & \verb|\refEnumFull{Req}{detect}| & \refEnumFull{Req}{detect} \\
 Identifier: title & \verb|\refEnumFullT{Req}{detect}| & \refEnumFullT{Req}{detect} \\
 Title & \verb|\nameref{enum:Req:detect}| & \nameref{enum:Req:detect} \\
+\midrule
+\multicolumn{3}{@{}l}{\emph{With \href{https://ctan.org/pkg/zref-clever}{zref-clever}}} \\
+Identifier & \verb|\zcref{enum:Req:detect}| & \zcref{enum:Req:detect} \\
 \midrule
 \multicolumn{3}{@{}l}{\emph{Not recommended}} \\
 Number & \verb|\ref{enum:Req:detect}| & \ref{enum:Req:detect} \\

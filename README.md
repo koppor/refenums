@@ -70,6 +70,7 @@ Using this, a enumeration similar to the ones of the `inparaenum` environment is
 * References to the label
   * `\nameref{enum:<EnumId>:<LabelId>}` = `<FullName>`
   * `\ref{enum:<EnumId>:<LabelId>}` = `<Counter>`, e.g. `1`
+  * `\zcref{enum:<EnumId>:<LabelId>}` = same as `\refEnum`, when [zref-clever](https://ctan.org/pkg/zref-clever) is loaded before `\setupRefEnum`
  
 ## Example
 
