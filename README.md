@@ -33,8 +33,8 @@ All references are hyperlinks to it.
 
 See [demo.tex](demo.tex) and its rendering [demo.pdf](https://koppor.github.io/refenums/demo.pdf), which shows the LaTeX code next to each result.
 
-refenums needs LaTeX 2023-06-01 and [zref-clever](https://ctan.org/pkg/zref-clever) 0.4.0 or later.
-It loads [hyperref](https://ctan.org/pkg/hyperref) and zref-clever itself; if you load them yourself, e.g., to pass options, load refenums after them.
+`refenums` needs LaTeX 2023-06-01 and [zref-clever](https://ctan.org/pkg/zref-clever) 0.4.0 or later.
+`refenums` loads [hyperref](https://ctan.org/pkg/hyperref) and zref-clever itself; if you load them yourself, e.g., to pass options, load `refenums` after them.
 
 ## Advanced usage
 
