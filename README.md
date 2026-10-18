@@ -17,8 +17,6 @@ This ensures consistency in the text.
 refenums loads [hyperref](https://ctan.org/pkg/hyperref) and [zref-clever](https://ctan.org/pkg/zref-clever) itself.
 If you load them yourself, e.g., to pass options, load refenums after them.
 refenums needs LaTeX 2023-06-01 and zref-clever 0.4.0 or later.
-If you use [cleveref](https://ctan.org/pkg/cleveref), `\cref` prints the same identifiers as `\refEnum`, no matter whether cleveref is loaded before or after refenums.
-Only `\setupRefEnum` must come after `\usepackage{cleveref}`; otherwise, `\cref` prints `?? 1` for that enum.
 
 ### Define the "Referenceable Enum Environment"
 
@@ -96,6 +94,14 @@ When you want to put all elements in a section, set it at initialization:
 The heading of an element is wrapped in `\refenumenclosing` (unless `enclosing` says otherwise), the one of an inline element in `\refenuminlineenclosing`.
 By default, `\refenumenclosing` prints the heading as is and `\refenuminlineenclosing` in italics.
 Both can be redefined after loading the package, e.g., `\renewcommand{\refenumenclosing}[1]{#1.}` adds a dot after each heading.
+
+## Advanced usage
+
+### cleveref
+
+refenums references with zref-clever; [cleveref](https://ctan.org/pkg/cleveref) is supported for existing documents only.
+`\cref` prints the same identifiers as `\refEnum`, no matter whether cleveref is loaded before or after refenums.
+Only `\setupRefEnum` must come after `\usepackage{cleveref}`; otherwise, `\cref` prints `?? 1` for that enum.
 
 ## Source code
 
