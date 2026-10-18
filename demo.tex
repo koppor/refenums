@@ -162,7 +162,7 @@ This mitigates \zcref{enum:R:concurrent,enum:R:backup}.
 
 The package \texttt{refenums} offers several ways to reference an item.
 They differ in how much of the item they show: its kind, its identifier, its title, or a combination.
-The following table shows each of them for \refEnum{Req}{detect} from \zcref{sec:requirements}.
+The following table shows each of them for \refEnum{Req}{keep} from \zcref{sec:requirements}.
 
 \begin{center}
 \small
@@ -172,17 +172,20 @@ The following table shows each of them for \refEnum{Req}{detect} from \zcref{sec
 \toprule
 Aim & Command & Output \\
 \midrule
-Identifier & \verb|\refEnum{Req}{detect}| & \refEnum{Req}{detect} \\
-Identifier (title) & \verb|\refEnumFull{Req}{detect}| & \refEnumFull{Req}{detect} \\
-Identifier: title & \verb|\refEnumFullT{Req}{detect}| & \refEnumFullT{Req}{detect} \\
-Title & \verb|\nameref{enum:Req:detect}| & \nameref{enum:Req:detect} \\
-Kind and identifier & \verb|\zcref{enum:Req:detect}| & \zcref{enum:Req:detect} \\
+Identifier & \verb|\refEnum{Req}{keep}| & \refEnum{Req}{keep} \\
+Identifier (title) & \verb|\refEnumFull{Req}{keep}| & \refEnumFull{Req}{keep} \\
+Identifier: title & \verb|\refEnumFullT{Req}{keep}| & \refEnumFullT{Req}{keep} \\
+Title & \verb|\refEnumTitle{Req}{keep}| & \refEnumTitle{Req}{keep} \\
+\midrule
+\multicolumn{3}{@{}l}{\emph{With the kind of the item}} \\
+Identifier & \verb|\refEnum*{Req}{keep}| & \refEnum*{Req}{keep} \\
+Identifier (title) & \verb|\refEnumFull*{Req}{keep}| & \refEnumFull*{Req}{keep} \\
+Identifier: title & \verb|\refEnumFullT*{Req}{keep}| & \refEnumFullT*{Req}{keep} \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\verb|\zcref| is the reference command of \href{https://ctan.org/pkg/zref-clever}{zref-clever}; \verb|\refEnum{Req}{detect}| is short for \verb|\zcref[noname]{enum:Req:detect}|.
-It also references several items at once, as in \zcref{sec:milestones}.
+\verb|\refEnum*{Req}{keep}| is short for \verb|\zcref{enum:Req:keep}| of \href{https://ctan.org/pkg/zref-clever}{zref-clever}, which also references several items at once, as in \zcref{sec:milestones}.
 
 The following list references every item of this document in the form ``Identifier (title)''.
 

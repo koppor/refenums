@@ -216,34 +216,31 @@
 }
 
 
-% Generic command to reference to an enum. The print name is put in brackets after the identifier.
+% References to an element
+% The starred forms prefix the print name of the enum, e.g., "Requirement Req-1" instead of "Req-1"
 %
-% Output: <EnumId><Num> (``<PrintName>'')
-%
-% #1: Enum Id (no spaces, only characters!)
-% #2: Label Id
-\newcommand{\refEnumFullP}[2]{%
- \refEnum{#1}{#2}
- (\enquote{\nameref{enum:#1:#2}})%
+% #1: (star) prefix the print name
+% #2: Enum Id
+% #3: Label Id
+
+% Output: <EnumId><Num>
+\NewDocumentCommand{\refEnum}{smm}{%
+\IfBooleanTF{#1}{\zcref{enum:#2:#3}}{\zcref[noname]{enum:#2:#3}}%
 }
 
+% Output: <FullName>
+\newcommand{\refEnumTitle}[2]{\nameref{enum:#1:#2}}
 
-% Generic command to reference to an enum. The print name is put in quotes after the identifier.
-%
-% Output: <EnumId><Num>: ``<PrintName>''
-%
-% #1: Enum Id (no spaces, only characters!)
-% #2: Label Id
-\newcommand{\refEnumFullT}[2]{%
- \refEnum{#1}{#2}: \enquote{\nameref{enum:#1:#2}}%
+% Output: <EnumId><Num> (``<FullName>'')
+\NewDocumentCommand{\refEnumFullP}{smm}{%
+\IfBooleanTF{#1}{\refEnum*{#2}{#3}}{\refEnum{#2}{#3}} (\enquote{\refEnumTitle{#2}{#3}})%
 }
 
-
-% \refEnumFull defaults to \efEnumFullP
-\let\refEnumFull\refEnumFullP
-
-
-\newcommand{\refEnum}[2]{%
-  \zcref[noname]{enum:#1:#2}%
+% Output: <EnumId><Num>: ``<FullName>''
+\NewDocumentCommand{\refEnumFullT}{smm}{%
+\IfBooleanTF{#1}{\refEnum*{#2}{#3}}{\refEnum{#2}{#3}}: \enquote{\refEnumTitle{#2}{#3}}%
 }
+
+% \refEnumFull defaults to \refEnumFullP
+\NewCommandCopy\refEnumFull\refEnumFullP
 \endinput

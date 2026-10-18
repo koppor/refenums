@@ -21,11 +21,11 @@ This ensures consistency in the text.
 If the library file changed since the save started, the save is aborted.
 
 % Reference it
-\refEnum{Req}{detect}         % Req-1
-\refEnumFull{Req}{detect}     % Req-1 ("Detect concurrent modification")
-\refEnumFullT{Req}{detect}    % Req-1: "Detect concurrent modification"
-\nameref{enum:Req:detect}     % Detect concurrent modification
-\zcref{enum:Req:detect}       % Requirement Req-1
+\zcref{enum:Req:detect}        % Requirement Req-1
+\refEnum{Req}{detect}          % Req-1
+\refEnumFull{Req}{detect}      % Req-1 ("Detect concurrent modification")
+\refEnumFull*{Req}{detect}     % Requirement Req-1 ("Detect concurrent modification")
+\refEnumTitle{Req}{detect}     % Detect concurrent modification
 ```
 
 The definition prints "Requirement 1 (Req-1): *Detect concurrent modification*".
@@ -67,9 +67,12 @@ If a command with one of these names exists already, LaTeX reports an error; cho
 
 ### Referencing
 
+* `\refEnumFullT{<EnumId>}{<LabelId>}` prints `<EnumId>-<Counter>: "<FullName>"`, e.g., `Req-1: "Detect concurrent modification"`.
 * `\refEnumFullP` is the long form of `\refEnumFull`.
+* The starred forms `\refEnum*`, `\refEnumFull*`, `\refEnumFullT*` prefix the print name, e.g., `Requirement Req-1`.
+* `\refEnumTitle{<EnumId>}{<LabelId>}` is short for `\nameref{enum:<EnumId>:<LabelId>}`.
 * `\zcref` of [zref-clever](https://ctan.org/pkg/zref-clever) prints the print name and the identifier, e.g., `Requirement Req-1`. It references several items at once, e.g., `\zcref{enum:Req:detect,enum:Req:keep}` prints `Requirements Req-1 and Req-2`.
-* `\refEnum{<EnumId>}{<LabelId>}` is short for `\zcref[noname]{enum:<EnumId>:<LabelId>}`; `\ref{enum:<EnumId>:<LabelId>}` prints the identifier as well.
+* `\refEnum{<EnumId>}{<LabelId>}` is short for `\zcref[noname]{enum:<EnumId>:<LabelId>}`, `\refEnum*` for `\zcref`; `\ref{enum:<EnumId>:<LabelId>}` prints the identifier as well.
 
 ### Tuning
 
