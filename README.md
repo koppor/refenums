@@ -27,17 +27,20 @@ E.g., `req`.
 #### Initialize
 
 ```latex
-\setupRefEnums{<EnumId>}{<PrintName>}
+\setupRefEnum[<options>]{<EnumId>}{<PrintName>}
 ```
 
 In case `<PrintName>` is set to `ONLYSHORT`, only the short name is used.
 
-Optional parameters:
+Options (key-value, all optional):
 
-1. Separator between `<EnumId>` and number. Default: `-`.
-2. Name of the command each element is wrapped in, e.g., `subsection`. Default: `refenumenclosing`.
+* `separator=<text>`: separator between `<EnumId>` and number. Default: `-`. Use `separator={}` for none and `separator={ }` for a space.
+* `enclosing=<name>`: name of the command each element is wrapped in, e.g., `subsection`. Default: `refenumenclosing`.
+* `combined`: print `<PrintName> <EnumId><Number>`, e.g., `Milestone M1`.
 
-For instance, `\setupRefEnums[-][subsection]{Step}{Step}` puts every step into its own subsection.
+For instance, `\setupRefEnum[enclosing=subsection]{Step}{Step}` puts every step into its own subsection.
+
+The older `\setupRefEnums[<separator>][<enclosing>]{<EnumId>}{<PrintName>}` takes the same settings as positional optional arguments, with `COMBINED` as separator for `combined`.
 
 #### (Optional) Define shorthand macro to define the macros for referencing
 
@@ -70,11 +73,11 @@ Using this, a enumeration similar to the ones of the `inparaenum` environment is
  
 ## Example
 
-**Initialize**: `\setupRefEnums{R}{Requirement}`
+**Initialize**: `\setupRefEnum{R}{Requirement}`
 
 **Define a single enum**: `\defRefEnum{R}{Quality}{qual}`.
 When you want to put all elements in a section, set it at initialization:
-`\setupRefEnums[-][section]{R}{Requirement}`.
+`\setupRefEnum[enclosing=section]{R}{Requirement}`.
 A single element can override this with the optional parameter:
 `\defRefEnum[section]{R}{Quality}{qual}`
 
@@ -93,7 +96,7 @@ These commands can be redefined after package usage.
 
 ## TODO
 
-* Enable automatically generating `\def<EnumId>` at `\setupRefEnums` via a package parameter.
+* Enable automatically generating `\def<EnumId>` at `\setupRefEnum` via a package parameter.
 
 ## Source code
 

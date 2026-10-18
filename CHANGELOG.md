@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `\setupRefEnum` sets up an enum with key-value options (`separator`, `enclosing`, `combined`).
 - The full LPPL license text is now included as `LICENSE`.
 - `\setupRefEnums` accepts a second optional argument naming the command each element is wrapped in (e.g., `subsection`). The optional argument of `\defRefEnum` still overrides it per element.
 

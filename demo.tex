@@ -66,7 +66,8 @@ Each green box shows the \LaTeX{} code producing the output right above it.
 \label{sec:features}
 
 \bsetup{Features print only their short form (``Feature~1'') and each becomes a subsection.}
-\setupRefEnums[ ][subsection]{Feature}{ONLYSHORT}
+\setupRefEnum[separator={ }, enclosing=subsection]{Feature}{ONLYSHORT}
+% With the default separator "-", this would print "Feature-1"
 \esetup
 
 \bexample
@@ -83,7 +84,8 @@ Every change to the library is saved shortly afterwards, and a backup is kept.
 \label{sec:risks}
 
 \bsetup{Risks use no separator (``Risk~1 (R1)'').}
-\setupRefEnums[]{R}{Risk}
+\setupRefEnum[separator={}]{R}{Risk}
+% With the default separator "-", this would print "R-1"
 \esetup
 
 \bexample
@@ -100,7 +102,7 @@ A failure while writing a backup during \refEnumFull{Feature}{autosave} replaces
 \label{sec:requirements}
 
 \bsetup{Requirements use the default separator (``Requirement~1 (Req-1)'').}
-\setupRefEnums{Req}{Requirement}
+\setupRefEnum{Req}{Requirement}
 \esetup
 
 \bexample
@@ -119,8 +121,8 @@ Mitigates \refEnumFull{R}{backup}.
 \label{sec:decisions}
 
 \bsetup{Decision records and the options they consider use the default separator, too.}
-\setupRefEnums{ADR}{Decision Record}
-\setupRefEnums{Opt}{Option}
+\setupRefEnum{ADR}{Decision Record}
+\setupRefEnum{Opt}{Option}
 \esetup
 
 The optional argument of \verb|\defRefEnum| wraps a single item, here a decision record in a subsection.
@@ -145,7 +147,8 @@ Chosen option: \refEnumFullT{Opt}{tmp}, because a failed write leaves the origin
 \label{sec:milestones}
 
 \bsetup{Milestones combine print name and short name (``Milestone~M1'').}
-\setupRefEnums[COMBINED]{M}{Milestone}
+\setupRefEnum[combined]{M}{Milestone}
+% Without combined, this would print "Milestone 1 (M-1)"
 \esetup
 
 \bexample
