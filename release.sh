@@ -11,9 +11,9 @@ zip refenums.zip -d /refenums/\.*
 zip refenums.zip -d ./refenums/release.sh
 
 #Generate demo.pdf
-pdflatex demo
-pdflatex demo
-pdflatex demo
+lualatex demo
+lualatex demo
+lualatex demo
 
 #Generate README.pdf
 pandoc -f gfm-hard_line_breaks -t latex README.md -o README.pdf

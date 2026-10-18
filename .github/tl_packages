@@ -1,4 +1,3 @@
-amsfonts
 auxhook
 bigintcalc
 bitset
@@ -6,9 +5,7 @@ bookmark
 booktabs
 cleveref
 cm
-cm-super
 csquotes
-ec
 environ
 epstopdf-pkg
 etexcmds
@@ -30,7 +27,9 @@ l3kernel
 latex
 latex-bin
 latexconfig
+latex-fonts
 listings
+lm
 ltxcmds
 oberdiek
 pdfescape
