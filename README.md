@@ -37,7 +37,7 @@ Options (key-value, all optional):
 * `separator=<text>`: separator between `<EnumId>` and number. Default: `-`. Use `separator={}` for none and `separator={ }` for a space.
 * `enclosing=<name>`: name of the command the heading of each element is wrapped in, e.g., `subsection`. Default: `refenumenclosing`, which prints the heading as is (see [Tuning](#tuning)).
 * `combined`: print `<PrintName> <EnumId><Number>`, e.g., `Milestone M1`.
-* `titleformat=<name>`: name of the command the title of each element is wrapped in, e.g., `emph`. Default: none. References to the title are not affected.
+* `titleformat=<name>`: name of the command the title of each element is wrapped in, e.g., `emph`. Default: `emph` (italics), or none if `enclosing` names another command. Use `titleformat={}` for none. References to the title are not affected.
 
 For instance, `\setupRefEnum[enclosing=subsection]{Step}{Step}` puts every step into its own subsection.
 
