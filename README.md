@@ -21,10 +21,10 @@ This ensures consistency in the text.
 If the library file changed since the save started, the save is aborted.
 
 % Reference it
-\refReq*{detect}               % Requirement Req-1
 \refReq{detect}                % Req-1
-\refReqFull*{detect}           % Requirement Req-1 ("Detect concurrent modification")
+\refReq*{detect}               % Requirement Req-1
 \refReqFull{detect}            % Req-1 ("Detect concurrent modification")
+\refReqFull*{detect}           % Requirement Req-1 ("Detect concurrent modification")
 \refReqFullColon{detect}       % Req-1: "Detect concurrent modification"
 \refReqTitle{detect}           % Detect concurrent modification
 ```
