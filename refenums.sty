@@ -43,6 +43,7 @@
 %     separator=<text>     the separator between EnumId and Number. Default: "-"
 %     enclosing=<name>     name of the command to wrap each element in, e.g. "subsection". Default: refenumenclosing
 %     combined             output format <PrintName> <EnumId><Number>
+%     titleformat=<name>   name of the command the title is wrapped in when an element is defined, e.g. "emph". Default: none
 % #2: Enum Id
 % #3: Print Name of enum type, if "ONLYSHORT" then only the short name is used and a long name never printed
 \ExplSyntaxOn
@@ -52,11 +53,12 @@
     enclosing .tl_set:N = \l__refenums_enclosing_tl ,
     combined  .code:n   = \tl_set:Nn \l__refenums_separator_tl { COMBINED } ,
     combined  .value_forbidden:n = true ,
+    titleformat .tl_set:N = \l__refenums_titleformat_tl ,
   }
 \NewDocumentCommand \setupRefEnum { O{} m m }
   {
     % No group around \keys_set:nn: \setupRefEnums defines macros locally, so the defaults are reset explicitly
-    \keys_set:nn { refenums } { separator = - , enclosing = refenumenclosing , #1 }
+    \keys_set:nn { refenums } { separator = - , enclosing = refenumenclosing , titleformat = @firstofone , #1 }
     \use:x
       {
         \exp_not:N \setupRefEnums
@@ -64,6 +66,7 @@
           [ \exp_not:V \l__refenums_enclosing_tl ]
           { \exp_not:n {#2} } { \exp_not:n {#3} }
       }
+    \tl_set_eq:cN { #2TitleFormat } \l__refenums_titleformat_tl
   }
 \ExplSyntaxOff
 
@@ -73,6 +76,9 @@
 
 %Store print name
 \expandafter\newcommand\csname #2PrintName\endcsname{#3}
+
+%Store the name of the command the title is wrapped in; \setupRefEnum may change it
+\expandafter\def\csname #2TitleFormat\endcsname{@firstofone}
 
 %Store separator
 %tipp by http://tex.stackexchange.com/a/64019/9075
@@ -115,18 +121,22 @@
 \fi
 }
 
+% Title #2 of an element of enum #1, wrapped in the enum's title format
+% Expandable, because headings end up in the table of contents and in bookmarks
+\newcommand{\refenums@formattitle}[2]{\csname\csname #1TitleFormat\endcsname\endcsname{#2}}
+
 %internal command, used only at defineReferenceableEnumElement
 % #1: Enum Id (no spaces, only characters), also used to print short form of enum and to reference the setup at setupRefEnums
 % #2: Full Name of the enum to be defined
 \newcommand{\defRefEnumHelper}[2]{%
 % \arabic{#1} returns the counter value
 \iftoggle{#1OnlyShort}{%
-#1\csname #1Separator\endcsname\arabic{#1}: #2%
+#1\csname #1Separator\endcsname\arabic{#1}: \refenums@formattitle{#1}{#2}%
 }{%
 \iftoggle{#1Combined}{%
-\csname #1PrintName\endcsname\ #1\arabic{#1}: #2%
+\csname #1PrintName\endcsname\ #1\arabic{#1}: \refenums@formattitle{#1}{#2}%
 }{%
-\csname #1PrintName\endcsname\ \arabic{#1} (#1\csname #1Separator\endcsname\arabic{#1}): #2%
+\csname #1PrintName\endcsname\ \arabic{#1} (#1\csname #1Separator\endcsname\arabic{#1}): \refenums@formattitle{#1}{#2}%
 }%
 }%
 }%
@@ -159,7 +169,7 @@
 % One uses either without ``Inline'' or with ``Inline'' for a group of types
 \newcommand{\defRefEnumInline}[4][refenuminlineenclosing]{%
  \refstepcounter{#2}%
- \csname #1\endcsname{(#2\csname #2Separator\endcsname\arabic{#2}) #3}%
+ \csname #1\endcsname{(#2\csname #2Separator\endcsname\arabic{#2}) \refenums@formattitle{#2}{#3}}%
  \labelname{#3}%
  \label{enum:#2:#4}%
 }
