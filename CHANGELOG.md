@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `demo.pdf` shows the LaTeX code of each example next to its output.
 - `demo.tex` demonstrates the package with requirements and a decision record (MADR style) modeled on JabRef.
 - `demo.tex` is typeset with LuaLaTeX.
-- refenums references with zref-clever instead of cleveref; `\zcref` prints the same identifiers as `\refEnum`. `\cref` still does if cleveref is loaded before refenums.
+- refenums references with zref-clever instead of cleveref; `\zcref` prints the same identifiers as `\refEnum`. `\cref` still does if cleveref is loaded before `\setupRefEnum`.
 - refenums requires LaTeX 2023-06-01 and zref-clever 0.4.0 or later.
 
 ### Removed

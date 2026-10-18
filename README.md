@@ -17,7 +17,8 @@ This ensures consistency in the text.
 refenums loads [hyperref](https://ctan.org/pkg/hyperref) and [zref-clever](https://ctan.org/pkg/zref-clever) itself.
 If you load them yourself, e.g., to pass options, load refenums after them.
 refenums needs LaTeX 2023-06-01 and zref-clever 0.4.0 or later.
-If [cleveref](https://ctan.org/pkg/cleveref) is loaded before refenums, `\cref` prints the same identifiers as `\refEnum`.
+If you use [cleveref](https://ctan.org/pkg/cleveref), `\cref` prints the same identifiers as `\refEnum`, no matter whether cleveref is loaded before or after refenums.
+Only `\setupRefEnum` must come after `\usepackage{cleveref}`; otherwise, `\cref` prints `?? 1` for that enum.
 
 ### Define the "Referenceable Enum Environment"
 
