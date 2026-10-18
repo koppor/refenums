@@ -65,7 +65,7 @@ Each green box shows the \LaTeX{} code producing the output right above it.
 \section{Features}
 \label{sec:features}
 
-\bsetup{Features print only their short form (``Feature~1'') and each becomes a subsection.}
+\bsetup{Features print only their short form (e.g., ``Feature~1'') and each becomes a subsection.}
 \setupRefEnum[separator={ }, enclosing=subsection]{Feature}{ONLYSHORT}
 % With the default separator "-", this would print "Feature-1"
 \esetup
@@ -83,7 +83,7 @@ As a researcher, I want every change to be saved automatically and a backup to b
 \section{Risks}
 \label{sec:risks}
 
-\bsetup{Risks use no separator (``Risk~1 (R1)'').}
+\bsetup{Risks use no separator (e.g., ``Risk~1 (R1)'').}
 \setupRefEnum[separator={}]{R}{Risk}
 % With the default separator "-", this would print "R-1"
 \esetup
@@ -101,7 +101,7 @@ A failure while writing a backup during \refEnumFull{Feature}{autosave} replaces
 \section{Requirements}
 \label{sec:requirements}
 
-\bsetup{Requirements use the default separator (``Requirement~1 (Req-1)'').}
+\bsetup{Requirements use the default separator (e.g., ``Requirement~1 (Req-1)'').}
 \setupRefEnum{Req}{Requirement}
 \esetup
 
@@ -146,7 +146,7 @@ Chosen option: \refEnumFullT{Opt}{tmp}, because a failed write leaves the origin
 \section{Milestones}
 \label{sec:milestones}
 
-\bsetup{Milestones combine print name and short name (``Milestone~M1'').}
+\bsetup{Milestones combine print name and short name (e.g., ``Milestone~M1'').}
 \setupRefEnum[combined]{M}{Milestone}
 % Without combined, this would print "Milestone 1 (M-1)"
 \esetup
