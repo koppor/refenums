@@ -79,8 +79,6 @@ Using this, a enumeration similar to the ones of the `inparaenum` environment is
 **Define a single enum**: `\defRefEnum{R}{Quality}{qual}`.
 When you want to put all elements in a section, set it at initialization:
 `\setupRefEnum[enclosing=section]{R}{Requirement}`.
-A single element can override this with the optional parameter:
-`\defRefEnum[section]{R}{Quality}{qual}`
 
 **Referencing**:
 
