@@ -36,7 +36,7 @@
 % Setup environment
 % Called ONCE for each enum
 %
-% #1: (optional) the seperator between EnumId and Number. Default: "-". If set to COMBINED, the output format changes to <PrintName> <EnumId><Number>
+% #1: (optional) the separator between EnumId and Number. Default: "-". If set to COMBINED, the output format changes to <PrintName> <EnumId><Number>
 % #2: (optional) name of the command to wrap each element in, e.g. "subsection". Default: refenumenclosing
 % #3: Enum Id (no spaces, only characters), also used later in defineReferenceableEnumElement
 % #4: Print Name of enum type, if "ONLYSHORT" then only the short name is used and a long name never printed
@@ -197,7 +197,7 @@
 %increase counter
 \refstepcounter{#2}%
 %
-%store the ``caption'' into a sepcial variable being used later for referencing
+%store the ``caption'' into a special variable being used later for referencing
 \labelname{#3}%
 %
 %label directly put after refstepcounter to enable sectioning commands to be used as enumeration
