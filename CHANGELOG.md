@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-10-19
+
 ### Added
 
 - `\setupRefEnum` sets up an enum with key-value options (`separator`, `enclosing`, `combined`).
@@ -45,5 +47,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - The CTAN archive contains a PDF version of `README.md`.
 
-[Unreleased]: https://github.com/koppor/refenums/compare/v1.1.2...HEAD
+[Unreleased]: https://github.com/koppor/refenums/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/koppor/refenums/compare/v1.1.2...v2.0.0
 [1.1.2]: https://github.com/koppor/refenums/compare/v1.1.1...v1.1.2
