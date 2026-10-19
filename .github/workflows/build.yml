@@ -20,13 +20,13 @@ jobs:
       - uses: zauguin/install-texlive@6671d0c62046c7e349fe154d5208fe746b07e037 # v4.4.0
         with:
           package_file: .github/tl_packages
-      - run: lualatex -interaction=nonstopmode -halt-on-error demo && lualatex -interaction=nonstopmode -halt-on-error demo
+      - run: lualatex -interaction=nonstopmode -halt-on-error refenums-demo && lualatex -interaction=nonstopmode -halt-on-error refenums-demo
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: demo
-          path: demo.pdf
+          path: refenums-demo.pdf
       - if: github.event_name == 'push'
-        run: mkdir pages && cp demo.pdf pages/
+        run: mkdir pages && cp refenums-demo.pdf pages/
       # Force-pushes a single commit, so gh-pages keeps no history
       - if: github.event_name == 'push'
         uses: crazy-max/ghaction-github-pages@1d6ee9b181a81033a16bd707a1401afa978daab4 # v5.0.0

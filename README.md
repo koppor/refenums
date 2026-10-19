@@ -35,7 +35,7 @@ If the library file changed since the save started, the save is aborted.
 The definition prints "Requirement 1 (Req-1): *Detect concurrent modification*".
 All references are hyperlinks to it.
 
-See [demo.tex](demo.tex) and its rendering [demo.pdf](https://koppor.github.io/refenums/demo.pdf), which shows the LaTeX code next to each result.
+See [refenums-demo.tex](refenums-demo.tex) and its rendering [refenums-demo.pdf](https://koppor.github.io/refenums/refenums-demo.pdf), which shows the LaTeX code next to each result.
 
 `refenums` needs LaTeX 2023-06-01 and [zref-clever](https://ctan.org/pkg/zref-clever) 0.4.0 or later.
 `refenums` loads [hyperref](https://ctan.org/pkg/hyperref) and zref-clever itself; if you load them yourself, e.g., to pass options, load `refenums` after them.
@@ -105,7 +105,7 @@ The latest source code is available at <https://github.com/koppor/refenums>.
 ## Files
 
 * [refenums.sty](refenums.sty): the package
-* [demo.tex](demo.tex): small demonstration
+* [refenums-demo.tex](refenums-demo.tex): small demonstration
 
 ## Related packages
 
@@ -130,5 +130,5 @@ This work has the LPPL maintenance status "maintained".
 
 The Current Maintainer and author of this work is Oliver Kopp.
 
-This work consists of the files `refenums.sty`, `demo.tex`, and `README.md`.
+This work consists of the files `refenums.sty`, `refenums-demo.tex`, and `README.md`.
 In case files are not listed here, but available at <https://github.com/koppor/refenums>, these additional files also form part of this work.
