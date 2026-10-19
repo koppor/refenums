@@ -2,11 +2,10 @@
 
 > Define numbered items with a title, such as requirements, risks, or milestones, and reference them by identifier (e.g., `Req-1`), title, or both, with hyperlinks to the definition
 
-This package provides commands to define enumerable items with a number and a long name, which can be referenced later with the name or just the short form.
-For instance, "Milestone M1: Specification created" can be defined and later on be referenced with `M1` or `M1 ("Specification created")`.
-The text in the references is derived from the definition and also rendered as hyperlink to the definition.
-Thus, a change of the definition also leads to a change of all references to the text.
-This ensures consistency in the text.
+The package provides commands to define numbered items with a title, such as requirements, risks, or milestones, and to reference them by identifier, title, or both, with hyperlinks to the definition.
+For instance, "Milestone M1: Specification created" can be defined and later on be referenced with `M1`, `Milestone M1`, or `M1 ("Specification created")`.
+The references are derived from the definition, so they stay consistent when it changes.
+The package builds on [zref-clever](https://ctan.org/pkg/zref-clever), which references several items at once, e.g., "Risks R1 and R2".
 
 ## Usage
 
