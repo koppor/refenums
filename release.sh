@@ -10,15 +10,12 @@ git archive -o refenums.zip --prefix=refenums/ HEAD
 zip refenums.zip -d /refenums/\.*
 zip refenums.zip -d ./refenums/release.sh
 
-#Generate demo.pdf
-pdflatex demo
-pdflatex demo
-pdflatex demo
+#Generate refenums-demo.pdf
+lualatex refenums-demo
+lualatex refenums-demo
+lualatex refenums-demo
 
-#Generate README.pdf
-pandoc -f gfm-hard_line_breaks -t latex README.md -o README.pdf
-
-#Add demo.pdf and README.pdf to the archive
+#Add refenums-demo.pdf to the archive; CTAN renders README.md itself
 mkdir refenums
-cp demo.pdf README.pdf refenums
-zip -g refenums.zip refenums/demo.pdf refenums/README.pdf
+cp refenums-demo.pdf refenums
+zip -g refenums.zip refenums/refenums-demo.pdf

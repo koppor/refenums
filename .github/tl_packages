@@ -1,14 +1,16 @@
-amsfonts
+auxhook
+babel
+babel-english
+babel-german
 bigintcalc
 bitset
 bookmark
-cleveref
+booktabs
 cm
-cm-super
 csquotes
-ec
 environ
 epstopdf-pkg
+etexcmds
 etoolbox
 gettitlestring
 graphics
@@ -16,6 +18,8 @@ graphics-cfg
 graphics-def
 hycolor
 hyperref
+hyphen-english
+hyphen-german
 iftex
 infwarerr
 intcalc
@@ -27,8 +31,11 @@ l3kernel
 latex
 latex-bin
 latexconfig
+latex-fonts
 listings
+lm
 ltxcmds
+oberdiek
 pdfescape
 pdftexcmds
 pgf
@@ -41,3 +48,5 @@ trimspaces
 uniquecounter
 url
 xcolor
+zref
+zref-clever

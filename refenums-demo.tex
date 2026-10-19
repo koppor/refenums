@@ -1,0 +1,231 @@
+\documentclass[parskip=full]{scrartcl}
+
+\usepackage[ngerman,main=english]{babel}
+\usepackage[colorlinks,allcolors=blue]{hyperref}
+\usepackage{refenums}
+% refenums references with zref-clever; capitalize its names of other references, too (e.g., "Section 3")
+\zcsetup{cap}
+
+%Always add a dot behind the definition
+\renewcommand{\refenumenclosing}[1]{#1.}
+
+% \bexample ... \eexample runs the code in between and then prints its source lines.
+% \bsetup{<explanation>} ... \esetup does the same for setup code, which has no output; the explanation goes into the box.
+% Plain commands, not environments: a group would discard the macros \setupRefEnums defines.
+\usepackage[listings]{tcolorbox}
+\usepackage{booktabs}
+\usepackage{array}
+\tcbset{
+  demo listing/.style={
+    listing file=\jobname.tex,
+    left=8mm,
+    listing options={
+      language={[LaTeX]TeX},
+      basicstyle=\small\ttfamily,
+      columns=fullflexible,
+      breaklines,
+      breakatwhitespace,
+      firstline=\the\bexampleline,
+      lastline=\the\eexampleline,
+      firstnumber=\the\bexampleline,
+      numbers=left,
+      numberstyle=\tiny,
+      numbersep=8pt
+    }
+  }
+}
+\newcount\bexampleline
+\newcount\eexampleline
+\newcommand{\bexample}{\global\bexampleline=\numexpr\inputlineno+1\relax}
+\newcommand{\eexample}{%
+  \global\eexampleline=\numexpr\inputlineno-1\relax
+  \tcbinputlisting{demo listing, listing only, colback=green!5!white, colframe=green!25}%
+}
+\newcommand{\bsetup}[1]{\gdef\setupexplanation{#1}\bexample}
+\newcommand{\esetup}{%
+  \global\eexampleline=\numexpr\inputlineno-1\relax
+  \tcbinputlisting{demo listing, comment and listing, comment={\setupexplanation}, colback=orange!5!white, colframe=orange!40}%
+}
+
+\begin{document}
+
+\title{Demonstration of the \texttt{refenums} package}
+\date{}
+\author{}
+\maketitle
+
+\vspace{-12ex}
+This document demonstrates the \href{https://ctan.org/pkg/refenums}{\texttt{refenums}} package with the development documents of a reference manager.
+The content is a simplified version of \href{https://github.com/JabRef/jabref/tree/main/docs}{JabRef's} requirements and decision records, written in \href{https://adr.github.io/madr/}{MADR}.
+
+Each section starts with an orange box setting up a kind of item; this produces no output.
+Each green box shows the \LaTeX{} code producing the output right above it.
+Items are defined and referenced with shorthands such as \verb|\defReq| and \verb|\refReq|, which \verb|\setupRefEnum{Req}| creates for \verb|\defRefEnum{Req}| and \verb|\refEnum{Req}|.
+
+\tableofcontents
+\clearpage
+
+\section{Features}
+\label{sec:features}
+
+\bsetup{Features print only their short form (e.g., ``Feature~1'') and each becomes a subsection.}
+\setupRefEnum[separator={ }, enclosing=subsection]{Feature}{ONLYSHORT}
+% With the default separator "-", this would print "Feature-1"
+\esetup
+
+\bexample
+\defFeature{Save a library}{save}
+As a researcher, I want to save my library to a \texttt{.bib} file, so that I can cite its entries in \LaTeX{}.
+\eexample
+
+\bexample
+\defFeature{Autosave}{autosave}
+As a researcher, I want every change to be saved automatically and a backup to be kept, so that I do not lose work after a crash.
+\eexample
+
+\section{Risks}
+\label{sec:risks}
+
+\bsetup{Risks use no separator (e.g., ``Risk~1 (R1)'').}
+\setupRefEnum[separator={}]{R}{Risk}
+% With the default separator "-", this would print "R-1"
+\esetup
+
+\bexample
+\defR{Concurrent modification}{concurrent}
+Another process, e.g., a second JabRef instance on a network share, writes the library file while \refFeature{save} is running.
+\eexample
+
+\bexample
+\defR{Incomplete backup}{backup}
+A failure while writing a backup during \refFeatureFull{autosave} replaces a valid backup.
+\eexample
+
+\section{Requirements}
+\label{sec:requirements}
+
+\bsetup{Requirements use the default separator (e.g., ``Requirement~1 (Req-1)'').}
+\setupRefEnum{Req}{Requirement}
+% Titles are set in italics; titleformat={} would set them upright
+\esetup
+
+\bexample
+\defReq{Detect concurrent modification}{detect}
+If the library file changed since the save started, the save is aborted with an error.
+Mitigates \refRFull{concurrent}.
+\eexample
+
+\bexample
+\defReq{Keep valid backups}{keep}
+A failure while writing a backup leaves the previous backup untouched.
+Mitigates \refRFull{backup}.
+\eexample
+
+\section{Decisions}
+\label{sec:decisions}
+
+\bsetup{Each decision record becomes a subsection. Decision records and the options they consider use the default separator.}
+\setupRefEnum[enclosing=subsection]{ADR}{Decision Record}
+\setupRefEnum{Opt}{Option}
+\esetup
+
+\bexample
+\defADR{Replace files atomically}{atomic}
+
+\paragraph{Context and Problem Statement}
+How do we write a file so that \refReqFull{detect} and \refReqFull{keep} hold?
+
+\paragraph{Considered Options}
+\begin{itemize}
+\item \defOptInline{Overwrite in place}{inplace}
+\item \defOptInline{Write a temporary file and move it over the target}{tmp}
+\end{itemize}
+
+\paragraph{Decision Outcome}
+Chosen option: \refOptFullColon{tmp}, because a failed write leaves the original file untouched and the target can be checked for changes right before the move.
+\eexample
+
+\section{Milestones}
+\label{sec:milestones}
+
+\bsetup{Milestones combine print name and short name (e.g., ``Milestone~M1'').}
+\setupRefEnum[combined]{M}{Milestone}
+% Without combined, this would print "Milestone 1 (M-1)"
+\esetup
+
+\bexample
+\defM{Safe saving}{safe}
+Reached when \refReq{detect} and \refReq{keep} are implemented as decided in \refADR{atomic} and covered by unit tests.
+This mitigates \zcref{enum:R:concurrent,enum:R:backup}.
+\eexample
+
+\section{German requirements}
+\label{sec:german}
+
+\bsetup{The plural of the print name defaults to the print name with an ``s'' appended (e.g., ``Requirements''). German needs its own plural. \texttt{\textbackslash zcref} follows the language of the text, here set with babel.}
+\setupRefEnum[plural=Anforderungen]{Anf}{Anforderung}
+% Without plural, \zcref would print "Anforderungs"
+\esetup
+
+\bexample
+\selectlanguage{ngerman}
+\defAnf{Bibliothek speichern}{speichern}
+Die Bibliothek wird als \texttt{.bib}-Datei gespeichert.
+\eexample
+
+\bexample
+\defAnf{Sicherung behalten}{sicherung}
+Ein fehlgeschlagenes Schreiben lässt die vorherige Sicherung unverändert.
+\eexample
+
+\bexample
+Diese Version erfüllt \zcref{enum:Anf:speichern,enum:Anf:sicherung}.
+\selectlanguage{english}
+\eexample
+
+\section{References}
+\label{sec:references}
+
+The package \texttt{refenums} offers several ways to reference an item.
+They differ in how much of the item they show: its kind, its identifier, its title, or a combination.
+The following table shows each of them for \refReq{keep} from \zcref{sec:requirements}.
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.3}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}l>{\footnotesize}ll@{}}
+\toprule
+Aim & Command & Output \\
+\midrule
+Identifier & \verb|\refReq{keep}| & \refReq{keep} \\
+Identifier (title) & \verb|\refReqFull{keep}| & \refReqFull{keep} \\
+Identifier: title & \verb|\refReqFullColon{keep}| & \refReqFullColon{keep} \\
+Title & \verb|\refReqTitle{keep}| & \refReqTitle{keep} \\
+\midrule
+\multicolumn{3}{@{}l}{\emph{With the kind of the item}} \\
+Identifier & \verb|\refReq*{keep}| & \refReq*{keep} \\
+Identifier (title) & \verb|\refReqFull*{keep}| & \refReqFull*{keep} \\
+Identifier: title & \verb|\refReqFullColon*{keep}| & \refReqFullColon*{keep} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Each shorthand has a long form, which takes the kind of the item as first argument.
+For instance, \verb|\refReqFull{keep}| is short for \verb|\refEnumFull{Req}{keep}|.
+The command \verb|\refReq*{keep}| is also short for \verb|\zcref{enum:Req:keep}| of \href{https://ctan.org/pkg/zref-clever}{zref-clever}, which also references several items at once, as in \zcref{sec:milestones}.
+
+The following list references every item of this document in the form ``Identifier (title)''.
+
+\bexample
+\begin{itemize}
+\item Features: \refFeatureFull{save}, \refFeatureFull{autosave}
+\item Risks: \refRFull{concurrent}, \refRFull{backup}
+\item Requirements: \refReqFull{detect}, \refReqFull{keep}
+\item Decision records: \refADRFull{atomic}
+\item Options: \refOptFull{inplace}, \refOptFull{tmp}
+\item Milestones: \refMFull{safe}
+\end{itemize}
+\eexample
+
+\end{document}
