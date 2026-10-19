@@ -81,6 +81,7 @@ Options (key-value, all optional):
 * `plural=<text>`: plural of `<PrintName>`, printed by `\zcref` for several items. Default: `<PrintName>s`.
 * `combined`: print `<PrintName> <EnumId><Number>`, e.g., `Milestone M1`.
 * `enclosing=<name>`: name of the command the heading of each element is wrapped in, e.g., `subsection`. Default: `refenumenclosing` (see [Tuning](#tuning)).
+* `inline`: `\def<EnumId>` and `\defRefEnum` define each element inline, as `\def<EnumId>Inline` does, e.g., `(Opt-1) Overwrite in place`.
 * `titleformat=<name>`: name of the command the title of each element is wrapped in, e.g., `textbf`. Default: `emph` (italics), or none if `enclosing` names another command. Use `titleformat={}` for none. References to the title are not affected.
 
 The older `\setupRefEnums[<separator>][<enclosing>]{<EnumId>}{<PrintName>}` takes the same settings as positional optional arguments, with `COMBINED` as separator for `combined`.

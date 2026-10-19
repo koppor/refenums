@@ -124,9 +124,10 @@ Mitigates \refRFull{backup}.
 \section{Decisions}
 \label{sec:decisions}
 
-\bsetup{Each decision record becomes a subsection. Decision records and the options they consider use the default separator.}
+\bsetup{Each decision record becomes a subsection. The options a record considers are defined inline, within the text. Both use the default separator.}
 \setupRefEnum[enclosing=subsection]{ADR}{Decision Record}
-\setupRefEnum{Opt}{Option}
+\setupRefEnum[inline]{Opt}{Option}
+% Without inline, \defOpt would print "Option 1 (Opt-1): ..."; \defOptInline prints the inline form for a single option
 \esetup
 
 \bexample
@@ -137,8 +138,8 @@ How do we write a file so that \refReqFull{detect} and \refReqFull{keep} hold?
 
 \paragraph{Considered Options}
 \begin{itemize}
-\item \defOptInline{Overwrite in place}{inplace}
-\item \defOptInline{Write a temporary file and move it over the target}{tmp}
+\item \defOpt{Overwrite in place}{inplace}
+\item \defOpt{Write a temporary file and move it over the target}{tmp}
 \end{itemize}
 
 \paragraph{Decision Outcome}
