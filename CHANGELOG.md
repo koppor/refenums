@@ -51,6 +51,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - The CTAN archive contains a PDF version of `README.md`.
 
+## [1.1.1] - 2014-01-03
+
+### Changed
+
+- refenums loads cleveref without options, so that loading cleveref before refenums with own options no longer causes an "options clash". The README recommends `\usepackage[capitalise,nameinlink]{cleveref}` before refenums.
+- The CTAN archive contains `demo.pdf` again.
+
+### Fixed
+
+- The README links to the packages on CTAN.
+
+## [1.1.0] - 2013-12-16
+
+### Added
+
+- `\defRefEnumInline` defines an element inline, e.g., in an `inparaenum` environment. Inline elements are enclosed in `\refenuminlineenclosing`, which sets them in italics by default.
+- `\refEnumFullP` is the long name of `\refEnumFull`.
+- The README documents `\refEnumFullT`, `\refenumenclosing`, and `\refenuminlineenclosing`.
+
+### Changed
+
+- `\setupReferencableEnumElements` was renamed to `\setupRefEnums`.
+- `\defineReferenceableEnumElement` was renamed to `\defRefEnum`, and `\defineReferenceableEnumElementInline` to `\defRefEnumInline`.
+
+### Removed
+
+- `release.sh` is no longer in the CTAN archive.
+
+## [1.0.0] - 2013-12-16
+
+### Added
+
+- Initial release on CTAN: `\setupReferencableEnumElements`, `\defineReferenceableEnumElement`, `\defineReferenceableEnumElementInline`, `\refEnum`, `\refEnumFull`, and `\refEnumFullT`, with the options `ONLYSHORT` and `COMBINED`.
+
 [Unreleased]: https://github.com/koppor/refenums/compare/v2.0.0...HEAD
 [2.0.0]: https://github.com/koppor/refenums/compare/v1.1.2...v2.0.0
 [1.1.2]: https://github.com/koppor/refenums/compare/v1.1.1...v1.1.2
+[1.1.1]: https://github.com/koppor/refenums/compare/v1.1.0...v1.1.1
+[1.1.0]: https://github.com/koppor/refenums/compare/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/koppor/refenums/releases/tag/v1.0.0
