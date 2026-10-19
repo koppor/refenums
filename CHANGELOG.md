@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `\setupRefEnum[inline]` defines all elements of a kind inline, so `\def<EnumId>` prints the same as `\def<EnumId>Inline`.
+
 ## [2.0.0] - 2026-10-19
 
 ### Added
