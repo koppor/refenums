@@ -3,3 +3,7 @@
 Anf = "Anf"
 als = "als"
 Ein = "Ein"
+
+# Command name of refenums 1.0.0, mentioned in CHANGELOG.md
+[default.extend-identifiers]
+setupReferencableEnumElements = "setupReferencableEnumElements"
