@@ -111,7 +111,7 @@ The latest source code is available at <https://github.com/koppor/refenums>.
 * See <https://ctan.org/topic/label-ref> for an overview.
 * [zref-clever](https://ctan.org/pkg/zref-clever) (like [cleveref](https://ctan.org/pkg/cleveref)) prints the type and number of a reference.
   `refenums` builds on zref-clever: `\defRefEnum` also prints the heading of an item, stores its title, and the references can include that title (`\refEnumFull`, `\refEnumFullColon`).
-* In the conext of chemistry, [chemsec](https://ctan.org/pkg/chemsec) offers taylored functionality.
+* In the context of chemistry, [chemsec](https://ctan.org/pkg/chemsec) offers tailored functionality.
 
 ## License
 
