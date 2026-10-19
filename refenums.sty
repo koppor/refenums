@@ -60,12 +60,12 @@
 % Same as \setupRefEnums, with key-value options instead of positional ones
 %
 % #1: (optional) keys:
-%     separator=<text>     the separator between EnumId and Number. Default: "-"
-%     enclosing=<name>     name of the command to wrap each element in, e.g. "subsection". Default: refenumenclosing
-%     combined             output format <PrintName> <EnumId><Number>
-%     plural=<text>        plural of the print name, used by \zcref for several items. Default: <PrintName>s
-%     titleformat=<name>   name of the command the title is wrapped in when an element is defined, e.g. "emph". Default: "emph" if enclosing is refenumenclosing, none otherwise. Empty: none
 %     inline               \defRefEnum (and \def<EnumId>) define elements inline, as \defRefEnumInline does
+%     enclosing=<name>     name of the command to wrap each element in, e.g. "subsection". Default: refenumenclosing
+%     titleformat=<name>   name of the command the title is wrapped in when an element is defined, e.g. "emph". Default: "emph" if enclosing is refenumenclosing, none otherwise. Empty: none
+%     combined             output format <PrintName> <EnumId><Number>
+%     separator=<text>     the separator between EnumId and Number. Default: "-"
+%     plural=<text>        plural of the print name, used by \zcref for several items. Default: <PrintName>s
 % #2: Enum Id
 % #3: Print Name of enum type, if "ONLYSHORT" then only the short name is used and a long name never printed
 \ExplSyntaxOn

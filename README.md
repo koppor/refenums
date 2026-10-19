@@ -75,14 +75,14 @@ If a command with one of these names exists already, LaTeX reports an error; cho
 
 If `<PrintName>` is `ONLYSHORT`, only the short form is printed, e.g., `Feature 1` with `separator={ }`.
 
-Options (key-value, all optional):
+Options (key-value, all optional), from the definition of an element to its references:
 
+* `inline`: `\def<EnumId>` and `\defRefEnum` define each element inline, as `\def<EnumId>Inline` does, e.g., `(Opt-1) Overwrite in place`.
+* `enclosing=<name>`: name of the command the heading of each element is wrapped in, e.g., `subsection`. Default: `refenumenclosing` (see [Tuning](#tuning)).
+* `titleformat=<name>`: name of the command the title of each element is wrapped in, e.g., `textbf`. Default: `emph` (italics), or none if `enclosing` names another command. Use `titleformat={}` for none. References to the title are not affected.
+* `combined`: print `<PrintName> <EnumId><Number>`, e.g., `Milestone M1`.
 * `separator=<text>`: separator between `<EnumId>` and number. Default: `-`. Use `separator={}` for none and `separator={ }` for a space.
 * `plural=<text>`: plural of `<PrintName>`, printed by `\zcref` for several items. Default: `<PrintName>s`.
-* `combined`: print `<PrintName> <EnumId><Number>`, e.g., `Milestone M1`.
-* `enclosing=<name>`: name of the command the heading of each element is wrapped in, e.g., `subsection`. Default: `refenumenclosing` (see [Tuning](#tuning)).
-* `inline`: `\def<EnumId>` and `\defRefEnum` define each element inline, as `\def<EnumId>Inline` does, e.g., `(Opt-1) Overwrite in place`.
-* `titleformat=<name>`: name of the command the title of each element is wrapped in, e.g., `textbf`. Default: `emph` (italics), or none if `enclosing` names another command. Use `titleformat={}` for none. References to the title are not affected.
 
 The older `\setupRefEnums[<separator>][<enclosing>]{<EnumId>}{<PrintName>}` takes the same settings as positional optional arguments, with `COMBINED` as separator for `combined`.
 
