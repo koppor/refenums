@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-10-21
+
 ### Added
 
 - `\setupRefEnum[inline]` defines all elements of a kind inline, so `\def<EnumId>` prints the same as `\def<EnumId>Inline`.
@@ -85,7 +87,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release on CTAN: `\setupReferencableEnumElements`, `\defineReferenceableEnumElement`, `\defineReferenceableEnumElementInline`, `\refEnum`, `\refEnumFull`, and `\refEnumFullT`, with the options `ONLYSHORT` and `COMBINED`.
 
-[Unreleased]: https://github.com/koppor/refenums/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/koppor/refenums/compare/v2.1.0...HEAD
+[2.1.0]: https://github.com/koppor/refenums/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/koppor/refenums/compare/v1.1.2...v2.0.0
 [1.1.2]: https://github.com/koppor/refenums/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/koppor/refenums/compare/v1.1.0...v1.1.1
